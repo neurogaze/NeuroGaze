@@ -1,0 +1,43 @@
+@use "@material";
+body {
+  /* Basic styling for the body including font and color */
+  font-family: helvetica, arial, sans-serif;
+  margin: 2em;
+  color: #3d3d3d;
+  --mdc-theme-primary: #007f8b;
+  --mdc-theme-on-primary: #f1f3f4;
+}
+h1, h2 {
+  /* Specific colors for headings */
+  color: #007f8b;
+}
+h1 {
+  font-style: italic;
+}
+video {
+  /* Flipping the video for a mirror effect */
+  transform: rotateY(180deg);
+}
+section, header, footer {
+  /* Style for clarity and spacing */
+  clear: both;
+}
+.removed, .invisible {
+  /* Styles for hiding elements or making them barely visible */
+  display: none;
+  opacity: 0.2;
+}
+.videoView, .detectOnClick, .blend-shapes {
+  /* Styling and positioning for video and blend shapes containers */
+  position: relative;
+  float: left;
+  width: 48%;
+  margin: 2% 1%;
+  cursor: pointer;
+}
+.canvas, .output_canvas {
+  /* Canvas used for drawing detections */
+  z-index: 1;
+  position: absolute;
+  pointer-events: none;
+}
