@@ -72,12 +72,11 @@ or personal education to better understand and demonstrate various aspects relat
 ### Main Backend Logic (Python)
 
 - **File Involved**:
-    - `main.py`: Contains backend logic for handling data processing or API requests (assuming typical backend
-      functionalities).
+    - `main.py`: Contains backend logic for handling data processing or API requests.
 
 - **Functionality**:
     - Handles requests from the frontend and provides necessary data responses.
-    - Could integrate with databases or external APIs for fetching or storing data.
+
 
 ## JavaScript Libraries
 

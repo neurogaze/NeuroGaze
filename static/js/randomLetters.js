@@ -55,5 +55,5 @@ function gameOver() {
     clearInterval(intervalId);
     document.querySelectorAll('.letter').forEach(letter => letter.remove());
     document.getElementById('game-over').style.display = 'block';
-    document.getElementById('start-button').style.display = 'block;
+    document.getElementById('start-button').style.display = 'block';
 }
