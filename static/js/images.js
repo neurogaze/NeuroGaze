@@ -240,9 +240,9 @@ function logIrisLandmarks() {
         if (shape.score > 0.3) {
             console.log(shape);
             if (shape.categoryName == "eyeLookInLeft" || shape.categoryName == "eyeLookOutRight") {
-                 alert('User is looking left');
-            } else if (shape.categoryName == "eyeLookOutLeft" || shape.categoryName == "eyeLookInRight") {
                  alert('User is looking right');
+            } else if (shape.categoryName == "eyeLookOutLeft" || shape.categoryName == "eyeLookInRight") {
+                 alert('User is looking left');
             }
             break; // Exit the loop
         }
