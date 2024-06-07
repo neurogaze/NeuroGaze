@@ -156,3 +156,7 @@ movements are logged and analyzed.
   described in `passage.js`, focusing on setting up and managing MediaPipe face landmark detection in images and webcam
   feeds.
 
+## Resources
+- https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker
+- https://codepen.io/mediapipe-preview/pen/OJBVQJm
+- https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker/web_js
