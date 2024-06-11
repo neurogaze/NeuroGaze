@@ -1,5 +1,7 @@
 # ADHD Tools for Web Interaction
 
+npx tailwindcss -i ./css/index.css -o ./css/output.css --watch
+
 ## Description
 
 This project provides a suite of interactive web-based tools designed to enhance understanding and awareness of ADHD
