@@ -1,0 +1,18 @@
+
+{% extends 'index.html' %}
+ 
+{% block body %}
+ 
+<!-- Main title centered at the top of the page -->
+<h1 class="text-center">ADHD</h1>
+<!-- Container for buttons with padding on top -->
+<div class="btn-container pt-4">
+    <!-- Buttons to trigger different actions, styled with Bootstrap -->
+    <button class="btn btn-primary" onclick="displayPassage()">Passage</button>
+    <button class="btn btn-success" onclick="displayImage()">Image</button>
+    <button class="btn btn-warning" onclick="redirectToRandomLetters()">Random Letters</button>
+</div>
+ 
+{% endblock %}
+
+

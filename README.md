@@ -2,6 +2,9 @@
 
 npx tailwindcss -i ./css/index.css -o ./css/output.css --watch
 
+python3 -m venv .venv                                                  
+source .venv/bin/activate
+python3 main.py
 ## Description
 
 This project provides a suite of interactive web-based tools designed to enhance understanding and awareness of ADHD
