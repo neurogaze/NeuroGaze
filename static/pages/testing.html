@@ -1,18 +1,19 @@
-
-{% extends 'index.html' %}
- 
-{% block body %}
- 
+{% extends 'index.html' %} {% block body %}
 <!-- Main title centered at the top of the page -->
 <h1 class="text-center">ADHD</h1>
 <!-- Container for buttons with padding on top -->
 <div class="btn-container pt-4">
-    <!-- Buttons to trigger different actions, styled with Bootstrap -->
-    <button class="btn btn-primary" onclick="displayPassage()">Passage</button>
-    <button class="btn btn-success" onclick="displayImage()">Image</button>
-    <button class="btn btn-warning" onclick="redirectToRandomLetters()">Random Letters</button>
+  <!-- Buttons to trigger different actions, styled with Bootstrap -->
+  <a class="btn btn-primary" href="./callibration" >
+    Callibration
+  </a>
+  <button class="btn btn-primary" onclick="displayPassage()">
+    Visual Attention Test
+  </button>
+  <button class="btn btn-success" onclick="displayImage()">Image Test</button>
+  <button class="btn btn-warning" onclick="redirectToRandomLetters()">
+    Passage Test
+  </button>
 </div>
- 
+
 {% endblock %}
-
-

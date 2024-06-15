@@ -1,392 +1,550 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <!-- Sets the viewport to scale for different device widths and initial zoom level -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NeuroGaze</title>
-    <link rel="stylesheet" href="static/css/index.css">
-    <link href="/static/css/output.css" rel="stylesheet">
-</head>
-<body>
-  {% include 'components/navbar.html' %}
 
-    <div class="container mx-auto pt-16 sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
-        {% block body %}
- 
-        <!-- Top Component of Home Page (Intro), fragments allow you to group elements without a group list -->
-        <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-          <div class="grid gap-5 row-gap-8 lg:grid-cols-2">
-            <div class="flex flex-col justify-center">
-              <div class="max-w-xl mb-6">
-                <div>
-                  <p class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider uppercase rounded-full bg-brand-primary">
-                    Brand new
-                  </p>
-                </div>
-                <h2 class="max-w-lg mb-6  text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
-                  Redefining ADHD Detection
-                  <span class="inline-block text-brand-secondary">
+    <link rel="stylesheet" href="static/css/index.css" />
+    <link href="/static/css/output.css" rel="stylesheet" />
+    <script src="/static/js/webgazer/webgazer.js"></script>
+  </head>
+  <body>
+    {% include 'components/navbar.html' %}
+
+    <div
+      class="container mx-auto pt-16 sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8"
+    >
+      {% block body %}
+
+      <!-- Top Component of Home Page (Intro), fragments allow you to group elements without a group list -->
+      <div
+        class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
+      >
+        <div class="grid gap-5 row-gap-8 lg:grid-cols-2">
+          <div class="flex flex-col justify-center">
+            <div class="max-w-xl mb-6">
+              <div>
+                <p
+                  class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider uppercase rounded-full bg-brand-primary"
+                >
+                  Brand new
+                </p>
+              </div>
+              <h2
+                class="max-w-lg mb-6 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none"
+              >
+                Redefining ADHD Detection
+                <span class="inline-block text-brand-secondary">
                   Technology
-                  </span>
-                </h2>
-                <p class="text-base text-gray-700 md:text-lg">
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-                  quae. explicabo.
-                </p>
-              </div>
-              <a
-                href="/"
-                aria-label=""
-                class="inline-flex items-center font-semibold transition-colors duration-200 text-brand-secondary hover:text-brand-tertiary"
-              >
-                Learn more
-                <svg
-                  class="inline-block w-3 ml-2"
-                  fill="currentColor"
-                  viewBox="0 0 12 12"
-                >
-                  <path d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z" />
-                </svg>
-              </a>
-            </div>
-            <div class="relative">
-              <svg
-                class="absolute w-full text-brand-primary"
-                fill="currentColor"
-                viewBox="0 0 600 392"
-              >
-                <rect x="0" y="211" width="75" height="181" rx="8" />
-                <rect x="525" y="260" width="75" height="132" rx="8" />
-                <rect x="105" y="83" width="75" height="309" rx="8" />
-                <rect x="210" y="155" width="75" height="237" rx="8" />
-                <rect x="420" y="129" width="75" height="263" rx="8" />
-                <rect x="315" y="0" width="75" height="392" rx="8" />
-              </svg>
-              <svg
-                class="relative w-full text-brand-secondary"
-                fill="currentColor"
-                viewBox="0 0 600 392"
-              >
-                <rect x="0" y="311" width="75" height="81" rx="8" />
-                <rect x="525" y="351" width="75" height="41" rx="8" />
-                <rect x="105" y="176" width="75" height="216" rx="8" />
-                <rect x="210" y="237" width="75" height="155" rx="8" />
-                <rect x="420" y="205" width="75" height="187" rx="8" />
-                <rect x="315" y="83" width="75" height="309" rx="8" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      <!-- Second Component of Home Page (Facts and uses) -->
-        <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-          <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-            <h2 class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-              <span class="relative inline-block">
-                <svg
-                  viewBox="0 0 52 24"
-                  fill="currentColor"
-                  class="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block"
-                >
-                  <defs>
-                    <pattern
-                      id="bebc38d1-bf72-4c77-a073-f0fe5abe0753"
-                      x="0"
-                      y="0"
-                      width=".135"
-                      height=".30"
-                    >
-                      <circle cx="1" cy="1" r=".7" />
-                    </pattern>
-                  </defs>
-                  <rect
-                    fill="url(#bebc38d1-bf72-4c77-a073-f0fe5abe0753)"
-                    width="52"
-                    height="24"
-                  />
-                </svg>
-                <span class="relative">The</span>
-              </span>
-              quick, brown fox jumps over a lazy dog
-            </h2>
-            <p class="text-base text-gray-700 md:text-lg">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque rem aperiam, eaque ipsa quae.
-            </p>
-          </div>
-          <div class="grid gap-8 row-gap-12 lg:grid-cols-2">
-            <div class="max-w-md sm:mx-auto sm:text-center">
-              <div class="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-brand-primary sm:mx-auto sm:w-24 sm:h-24">
-                <svg
-                  class="w-12 h-12 text-brand-tertiary sm:w-20 sm:h-20"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
-              </div>
-              <h6 class="mb-3 text-xl font-bold leading-5">A business big</h6>
-              <p class="mb-3 text-sm text-gray-900">
+                </span>
+              </h2>
+              <p class="text-base text-gray-700 md:text-lg">
                 Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium rem aperiam, eaque ipsa quae. Sed ut perspiciatis unde
-                omnis iste natus error sit voluptatem accusantium doloremque rem
-                aperiam, eaque ipsa quae.
-              </p>
-              <a
-                href="/"
-                aria-label=""
-                class="inline-flex items-center font-semibold transition-colors duration-200 text-brand-secondary hover:text-brand-tertiary"
-              >
-                Learn more
-              </a>
-            </div>
-            <div class="max-w-md sm:mx-auto sm:text-center">
-              <div class="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-brand-primary sm:mx-auto sm:w-24 sm:h-24">
-                <svg
-                  class="w-12 h-12 text-brand-tertiary sm:w-20 sm:h-20"
-                  stroke="currentColor"
-                  viewBox="0 0 52 52"
-                >
-                  <polygon
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                    points="29 13 14 29 25 29 23 39 38 23 27 23"
-                  />
-                </svg>
-              </div>
-              <h6 class="mb-3 text-xl font-bold leading-5">The quick dog</h6>
-              <p class="mb-3 text-sm text-gray-900">
-                Yolo ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
-                suscipit leo. Carpe diem vulputate est nec commodo rutrum.
-                Pellentesque mattis convallis nisi eu and I ain’t stoppin until the
-                swear jar’s full.
-              </p>
-              <a
-                href="/"
-                aria-label=""
-                class="inline-flex items-center font-semibold transition-colors duration-200 text-brand-secondary hover:text-brand-tertiary"
-              >
-                Learn more
-              </a>
-            </div>
-          </div>
-        </div>
-        <!-- Third Component of Home Page (Step by Step Process)  -->
-        <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-          <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-            <div>
-              <p class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-brand-tertiary uppercase rounded-full bg-brand-primary">
-                Brand new
+                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+                quae. explicabo.
               </p>
             </div>
-            <h2 class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-              <span class="relative inline-block">
-                <svg viewBox="0 0 52 24" fill="currentColor" class="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block">
-                  <defs>
-                    <pattern id="d0d83814-78b6-480f-9a5f-7f637616b267" x="0" y="0" width=".135" height=".30">
-                      <circle cx="1" cy="1" r=".7"></circle>
-                    </pattern>
-                  </defs>
-                  <rect fill="url(#d0d83814-78b6-480f-9a5f-7f637616b267)" width="52" height="24"></rect>
-                </svg>
-                <span class="relative">The</span>
-              </span>
-              quick, brown fox jumps over a lazy dog
-            </h2>
-            <p class="text-base text-gray-700 md:text-lg">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem aperiam, eaque ipsa quae.
-            </p>
-          </div>
-          <div class="relative grid gap-8 row-gap-5 mb-8 md:row-gap-8 lg:grid-cols-4 sm:grid-cols-2">
-            <div class="absolute inset-0 flex items-center justify-center sm:hidden lg:flex">
-              <div class="w-px h-full bg-gray-300 lg:w-full lg:h-px"></div>
-            </div>
-            <div class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <div class="flex items-center justify-between mb-2">
-                <p class="text-lg font-bold leading-5">Believe</p>
-                <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-brand-tertiary bg-brand-primary">
-                  1
-                </p>
-              </div>
-              <p class="text-sm text-gray-900">
-                Skate ipsum dolor sit amet, alley oop vert mute-air Colby Carter flail 180 berm.
-              </p>
-            </div>
-            <div class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <div class="flex items-center justify-between mb-2">
-                <p class="text-lg font-bold leading-5">Be yourself</p>
-                <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-brand-tertiary bg-brand-primary">
-                  2
-                </p>
-              </div>
-              <p class="text-sm text-gray-900">
-                A flower in my garden, a mystery in my panties. Heart attack never stopped.
-              </p>
-            </div>
-            <div class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <div class="flex items-center justify-between mb-2">
-                <p class="text-lg font-bold leading-5">Just do it</p>
-                <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-brand-tertiary bg-brand-primary">
-                  3
-                </p>
-              </div>
-              <p class="text-sm text-gray-900">
-                Chase ball of string eat plants, meow, and throw up because I ate plants going.
-              </p>
-            </div>
-            <div class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
-              <div class="flex items-center justify-between mb-2">
-                <p class="text-lg font-bold leading-5">Eat that</p>
-                <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-brand-tertiary bg-brand-primary">
-                  4
-                </p>
-              </div>
-              <p class="text-sm text-gray-900">
-                Bro ipsum dolor sit amet gaper backside single track, manny Bike epic clipless.
-              </p>
-            </div>
-          </div>
-          <div class="text-center">
             <a
               href="/"
-              class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-brand-secondary hover:bg-brand-tertiary focus:shadow-outline focus:outline-none"
+              aria-label=""
+              class="inline-flex items-center font-semibold transition-colors duration-200 text-brand-secondary hover:text-brand-tertiary"
+            >
+              Learn more
+              <svg
+                class="inline-block w-3 ml-2"
+                fill="currentColor"
+                viewBox="0 0 12 12"
+              >
+                <path
+                  d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z"
+                />
+              </svg>
+            </a>
+          </div>
+          <div class="relative">
+            <svg
+              class="absolute w-full text-brand-primary"
+              fill="currentColor"
+              viewBox="0 0 600 392"
+            >
+              <rect x="0" y="211" width="75" height="181" rx="8" />
+              <rect x="525" y="260" width="75" height="132" rx="8" />
+              <rect x="105" y="83" width="75" height="309" rx="8" />
+              <rect x="210" y="155" width="75" height="237" rx="8" />
+              <rect x="420" y="129" width="75" height="263" rx="8" />
+              <rect x="315" y="0" width="75" height="392" rx="8" />
+            </svg>
+            <svg
+              class="relative w-full text-brand-secondary"
+              fill="currentColor"
+              viewBox="0 0 600 392"
+            >
+              <rect x="0" y="311" width="75" height="81" rx="8" />
+              <rect x="525" y="351" width="75" height="41" rx="8" />
+              <rect x="105" y="176" width="75" height="216" rx="8" />
+              <rect x="210" y="237" width="75" height="155" rx="8" />
+              <rect x="420" y="205" width="75" height="187" rx="8" />
+              <rect x="315" y="83" width="75" height="309" rx="8" />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <!-- Second Component of Home Page (Facts and uses) -->
+      <div
+        class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
+      >
+        <div
+          class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12"
+        >
+          <h2
+            class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto"
+          >
+            <span class="relative inline-block">
+              <svg
+                viewBox="0 0 52 24"
+                fill="currentColor"
+                class="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block"
+              >
+                <defs>
+                  <pattern
+                    id="bebc38d1-bf72-4c77-a073-f0fe5abe0753"
+                    x="0"
+                    y="0"
+                    width=".135"
+                    height=".30"
+                  >
+                    <circle cx="1" cy="1" r=".7" />
+                  </pattern>
+                </defs>
+                <rect
+                  fill="url(#bebc38d1-bf72-4c77-a073-f0fe5abe0753)"
+                  width="52"
+                  height="24"
+                />
+              </svg>
+              <span class="relative">The</span>
+            </span>
+            quick, brown fox jumps over a lazy dog
+          </h2>
+          <p class="text-base text-gray-700 md:text-lg">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque rem aperiam, eaque ipsa quae.
+          </p>
+        </div>
+        <div class="grid gap-8 row-gap-12 lg:grid-cols-2">
+          <div class="max-w-md sm:mx-auto sm:text-center">
+            <div
+              class="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-brand-primary sm:mx-auto sm:w-24 sm:h-24"
+            >
+              <svg
+                class="w-12 h-12 text-brand-tertiary sm:w-20 sm:h-20"
+                stroke="currentColor"
+                viewBox="0 0 52 52"
+              >
+                <polygon
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                  points="29 13 14 29 25 29 23 39 38 23 27 23"
+                />
+              </svg>
+            </div>
+            <h6 class="mb-3 text-xl font-bold leading-5">A business big</h6>
+            <p class="mb-3 text-sm text-gray-900">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium rem aperiam, eaque ipsa quae. Sed ut perspiciatis unde
+              omnis iste natus error sit voluptatem accusantium doloremque rem
+              aperiam, eaque ipsa quae.
+            </p>
+            <a
+              href="/"
+              aria-label=""
+              class="inline-flex items-center font-semibold transition-colors duration-200 text-brand-secondary hover:text-brand-tertiary"
+            >
+              Learn more
+            </a>
+          </div>
+          <div class="max-w-md sm:mx-auto sm:text-center">
+            <div
+              class="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-brand-primary sm:mx-auto sm:w-24 sm:h-24"
+            >
+              <svg
+                class="w-12 h-12 text-brand-tertiary sm:w-20 sm:h-20"
+                stroke="currentColor"
+                viewBox="0 0 52 52"
+              >
+                <polygon
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                  points="29 13 14 29 25 29 23 39 38 23 27 23"
+                />
+              </svg>
+            </div>
+            <h6 class="mb-3 text-xl font-bold leading-5">The quick dog</h6>
+            <p class="mb-3 text-sm text-gray-900">
+              Yolo ipsum dolor sit amet, consectetur adipiscing elit. Ut ac
+              suscipit leo. Carpe diem vulputate est nec commodo rutrum.
+              Pellentesque mattis convallis nisi eu and I ain’t stoppin until
+              the swear jar’s full.
+            </p>
+            <a
+              href="/"
+              aria-label=""
+              class="inline-flex items-center font-semibold transition-colors duration-200 text-brand-secondary hover:text-brand-tertiary"
             >
               Learn more
             </a>
           </div>
         </div>
+      </div>
+      <!-- Third Component of Home Page (Step by Step Process)  -->
+      <div
+        class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
+      >
+        <div
+          class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12"
+        >
+          <div>
+            <p
+              class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-brand-tertiary uppercase rounded-full bg-brand-primary"
+            >
+              Brand new
+            </p>
+          </div>
+          <h2
+            class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto"
+          >
+            <span class="relative inline-block">
+              <svg
+                viewBox="0 0 52 24"
+                fill="currentColor"
+                class="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block"
+              >
+                <defs>
+                  <pattern
+                    id="d0d83814-78b6-480f-9a5f-7f637616b267"
+                    x="0"
+                    y="0"
+                    width=".135"
+                    height=".30"
+                  >
+                    <circle cx="1" cy="1" r=".7"></circle>
+                  </pattern>
+                </defs>
+                <rect
+                  fill="url(#d0d83814-78b6-480f-9a5f-7f637616b267)"
+                  width="52"
+                  height="24"
+                ></rect>
+              </svg>
+              <span class="relative">The</span>
+            </span>
+            quick, brown fox jumps over a lazy dog
+          </h2>
+          <p class="text-base text-gray-700 md:text-lg">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque rem aperiam, eaque ipsa quae.
+          </p>
+        </div>
+        <div
+          class="relative grid gap-8 row-gap-5 mb-8 md:row-gap-8 lg:grid-cols-4 sm:grid-cols-2"
+        >
+          <div
+            class="absolute inset-0 flex items-center justify-center sm:hidden lg:flex"
+          >
+            <div class="w-px h-full bg-gray-300 lg:w-full lg:h-px"></div>
+          </div>
+          <div
+            class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2"
+          >
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-lg font-bold leading-5">Believe</p>
+              <p
+                class="flex items-center justify-center w-6 h-6 font-bold rounded text-brand-tertiary bg-brand-primary"
+              >
+                1
+              </p>
+            </div>
+            <p class="text-sm text-gray-900">
+              Skate ipsum dolor sit amet, alley oop vert mute-air Colby Carter
+              flail 180 berm.
+            </p>
+          </div>
+          <div
+            class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2"
+          >
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-lg font-bold leading-5">Be yourself</p>
+              <p
+                class="flex items-center justify-center w-6 h-6 font-bold rounded text-brand-tertiary bg-brand-primary"
+              >
+                2
+              </p>
+            </div>
+            <p class="text-sm text-gray-900">
+              A flower in my garden, a mystery in my panties. Heart attack never
+              stopped.
+            </p>
+          </div>
+          <div
+            class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2"
+          >
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-lg font-bold leading-5">Just do it</p>
+              <p
+                class="flex items-center justify-center w-6 h-6 font-bold rounded text-brand-tertiary bg-brand-primary"
+              >
+                3
+              </p>
+            </div>
+            <p class="text-sm text-gray-900">
+              Chase ball of string eat plants, meow, and throw up because I ate
+              plants going.
+            </p>
+          </div>
+          <div
+            class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2"
+          >
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-lg font-bold leading-5">Eat that</p>
+              <p
+                class="flex items-center justify-center w-6 h-6 font-bold rounded text-brand-tertiary bg-brand-primary"
+              >
+                4
+              </p>
+            </div>
+            <p class="text-sm text-gray-900">
+              Bro ipsum dolor sit amet gaper backside single track, manny Bike
+              epic clipless.
+            </p>
+          </div>
+        </div>
+        <div class="text-center">
+          <a
+            href="/"
+            class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-brand-secondary hover:bg-brand-tertiary focus:shadow-outline focus:outline-none"
+          >
+            Learn more
+          </a>
+        </div>
+      </div>
 
       <!-- Fourth Component of Home Page (Faq Question) -->
-      <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <div
+        class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
+      >
         <div class="max-w-xl sm:mx-auto lg:max-w-2xl">
           <div class="flex flex-col mb-16 sm:text-center">
             <a href="/" class="mb-6 sm:mx-auto">
-              <div class="flex items-center justify-center w-12 h-12 rounded-full bg-brand-primary">
-                <svg class="w-10 h-10 text-brand-tertiary" stroke="currentColor" viewBox="0 0 52 52">
-                  <polygon stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" points="29 13 14 29 25 29 23 39 38 23 27 23"></polygon>
+              <div
+                class="flex items-center justify-center w-12 h-12 rounded-full bg-brand-primary"
+              >
+                <svg
+                  class="w-10 h-10 text-brand-tertiary"
+                  stroke="currentColor"
+                  viewBox="0 0 52 52"
+                >
+                  <polygon
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none"
+                    points="29 13 14 29 25 29 23 39 38 23 27 23"
+                  ></polygon>
                 </svg>
               </div>
             </a>
             <div class="max-w-xl md:mx-auto sm:text-center lg:max-w-2xl">
-              <h2 class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+              <h2
+                class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto"
+              >
                 <span class="relative inline-block">
-                  <svg viewBox="0 0 52 24" fill="currentColor" class="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block">
+                  <svg
+                    viewBox="0 0 52 24"
+                    fill="currentColor"
+                    class="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block"
+                  >
                     <defs>
-                      <pattern id="ec5d8ef5-b853-4714-b94f-df28ec98eeb7" x="0" y="0" width=".135" height=".30"><circle cx="1" cy="1" r=".7"></circle></pattern>
+                      <pattern
+                        id="ec5d8ef5-b853-4714-b94f-df28ec98eeb7"
+                        x="0"
+                        y="0"
+                        width=".135"
+                        height=".30"
+                      >
+                        <circle cx="1" cy="1" r=".7"></circle>
+                      </pattern>
                     </defs>
-                    <rect fill="url(#ec5d8ef5-b853-4714-b94f-df28ec98eeb7)" width="52" height="24"></rect>
+                    <rect
+                      fill="url(#ec5d8ef5-b853-4714-b94f-df28ec98eeb7)"
+                      width="52"
+                      height="24"
+                    ></rect>
                   </svg>
                   <span class="relative">The</span>
                 </span>
                 quick, brown fox jumps over a lazy dog
               </h2>
-              <p class="text-base text-gray-700 md:text-lg">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem aperiam, eaque ipsa quae.</p>
+              <p class="text-base text-gray-700 md:text-lg">
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                accusantium doloremque rem aperiam, eaque ipsa quae.
+              </p>
             </div>
           </div>
           <div class="space-y-4">
             <div class="border rounded shadow-sm">
-              <div class="flex items-center justify-between w-full p-4 focus:outline-none">
-                <p class="text-lg font-medium">The quick, brown fox jumps over a lazy dog?</p>
+              <div
+                class="flex items-center justify-between w-full p-4 focus:outline-none"
+              >
+                <p class="text-lg font-medium">
+                  The quick, brown fox jumps over a lazy dog?
+                </p>
               </div>
               <!-- Show content if is open  -->
-              <div class="p-4 pt-0"><p class="text-gray-700">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem aperiam, eaque ipsa quae.</p></div>
-             
-            </div>
-            <div class="border rounded shadow-sm">
-              <div class="flex items-center justify-between w-full p-4 focus:outline-none">
-                <p class="text-lg font-medium">The first mate and his Skipper too will do?</p>
+              <div class="p-4 pt-0">
+                <p class="text-gray-700">
+                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                  accusantium doloremque rem aperiam, eaque ipsa quae.
+                </p>
               </div>
-              <div class="p-4 pt-0"><p class="text-gray-700">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem aperiam, eaque ipsa quae.</p></div>
             </div>
             <div class="border rounded shadow-sm">
-              <div class="flex items-center justify-between w-full p-4 focus:outline-none">
+              <div
+                class="flex items-center justify-between w-full p-4 focus:outline-none"
+              >
+                <p class="text-lg font-medium">
+                  The first mate and his Skipper too will do?
+                </p>
+              </div>
+              <div class="p-4 pt-0">
+                <p class="text-gray-700">
+                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                  accusantium doloremque rem aperiam, eaque ipsa quae.
+                </p>
+              </div>
+            </div>
+            <div class="border rounded shadow-sm">
+              <div
+                class="flex items-center justify-between w-full p-4 focus:outline-none"
+              >
                 <p class="text-lg font-medium">Is the Space Pope reptilian!?</p>
               </div>
-              <div class="p-4 pt-0"><p class="text-gray-700">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem aperiam, eaque ipsa quae.</p></div>
-             
+              <div class="p-4 pt-0">
+                <p class="text-gray-700">
+                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                  accusantium doloremque rem aperiam, eaque ipsa quae.
+                </p>
+              </div>
             </div>
             <div class="border rounded shadow-sm">
-              <div class="flex items-center justify-between w-full p-4 focus:outline-none">
-                <p class="text-lg font-medium">How much money you got on you?</p>
+              <div
+                class="flex items-center justify-between w-full p-4 focus:outline-none"
+              >
+                <p class="text-lg font-medium">
+                  How much money you got on you?
+                </p>
               </div>
-              <div class="p-4 pt-0"><p class="text-gray-700">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem aperiam, eaque ipsa quae.</p></div>
+              <div class="p-4 pt-0">
+                <p class="text-gray-700">
+                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                  accusantium doloremque rem aperiam, eaque ipsa quae.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    
-        <!-- Fifth Component of Home Page (Get Started) -->
-        <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-          <div class="flex flex-col max-w-screen-lg overflow-hidden bg-white border rounded shadow-sm lg:flex-row sm:mx-auto">
-            <div class="relative lg:w-1/2">
-              <img
-                src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                alt=""
-                class="object-cover w-full lg:absolute h-80 lg:h-full"
+
+      <!-- Fifth Component of Home Page (Get Started) -->
+      <div
+        class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
+      >
+        <div
+          class="flex flex-col max-w-screen-lg overflow-hidden bg-white border rounded shadow-sm lg:flex-row sm:mx-auto"
+        >
+          <div class="relative lg:w-1/2">
+            <img
+              src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+              alt=""
+              class="object-cover w-full lg:absolute h-80 lg:h-full"
+            />
+            <svg
+              class="absolute top-0 right-0 hidden h-full text-white lg:inline-block"
+              viewBox="0 0 20 104"
+              fill="currentColor"
+            >
+              <polygon
+                points="17.3036738 5.68434189e-14 20 5.68434189e-14 20 104 0.824555778 104"
               />
-              <svg
-                class="absolute top-0 right-0 hidden h-full text-white lg:inline-block"
-                viewBox="0 0 20 104"
-                fill="currentColor"
+            </svg>
+          </div>
+          <div
+            class="flex flex-col justify-center p-8 bg-white lg:p-16 lg:pl-10 lg:w-1/2"
+          >
+            <div>
+              <p
+                class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-brand-tertiary uppercase rounded-full bg-brand-primary"
               >
-                <polygon points="17.3036738 5.68434189e-14 20 5.68434189e-14 20 104 0.824555778 104" />
-              </svg>
-            </div>
-            <div class="flex flex-col justify-center p-8 bg-white lg:p-16 lg:pl-10 lg:w-1/2">
-              <div>
-                <p class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-brand-tertiary uppercase rounded-full bg-brand-primary">
-                  Brand new
-                </p>
-              </div>
-              <h5 class="mb-3 text-3xl font-extrabold leading-none sm:text-4xl">
-                Your new ideal style
-              </h5>
-              <p class="mb-5 text-gray-800">
-                <span class="font-bold">Lorem ipsum</span> dolor sit amet,
-                consectetur adipiscing elit. Etiam sem neque, molestie sit amet
-                venenatis et, dignissim ut erat. Sed aliquet velit id dui eleifend,
-                sed consequat odio sollicitudin.
+                Brand new
               </p>
-              <div class="flex items-center">
-                <button
-                  type="submit"
-                  class="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-brand-secondary hover:bg-brand-tertiary focus:shadow-outline focus:outline-none"
+            </div>
+            <h5 class="mb-3 text-3xl font-extrabold leading-none sm:text-4xl">
+              Your new ideal style
+            </h5>
+            <p class="mb-5 text-gray-800">
+              <span class="font-bold">Lorem ipsum</span> dolor sit amet,
+              consectetur adipiscing elit. Etiam sem neque, molestie sit amet
+              venenatis et, dignissim ut erat. Sed aliquet velit id dui
+              eleifend, sed consequat odio sollicitudin.
+            </p>
+            <div class="flex items-center">
+              <button
+                type="submit"
+                class="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-brand-secondary hover:bg-brand-tertiary focus:shadow-outline focus:outline-none"
+              >
+                Get started
+              </button>
+              <a
+                href="/"
+                aria-label=""
+                class="inline-flex items-center font-semibold transition-colors duration-200 text-brand-secondary hover:text-brand-tertiary"
+              >
+                Learn More
+                <svg
+                  class="inline-block w-3 ml-2"
+                  fill="currentColor"
+                  viewBox="0 0 12 12"
                 >
-                  Get started
-                </button>
-                <a
-                  href="/"
-                  aria-label=""
-                  class="inline-flex items-center font-semibold transition-colors duration-200 text-brand-secondary hover:text-brand-tertiary"
-                >
-                  Learn More
-                  <svg
-                    class="inline-block w-3 ml-2"
-                    fill="currentColor"
-                    viewBox="0 0 12 12"
-                  >
-                    <path d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z" />
-                  </svg>
-                </a>
-              </div>
+                  <path
+                    d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z"
+                  />
+                </svg>
+              </a>
             </div>
           </div>
         </div>
-        {% endblock %}
+      </div>
+      {% endblock %}
     </div>
 
     {% include 'components/footer.html' %}
 
     <!-- Linking JavaScript file for button functionalities -->
     <script src="static/js/index.js"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

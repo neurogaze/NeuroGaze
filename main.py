@@ -23,5 +23,13 @@ def resources():
 def aboutus():
     return render_template("about-us.html")
 
+@app.route("/callibration", methods=['GET'])
+def callibration():
+    return render_template("callibration.html")
+
+@app.route("/images", methods=['GET'])
+def images():
+    return render_template("images.html")
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=3000,debug=True)
