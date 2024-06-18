@@ -1,5 +1,5 @@
 # ADHD Tools for Web Interaction
-
+cd static
 npx tailwindcss -i ./css/index.css -o ./css/output.css --watch
 
 python3 -m venv .venv                                                  
