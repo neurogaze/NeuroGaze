@@ -1,45 +1,24 @@
+{% extends 'callibration.html' %} {% block body %}
+<style>
+  .swal-icon img {
+    max-width: 300px;
+    max-height: 300px;
+    display: block;
+    margin: auto;
+    object-fit: contain;
+  }
+</style>
 
-{% extends 'callibration.html' %} 
-{% block body %}
-
-<h1>Images</h1>
-
-<div id="liveView" class="videoView">
-
-    <button id="webcamButton" class="mdc-button mdc-button--raised">
-        <span class="mdc-button__ripple"></span>
-        <span class="mdc-button__label">ENABLE WEBCAM</span>
-    </button>
-    <div style="position: relative;">
-        <video id="webcam" style="position: abso" autoplay playsinline></video>
-        <canvas class="output_canvas" id="output_canvas" style="position: absolute; left: 0px; top: 0px;"></canvas>
-    </div>
+<div class="flex items-center justify-center h-screen bg-gray-100">
+  <div id="imgCont" class="h-96 w-96 bg-white flex items-center justify-center">
+    <img
+      id="currentImg"
+      src=""
+      alt=""
+      class="object-contain max-w-full max-h-full"
+    />
+  </div>
 </div>
 
-<!--add an image to the left size of the screen-->
-<div class="container-center">
-    <div class="container">
-            <img src="https://static.vecteezy.com/system/resources/previews/003/623/626/non_2x/sunset-lake-landscape-illustration-free-vector.jpg"
-                 alt="Lights" style="width:70%">
-    </div>
-</div>
-
-
-<div class="container-left">
-    <div class="container">
-            <img src="https://www.w3schools.com/w3images/lights.jpg" alt="Lights" style="width:20%">
-    </div>
-</div>
-<div class="container-right">
-    <div class="container">
-            <img src="https://www.w3schools.com/w3images/lights.jpg" alt="Lights" style="width:70%">
-    </div>
-</div>
-<div class="blend-shapes">
-    <ul class="blend-shapes-list" id="video-blend-shapes"></ul>
-</div>
-
-<script type="module" src="js/images.js"></script>
-
+<script src="/static/js/images.js"></script>
 {% endblock %}
-
