@@ -1,7 +1,22 @@
 from flask import Flask, render_template
+from flask_flatpages import FlatPages
 
 app = Flask(__name__, static_folder='static', template_folder='static/pages')
+app.config['FLATPAGES_AUTO_RELOAD'] = True
+app.config['FLATPAGES_EXTENSION'] = '.md'
+app.config['FLATPAGES_ROOT'] = 'content'
+pages = FlatPages(app)
 
+@app.route('/resources')
+def resources():
+    posts = [p for p in pages if 'resources' in p.path]
+    groups = sorted(set(post.meta.get('group') for post in posts if 'group' in post.meta))
+    return render_template('resources.html', posts=posts, groups=groups)
+
+@app.route('/resources/<path:path>')
+def resource(path):
+    page = pages.get_or_404(f'resources/{path}')
+    return render_template('resource.html', page=page)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -13,10 +28,6 @@ def home():
 
 @app.route("/testing", methods=['GET'])
 def testing():
-    return render_template("testing.html")
-
-@app.route("/resources", methods=['GET'])
-def resources():
     return render_template("testing.html")
 
 @app.route("/about-us", methods=['GET'])
