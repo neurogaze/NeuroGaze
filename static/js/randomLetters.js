@@ -1,59 +1,108 @@
-let intervalId; // Stores the interval ID for letter generation
+// value for test time duration in seconds
+const TEST_DURATION = 30;
+// values of the alphabet
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const DELAY_INTERVAL = [1000, 2000, 4000];
 
-// Starts the game once the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", function() {
-    startGame();
+let currLetterIndex = 0; // current letter index
+let corPressedKeys = 0; // correct pressed keys
+let incPressedKeys = 0; // incorrect pressed keys
+let testingPhase = false; // boolean test initiated
+let reactionTimes = []; // reactionTimes array
+let startTime; // exact time and date when correct image appears
+let avgReactionTime; // average reaction time
+
+/**
+ * Show the instruction at the start up screen.
+ */
+function showInitialInstructions() {
+  swal({
+    title: "Continuous Inhibition Test",
+    text: "You will be presented with a series of flashing alphabetical letters on the screen with varying frequencies. Press the spacebar for every letter other than ‘X’.",
+    icon: "info",
+    button: "Start Test",
+  }).then((isConfirm) => {
+    if (isConfirm) {
+      testingPhase = true; // set testingPhase to true
+      showRandomLetter(); // call random image function
+      setTimeout(endTest, TEST_DURATION * 1000); // setTimeout to end test after test duration
+    }
+  });
+}
+
+/**
+ * Test start
+ */
+function showRandomLetter() {
+  if (!testingPhase) return;
+  currLetterIndex = Math.floor(Math.random() * 26); // random current index
+
+  startTime = Date.now();
+  let currentLetter = document.getElementById("currentLetter");
+  console.log("Current Letter:", ALPHABET[currLetterIndex]);
+  currentLetter.textContent = ALPHABET[currLetterIndex]; // set current letter text to random letter
+
+  let delay = DELAY_INTERVAL[Math.floor(Math.random() * 3)];
+  setTimeout(showRandomLetter, 250 + delay);
+}
+
+/**
+ * Ends the test
+ */
+function endTest() {
+  testingPhase = false;
+  avgReactionTime = calculateAvgReactionTime();
+  let testScore = calculateTestScore();
+  console.log("Test ended:", avgReactionTime, testScore);
+  localStorage.setItem("inhibition-reactionTimes", JSON.stringify(reactionTimes));
+  localStorage.setItem("inhibition-avgReactionTime", avgReactionTime);
+  localStorage.setItem("inhibition-testScore", testScore);
+
+  swal({
+    title: "Test Completed",
+    icon: "success",
+    button: "Start Next Test",
+  }).then((isConfirm) => {
+    if (isConfirm) {
+      window.location.href = "continuous-inhibition";
+    }
+  });
+}
+
+/**
+ * Calculate reaction times
+ */
+function calculateAvgReactionTime() {
+  let sum = 0;
+  for (let i = 0; i < reactionTimes.length; i++) {
+    sum += reactionTimes[i];
+  }
+  return sum / reactionTimes.length;
+}
+
+/**
+ * Calculate final test score
+ */
+function calculateTestScore() {
+  return (corPressedKeys / (corPressedKeys + incPressedKeys)) * 100;
+}
+
+/**
+ * Event listener for keypress event
+ */
+document.addEventListener("keypress", function (event) {
+  if (testingPhase && event.code === "Space") {
+    if (ALPHABET[currLetterIndex] !== "X") {
+      let endTime = Date.now();
+      let reactionTime = endTime - startTime;
+      reactionTimes.push(reactionTime);
+      corPressedKeys++;
+      console.log("correct press");
+    } else {
+      console.log("incorrect press");
+      incPressedKeys++;
+    }
+  }
 });
 
-function startGame() {
-    // Hides game over message and start button, clears existing letters
-    document.getElementById('game-over').style.display = 'none';
-    document.getElementById('start-button').style.display = 'none';
-    document.querySelectorAll('.letter').forEach(letter => letter.remove());
-
-    // Sets an interval to create a new letter every second
-    intervalId = setInterval(createLetter, 1000);
-}
-
-function generateRandomLetter() {
-    // Generates a random letter from A-Z
-    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    return letters.charAt(Math.floor(Math.random() * letters.length));
-}
-
-function generateRandomPosition() {
-    // Calculates a random position for a letter within the viewport, excluding navbar area
-    const navbarHeight = document.querySelector('.navbar').offsetHeight;
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    const randomX = Math.floor(Math.random() * (screenWidth - 50));
-    const randomY = Math.floor(Math.random() * (screenHeight - navbarHeight - 50)) + navbarHeight;
-    return { x: randomX, y: randomY };
-}
-
-function createLetter() {
-    // Creates and positions a new letter element on the screen
-    const letter = generateRandomLetter();
-    const position = generateRandomPosition();
-    const newLetter = document.createElement('div');
-    newLetter.textContent = letter;
-    newLetter.classList.add('letter');
-    newLetter.style.left = position.x + 'px';
-    newLetter.style.top = position.y + 'px';
-    newLetter.addEventListener('click', function() {
-        if (letter === 'X') {
-            gameOver(); // Ends game if letter X is clicked
-        } else {
-            this.remove(); // Removes the letter on click
-        }
-    });
-    document.body.appendChild(newLetter);
-}
-
-function gameOver() {
-    // Stops letter generation, clears the screen, shows game over message and restart option
-    clearInterval(intervalId);
-    document.querySelectorAll('.letter').forEach(letter => letter.remove());
-    document.getElementById('game-over').style.display = 'block';
-    document.getElementById('start-button').style.display = 'block';
-}
+showInitialInstructions();

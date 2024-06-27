@@ -2,6 +2,7 @@
 const API_KEY = "wxFE-eV4eaT1N27OsKq5N8Kt9riF36G9Dy_KSPZenqQ";
 // value for test time duration in seconds
 const TEST_DURATION = 30;
+const DELAY_INTERVAL = [1000, 2000, 4000];
 
 let images = []; // images array
 let randImgIndex; // randomly selected image index
@@ -9,8 +10,8 @@ let currImgIndex = 0; // current image index
 let corPressedKeys = 0; // correct pressed keys
 let incPressedKeys = 0; // incorrect pressed keys
 let testingPhase = false; // boolean test initiated
-let reactionTime = []; // reactionTimes array
-let corrImgAppears; // correct image appears
+let reactionTimes = []; // reactionTimes array
+let startTime; // exact time and date when correct image appears
 let avgReactionTime; // average reaction time
 
 /**
@@ -57,24 +58,25 @@ async function startingTestInstructions() {
     button: "Start Test",
   }).then((isConfirm) => {
     if (isConfirm) {
-      testingPhase = true // set testingPhase to true
+      testingPhase = true; // set testingPhase to true
       showRandomImage(); // call random image function
-      setTimeout(endTest, TEST_DURATION * (1000)); // setTimeout to end test after test duration
-      
+      setTimeout(endTest, TEST_DURATION * 1000); // setTimeout to end test after test duration
     }
-  })
+  });
 }
 
 /**
  * Test start
  */
-function showRandomImage(){
+function showRandomImage() {
   if (!testingPhase) return;
+  startTime = Date.now();
   let currentImage = document.getElementById("currentImg");
-  currImgIndex = Math.floor(Math.random() * images.length) // random current index 
-  currentImage.src = images[currImgIndex]// set currentImage.src to random current index inside images array
+  currImgIndex = Math.floor(Math.random() * images.length); // random current index
+  currentImage.src = images[currImgIndex]; // set currentImage.src to random current index inside images array
 
-  setTimeout(showRandomImage, Math.random() * 1000 + 1000);
+  let delay = DELAY_INTERVAL[Math.floor(Math.random()*3)];
+  setTimeout(showRandomImage, 250 + delay);
 }
 
 /**
@@ -82,19 +84,60 @@ function showRandomImage(){
  */
 function endTest() {
   testingPhase = false;
+  avgReactionTime = calculateAvgReactionTime();
+  let testScore = calculateTestScore();
+  console.log("Test ended:", avgReactionTime, testScore);
+  localStorage.setItem("attention-reactionTimes", JSON.stringify(reactionTimes));
+  localStorage.setItem("attention-avgReactionTime", avgReactionTime);
+  localStorage.setItem("attention-testScore", testScore);
+
+  swal({
+    title: "Test Completed",
+    icon: "success",
+    button: "Start Next Test",
+  }).then((isConfirm) => {
+    if (isConfirm) {
+      window.location.href = 'continuous-inhibition';
+    }
+  });
+
+}
+
+/**
+ * Calculate reaction times
+ */
+function calculateAvgReactionTime() {
+  let sum = 0;
+  for (let i = 0; i < reactionTimes.length; i++) {
+    sum += reactionTimes[i];
+  }
+  return sum / (reactionTimes.length);
+}
+
+/**
+ * Calculate final test score
+ */
+function calculateTestScore() {
+  return (corPressedKeys/(corPressedKeys+incPressedKeys)) * 100;
 }
 
 
 /**
  * Event listener for keypress event
  */
-document.addEventListener("keypress", function(event) {
-  if (testingPhase){
-    console.log('Key pressed:', event.code);
+document.addEventListener("keypress", function (event) {
+  if (testingPhase && event.code === "Space") {
+    if (randImgIndex == currImgIndex) {
+      let endTime = Date.now();
+      let reactionTime = endTime - startTime;
+      reactionTimes.push(reactionTime);
+      corPressedKeys++;
+      console.log("correct press");
+    } else {
+      console.log("incorrect press");
+      incPressedKeys++;
+    }
   }
 });
 
-
 showInitialInstructions();
-
-

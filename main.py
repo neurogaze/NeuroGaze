@@ -27,9 +27,17 @@ def aboutus():
 def callibration():
     return render_template("callibration.html")
 
-@app.route("/images", methods=['GET'])
+@app.route("/visual-attention", methods=['GET'])
 def images():
     return render_template("images.html")
+
+@app.route("/continuous-inhibition", methods=['GET'])
+def letters():
+    return render_template("randomLetters.html")
+
+@app.route("/interference", methods=['GET'])
+def passage():
+    return render_template("passage.html")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=3000,debug=True)
