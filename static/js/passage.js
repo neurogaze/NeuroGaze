@@ -1,278 +1,183 @@
-import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
-const { FaceLandmarker, FilesetResolver, DrawingUtils } = vision;
-const demosSection = document.getElementById("demos");
-const imageBlendShapes = document.getElementById("image-blend-shapes");
-const videoBlendShapes = document.getElementById("video-blend-shapes");
+const API_KEY = "wxFE-eV4eaT1N27OsKq5N8Kt9riF36G9Dy_KSPZenqQ";
+const TEST_DURATION = 60; // value for test time duration in seconds
+const DELAY_INTERVAL = [1000, 2000, 4000];
+const PASSAGES = [
+  // Array of passages
+  { text: "The quick brown fox jumps over the lazy dog.", difficulty: "child" },
+  {
+    text: "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
+    difficulty: "teen",
+  },
+  {
+    text: "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
+    difficulty: "adult",
+  },
+];
 
-let faceLandmarker;
-let runningMode = "VIDEO";
-let enableWebcamButton= HTMLButtonElement;
-let webcamRunning = false;
-const videoWidth = 480;
-let currentIrisLandmarks = null;
-let logInterval = null;
+let popUps = []; // distractions that pop up
+let selectedPassage; // currently selected passage
+let testingPhase = false; // boolean test initiated
+let distractionInterval; // time between distractions
 
+/**
+ * Fetches 10 random images from the Unsplash API.
+ */
+async function fetchImageURLs() {
+  const URL = `https://api.unsplash.com/photos/random?count=10&client_id=${API_KEY}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  const imgUrls = data.map((img) => img.urls.regular);
 
-// Before we can use HandLandmarker class we must wait for it to finish
-// loading. Machine Learning models can be large and take a moment to
-// get everything needed to run.
-async function createFaceLandmarker() {
-  const filesetResolver = await FilesetResolver.forVisionTasks(
-    "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
-  );
-  faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
-    baseOptions: {
-      modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
-      delegate: "GPU"
-    },
-    outputFaceBlendshapes: true,
-    runningMode,
-    numFaces: 1
+  return imgUrls;
+}
+
+/**
+ * Show the instruction at the start up screen.
+ */
+function showInitialInstructions() {
+  swal({
+    title: "Interference Test",
+    text: "In this test, you will be shown a passage of text. You will be asked to read the passage carefully.\
+     You will also be shown some distractions during the test. You will have to ignore the distractions and focus on the passage.",
+    icon: "info",
+    button: "Start Test",
+  }).then((isConfirm) => {
+    if (isConfirm) {
+      selectDifficulty();
+    }
   });
-  demosSection.classList.remove("invisible");
-}
-createFaceLandmarker();
-
-/********************************************************************
-// Demo 1: Grab a bunch of images from the page and detection them
-// upon click.
-********************************************************************/
-
-// In this demo, we have put all our clickable images in divs with the
-// CSS class 'detectionOnClick'. Lets get all the elements that have
-// this class.
-const imageContainers = document.getElementsByClassName("detectOnClick");
-
-// Now let's go through all of these and add a click event listener.
-for (let imageContainer of imageContainers) {
-  // Add event listener to the child element whichis the img element.
-  imageContainer.children[0].addEventListener("click", handleClick);
 }
 
-// When an image is clicked, let's detect it and display results!
-async function handleClick(event) {
-  if (!faceLandmarker) {
-    console.log("Wait for faceLandmarker to load before clicking!");
-    return;
-  }
+/**
+ * Choose the difficulty for the test.
+ */
+function selectDifficulty() {
+  const difficultyOptions = [
+    { text: "Easy (For Children)", value: "child" },
+    { text: "Medium (For Teens)", value: "teen" },
+    { text: "Hard (For Adults)", value: "adult" },
+  ];
 
-  if (runningMode === "VIDEO") {
-    runningMode = "IMAGE";
-    await faceLandmarker.setOptions({ runningMode });
-  }
-  // Remove all landmarks drawed before
-  const allCanvas = event.target.parentNode.getElementsByClassName("canvas");
-  for (var i = allCanvas.length - 1; i >= 0; i--) {
-    const n = allCanvas[i];
-    n.parentNode.removeChild(n);
-  }
+  const select = document.createElement("select");
 
-  // We can call faceLandmarker.detect as many times as we like with
-  // different image data each time. This returns a promise
-  // which we wait to complete and then call a function to
-  // print out the results of the prediction.
-  const faceLandmarkerResult = faceLandmarker.detect(event.target);
-  const canvas = document.createElement("canvas");
-  canvas.setAttribute("class", "canvas");
-  canvas.setAttribute("width", event.target.naturalWidth + "px");
-  canvas.setAttribute("height", event.target.naturalHeight + "px");
-  canvas.style.left = "0px";
-  canvas.style.top = "0px";
-  canvas.style.width = `${event.target.width}px`;
-  canvas.style.height = `${event.target.height}px`;
+  difficultyOptions.forEach((option) => {
+    const optionElement = document.createElement("option");
+    optionElement.text = option.text;
+    optionElement.value = option.value;
+    select.appendChild(optionElement);
+  });
 
-  event.target.parentNode.appendChild(canvas);
-  const ctx = canvas.getContext("2d");
-  const drawingUtils = new DrawingUtils(ctx);
-  for (const landmarks of faceLandmarkerResult.faceLandmarks) {
+  let selectedDifficulty = difficultyOptions[0].value; // Default to first option
 
-    drawingUtils.drawConnectors(
-      landmarks,
-      FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS,
-      { color: "#FF3030" }
-    );
-    drawingUtils.drawConnectors(
-      landmarks,
-      FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS,
-      { color: "#30FF30" }
-    );
-  }
-  drawBlendShapes(imageBlendShapes, faceLandmarkerResult.faceBlendshapes);
-}
-
-/********************************************************************
-// Demo 2: Continuously grab image from webcam stream and detect it.
-********************************************************************/
-
-const video = document.getElementById("webcam");
-const canvasElement = document.getElementById(
-  "output_canvas"
-);
-
-const canvasCtx = canvasElement.getContext("2d");
-
-// Check if webcam access is supported.
-function hasGetUserMedia() {
-  return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
-}
-
-// If webcam supported, add event listener to button for when user
-// wants to activate it.
-if (hasGetUserMedia()) {
-  enableWebcamButton = document.getElementById(
-    "webcamButton"
-  );
-  enableWebcamButton.addEventListener("click", enableCam);
-} else {
-  console.warn("getUserMedia() is not supported by your browser");
-}
-
-// Enable the live webcam view and start detection.
-function enableCam(event) {
-  if (!faceLandmarker) {
-    console.log("Wait! faceLandmarker not loaded yet.");
-    return;
-  }
-
-  if (webcamRunning === true) {
-    webcamRunning = false;
-    enableWebcamButton.innerText = "ENABLE PREDICTIONS";
-    stopLogging();
-  } else {
-    webcamRunning = true;
-    enableWebcamButton.innerText = "DISABLE PREDICTIONS";
-    startLogging();
-  }
-
-  // getUsermedia parameters.
-  const constraints = {
-    video: true
+  select.onchange = function (e) {
+    selectedDifficulty = e.target.value;
   };
 
-  // Activate the webcam stream.
-  navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
-    video.srcObject = stream;
-    video.addEventListener("loadeddata", predictWebcam);
+  swal({
+    title: "Select Difficulty",
+    text: "Choose the difficulty level for the test",
+    icon: "info",
+    content: select,
+    buttons: {
+      cancel: "Cancel",
+      confirm: "Start Test",
+    },
+  }).then((isConfirm) => {
+    if (isConfirm) {
+      testingPhase = true;
+      startingTest(selectedDifficulty);
+    }
   });
 }
 
-let lastVideoTime = -1;
-let results = undefined;
-const drawingUtils = new DrawingUtils(canvasCtx);
-async function predictWebcam() {
-  // Resize the output to fit the video element.
-  const radio = video.videoHeight / video.videoWidth;
-  video.style.width = videoWidth + "px";
-  video.style.height = videoWidth * radio + "px";
-  canvasElement.style.width = videoWidth + "px";
-  canvasElement.style.height = videoWidth * radio + "px";
-  canvasElement.width = video.videoWidth;
-  canvasElement.height = video.videoHeight;
-  // Now let's start detecting the stream.
-  if (runningMode === "IMAGE") {
-    runningMode = "VIDEO";
-    await faceLandmarker.setOptions({ runningMode: runningMode });
-  }
-  // Store the current time to check if we need to detect again.
-  let startTimeMs = performance.now();
-  if (lastVideoTime !== video.currentTime) {
-    lastVideoTime = video.currentTime;
-    results = faceLandmarker.detectForVideo(video, startTimeMs);
-  }
-  //
-  if (results.faceLandmarks) {
-    for (const landmarks of results.faceLandmarks) {
+/**
+ * Test start
+ */
+async function startingTest(selectedDifficulty) {
+  if (!testingPhase) return;
 
-        // Access the iris landmarks:
-        const leftIris = [
-          landmarks[468],
-          landmarks[469],
-          landmarks[470],
-          landmarks[471]
-        ];
-        const rightIris = [
-          landmarks[473],
-          landmarks[474],
-          landmarks[475],
-          landmarks[476]
-        ];
+  console.log(selectedDifficulty);
 
-
-        // Store the current iris landmarks
-        currentIrisLandmarks = { leftIris, rightIris };
-
-//        // You can now use these landmarks to track the iris
-//        console.log('Left Iris:', leftIris);
-//        console.log('Right Iris:', rightIris);
-
-        //draw the iris landmarks
-        drawingUtils.drawConnectors(
-            landmarks,
-            FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS,
-            { color: "#FF3030" }
-        );
-        drawingUtils.drawConnectors(
-            landmarks,
-            FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS,
-            { color: "#30FF30" }
-            );
-        }
-  }
-  drawBlendShapes(videoBlendShapes, results.faceBlendshapes);
-
-  // Call this function again to keep predicting when the browser is ready.
-  if (webcamRunning === true) {
-    window.requestAnimationFrame(predictWebcam);
-  }
+  popUps = await fetchImageURLs(); // Set the images to the popUps array
+  const filteredPassages = PASSAGES.filter(
+    (passage) => passage.difficulty === selectedDifficulty
+  ); // Using selected difficulty, filter the passages
+  selectedPassage =
+    filteredPassages[Math.floor(Math.random() * filteredPassages.length)]; // Select random passage
+  document.getElementById("passage").innerText = selectedPassage.text; // Display the passage text
+  testingPhase = true; // Set testing phase to true
+  startPopupLoop();
+  setTimeout(endTest, TEST_DURATION * 1000); // Set test duration
 }
 
-function drawBlendShapes(el, blendShapes) {
-    if (!blendShapes.length) {
-        return;
+/**
+ * Start pop=up distraction loop
+ */
+function startPopupLoop() {
+  let delay = DELAY_INTERVAL[Math.floor(Math.random() * 3)];
+
+  distractionInterval = setInterval(() => {
+    showPopup();
+  }, 250 + delay);
+}
+
+/**
+ * Show the pop-up distractions
+ */
+function showPopup() {
+  const popUp = document.getElementById("popUp");
+  const randomSize = Math.floor(Math.random() * 100 + 200); // Generate size anywhere from 200px - 300px;
+  const randomPosition = generateRandomPosition();
+  console.log(randomPosition)
+
+  // Randomly select an image from the popUps array
+  let randomImgIndex = Math.floor(Math.random() * popUps.length);
+
+  popUp.src = popUps[randomImgIndex];
+  popUp.style.width = randomSize.toString() + "px";
+  popUp.style.height = randomSize.toString() + "px";
+  popUp.style.top = randomPosition.y.toString() + "px";
+  popUp.style.left = randomPosition.x.toString() + "px";
+  popUp.classList.remove("hidden");
+
+  setTimeout(() => {
+    popUp.classList.add("hidden");
+  }, 1000);
+}
+
+/**
+ * Generate random position
+ */
+function generateRandomPosition() {
+  const windowHeight = window.innerHeight;
+  const windowWidth = window.innerWidth;
+  const maxY = windowHeight - 200;
+  const maxX = windowWidth - 200;
+
+  const randomY = Math.floor(Math.random() * maxY);
+  const randomX = Math.floor(Math.random() * maxX);
+
+  return { x: randomX, y: randomY };
+}
+
+/**
+ * Ends the test
+ */
+function endTest() {
+  testingPhase = false;
+  // localStorage.setItem("inhibition-reactionTimes", JSON.stringify(reactionTimes));
+  // localStorage.setItem("inhibition-avgReactionTime", avgReactionTime);
+  // localStorage.setItem("inhibition-testScore", testScore);
+
+  swal({
+    title: "Testing Completed",
+    icon: "success",
+    button: "Start Survey",
+  }).then((isConfirm) => {
+    if (isConfirm) {
+      window.location.href = "survey";
     }
-
-    // Filter out only the blend shapes related to the eyes
-    const irisBlendShapes = blendShapes[0].categories.filter(shape => {
-        return shape.categoryName.includes("eye");
-    });
-
-    let htmlMaker = "";
-
-    irisBlendShapes.forEach(shape => {
-        //write the score of the iris blend shapes
-        htmlMaker += `
-            <li class="blend-shapes-item">
-                <span class="blend-shapes-label">${shape.displayName || shape.categoryName}</span>
-                <span class="blend-shapes-value" style="width: calc(${+shape.score * 100}% - 120px)">${(+shape.score).toFixed(4)}</span>
-            </li>
-        `;
-    });
-
-    el.innerHTML = htmlMaker;
+  });
 }
 
-function logIrisLandmarks() {
-    // Track the iris landmarks
-    if (currentIrisLandmarks) {
-    console.log('Current Left Iris:', currentIrisLandmarks.leftIris);
-    console.log('Current Right Iris:', currentIrisLandmarks.rightIris);
-    }
-}
-
-// Function to start the logging interval
-function startLogging() {
-  if (logInterval) {
-    clearInterval(logInterval);
-  }
-  // Log the iris landmarks every second
-  logInterval = setInterval(logIrisLandmarks, 1000);
-}
-
-// Function to stop the logging interval
-function stopLogging() {
-  if (logInterval) {
-    clearInterval(logInterval);
-    logInterval = null;
-  }
-}
-
+showInitialInstructions();
