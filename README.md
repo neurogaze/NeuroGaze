@@ -1,10 +1,27 @@
 # ADHD Tools for Web Interaction
+
+Dont forget to commit btw -
 cd static
 npx tailwindcss -i ./css/index.css -o ./css/output.css --watch
 
+venv = virtual environment - used to add packages.
+running server:
 python3 -m venv .venv                                                  
 source .venv/bin/activate
 python3 main.py
+
+turning off virtual environment:
+source deactivate
+
+when installing new packages:
+python3 -m venv .venv                                                  
+source .venv/bin/activate
+pip3 install -r requirements.txt or python3 -m pip install -r requirements.txt
+python3 main.py
+
+Write articles using:
+https://stackedit.io/app#
+
 ## Description
 
 This project provides a suite of interactive web-based tools designed to enhance understanding and awareness of ADHD
