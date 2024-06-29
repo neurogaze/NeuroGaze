@@ -172,10 +172,10 @@ function endTest() {
   swal({
     title: "Testing Completed",
     icon: "success",
-    button: "Start Survey",
+    button: "Start Screening Test",
   }).then((isConfirm) => {
     if (isConfirm) {
-      window.location.href = "survey";
+      window.location.href = "screening";
     }
   });
 }

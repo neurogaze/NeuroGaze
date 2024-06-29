@@ -1,11 +1,14 @@
 from flask import Flask, render_template
 from flask_flatpages import FlatPages
+import json
 
 app = Flask(__name__, static_folder='static', template_folder='static/pages')
 app.config['FLATPAGES_AUTO_RELOAD'] = True
 app.config['FLATPAGES_EXTENSION'] = '.md'
 app.config['FLATPAGES_ROOT'] = 'content'
 pages = FlatPages(app)
+
+questions = json.loads(open('content/screening/questions.json').read())
 
 @app.route('/resources')
 def resources():
@@ -49,6 +52,10 @@ def letters():
 @app.route("/interference", methods=['GET'])
 def passage():
     return render_template("passage.html")
+
+@app.route("/screening", methods=['GET'])
+def screening():
+    return render_template("screening.html", questions=questions)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=3000,debug=True)
