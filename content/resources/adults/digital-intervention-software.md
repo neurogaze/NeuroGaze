@@ -2,7 +2,10 @@
 title: "Digital Intervention Software: “Brain Training” for ADHD"
 date: 2024-06-24
 group: adults
+caption: "Solid research evidence supports two types of treatment for ADHD."
+imageURL: "https://thenutritionjunky.com/wp-content/uploads/2023/02/How-nutrition-and-diet-impact-ADHD-1024x1024.jpg"
 ---
+
 Solid research evidence supports two types of treatment for ADHD: [medication and behavioral treatments](https://chadd.org/for-parents/treatment-overview/) (such as behavior management strategies and parent training in behavior management). Even though these treatments help most children with ADHD, they are not perfect. Many practitioners, parents, and patients themselves look for complementary approaches to include with their ADHD treatment plan.
 
 One complementary approach that has attracted a great deal of interest uses digital products that resemble computer games to improve symptoms—often referred to as “brain training.” Some digital products have even been [approved by the FDA](https://www.fda.gov/drugs/development-approval-process-drugs). These interventions, which often use a gamelike design and format, are not the same games played for entertainment.

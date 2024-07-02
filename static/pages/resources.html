@@ -75,7 +75,14 @@
             {% for post in posts %}
             <a class="resource-item" data-group="{{ post.meta.get('group', 'Uncategorized') }}" href="{{ url_for('resource', path=post.path.replace('resources/', '')) }}" aria-label="View Item">
                 <div class="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
-                <img class="object-cover w-full h-56 md:h-64 xl:h-80" src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260" alt="" />
+                <img class="object-cover w-full h-56 md:h-64 xl:h-80" src=
+                "
+                  {% if post.meta.imageURL %}
+                  {{ post.meta.imageURL }}
+                  {% else %}
+                  https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260
+                  {% endif %}
+                " alt="" />
                 <div class="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
                     <p class="text-sm font-medium tracking-wide text-white">
                         {{ post.meta.title }}

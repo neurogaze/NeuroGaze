@@ -19,7 +19,7 @@ def resources():
 @app.route('/resources/<path:path>')
 def resource(path):
     page = pages.get_or_404(f'resources/{path}')
-    return render_template('resource.html', page=page)
+    return render_template('articlelayout.html', page=page)
 
 @app.route('/', methods=['GET'])
 def index():
