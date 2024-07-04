@@ -73,7 +73,7 @@ function calcAccuracy() {
         },
       }).then((isConfirm) => {
         if (isConfirm) {
-          window.location.href = "/images"; // go to the test page
+          window.location.href = "/visual-attention"; // go to the test page
           //clear the calibration & hide the last middle button
           ClearCanvas();
         } else {

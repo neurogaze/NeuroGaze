@@ -35,6 +35,7 @@ function showInitialInstructions() {
     text: "The computer will generate 10 random images. It will pick one image which you will need to press the spacebar when you see. Do not press the spacebar if a different image appears.",
     icon: "info",
     button: "Next",
+    closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {
       startingTestInstructions();
@@ -55,6 +56,7 @@ async function startingTestInstructions() {
     title: "Your Image",
     text: "This is the image. Make sure to press the spacebar when you see it again.",
     icon: images[randImgIndex],
+    closeOnClickOutside: false,
     button: "Start Test",
   }).then((isConfirm) => {
     if (isConfirm) {
@@ -75,7 +77,7 @@ function showRandomImage() {
   currImgIndex = Math.floor(Math.random() * images.length); // random current index
   currentImage.src = images[currImgIndex]; // set currentImage.src to random current index inside images array
 
-  let delay = DELAY_INTERVAL[Math.floor(Math.random()*3)];
+  let delay = DELAY_INTERVAL[Math.floor(Math.random() * 3)];
   setTimeout(showRandomImage, 250 + delay);
 }
 
@@ -87,7 +89,10 @@ function endTest() {
   avgReactionTime = calculateAvgReactionTime();
   let testScore = calculateTestScore();
   console.log("Test ended:", avgReactionTime, testScore);
-  localStorage.setItem("attention-reactionTimes", JSON.stringify(reactionTimes));
+  localStorage.setItem(
+    "attention-reactionTimes",
+    JSON.stringify(reactionTimes)
+  );
   localStorage.setItem("attention-avgReactionTime", avgReactionTime);
   localStorage.setItem("attention-testScore", testScore);
 
@@ -95,12 +100,12 @@ function endTest() {
     title: "Test Completed",
     icon: "success",
     button: "Start Next Test",
+    closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {
-      window.location.href = 'continuous-inhibition';
+      window.location.href = "interference";
     }
   });
-
 }
 
 /**
@@ -111,16 +116,15 @@ function calculateAvgReactionTime() {
   for (let i = 0; i < reactionTimes.length; i++) {
     sum += reactionTimes[i];
   }
-  return sum / (reactionTimes.length);
+  return sum / reactionTimes.length;
 }
 
 /**
  * Calculate final test score
  */
 function calculateTestScore() {
-  return (corPressedKeys/(corPressedKeys+incPressedKeys)) * 100;
+  return (corPressedKeys / (corPressedKeys + incPressedKeys)) * 100;
 }
-
 
 /**
  * Event listener for keypress event

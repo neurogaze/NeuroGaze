@@ -21,6 +21,7 @@ function showInitialInstructions() {
     text: "You will be presented with a series of flashing alphabetical letters on the screen with varying frequencies. Press the spacebar for every letter other than ‘X’.",
     icon: "info",
     button: "Start Test",
+    closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {
       testingPhase = true; // set testingPhase to true
@@ -54,7 +55,10 @@ function endTest() {
   avgReactionTime = calculateAvgReactionTime();
   let testScore = calculateTestScore();
   console.log("Test ended:", avgReactionTime, testScore);
-  localStorage.setItem("inhibition-reactionTimes", JSON.stringify(reactionTimes));
+  localStorage.setItem(
+    "inhibition-reactionTimes",
+    JSON.stringify(reactionTimes)
+  );
   localStorage.setItem("inhibition-avgReactionTime", avgReactionTime);
   localStorage.setItem("inhibition-testScore", testScore);
 
@@ -62,6 +66,7 @@ function endTest() {
     title: "Test Completed",
     icon: "success",
     button: "Start Next Test",
+    closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {
       window.location.href = "continuous-inhibition";

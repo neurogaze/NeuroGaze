@@ -1,18 +1,21 @@
 const API_KEY = "wxFE-eV4eaT1N27OsKq5N8Kt9riF36G9Dy_KSPZenqQ";
 const TEST_DURATION = 60; // value for test time duration in seconds
 const DELAY_INTERVAL = [1000, 2000, 4000];
-const PASSAGES = [
-  // Array of passages
-  { text: "The quick brown fox jumps over the lazy dog.", difficulty: "child" },
-  {
-    text: "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
-    difficulty: "teen",
-  },
-  {
-    text: "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
-    difficulty: "adult",
-  },
-];
+
+let passages;
+
+document.addEventListener("DOMContentLoaded", async function () {
+  try {
+    let response = await fetch("/static/testing/passages.json");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    let data = await response.json();
+    passages = data;
+  } catch (error) {
+    console.error("Error fetching or parsing questions:", error);
+  }
+});
 
 let popUps = []; // distractions that pop up
 let selectedPassage; // currently selected passage
@@ -41,6 +44,7 @@ function showInitialInstructions() {
      You will also be shown some distractions during the test. You will have to ignore the distractions and focus on the passage.",
     icon: "info",
     button: "Start Test",
+    closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {
       selectDifficulty();
@@ -82,6 +86,7 @@ function selectDifficulty() {
       cancel: "Cancel",
       confirm: "Start Test",
     },
+    closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {
       testingPhase = true;
@@ -99,11 +104,11 @@ async function startingTest(selectedDifficulty) {
   console.log(selectedDifficulty);
 
   popUps = await fetchImageURLs(); // Set the images to the popUps array
-  const filteredPassages = PASSAGES.filter(
+  const filteredpassages = passages.filter(
     (passage) => passage.difficulty === selectedDifficulty
   ); // Using selected difficulty, filter the passages
   selectedPassage =
-    filteredPassages[Math.floor(Math.random() * filteredPassages.length)]; // Select random passage
+    filteredpassages[Math.floor(Math.random() * filteredpassages.length)]; // Select random passage
   document.getElementById("passage").innerText = selectedPassage.text; // Display the passage text
   testingPhase = true; // Set testing phase to true
   startPopupLoop();
@@ -128,7 +133,7 @@ function showPopup() {
   const popUp = document.getElementById("popUp");
   const randomSize = Math.floor(Math.random() * 100 + 200); // Generate size anywhere from 200px - 300px;
   const randomPosition = generateRandomPosition();
-  console.log(randomPosition)
+  console.log(randomPosition);
 
   // Randomly select an image from the popUps array
   let randomImgIndex = Math.floor(Math.random() * popUps.length);
