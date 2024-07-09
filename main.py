@@ -8,7 +8,7 @@ app.config['FLATPAGES_EXTENSION'] = '.md'
 app.config['FLATPAGES_ROOT'] = 'content'
 pages = FlatPages(app)
 
-questions = json.loads(open('content/screening/questions.json').read())
+questions = json.loads(open('./static/testing/questions.json').read())
 
 @app.route('/resources')
 def resources():

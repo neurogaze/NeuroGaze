@@ -1,5 +1,5 @@
 # ADHD Tools for Web Interaction
-Testing
+
 # Dont forget to commit btw -
 cd static
 npx tailwindcss -i ./css/index.css -o ./css/output.css --watch
