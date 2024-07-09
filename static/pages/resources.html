@@ -1,99 +1,114 @@
-
 {% extends 'index.html' %}
- 
+
 {% block body %}
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.group-button').click(function() {
-                var group = $(this).data('group');
-                if (group === 'All') {
-                    $('.resource-item').show();
-                } else {
-                    $('.resource-item').hide();
-                    $('.resource-item[data-group="' + group + '"]').show();
-                }
-            });
-        });
-    </script>
-    <div class="mb-16">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.group-button').click(function () {
+      var group = $(this).data('group');
+      console.log(group)
+      // Add border classes to elements with matching group
+      $('.group-button[data-group="' + group + '"]').addClass("!border-solid !border-2 border-brand-tertiary");
+      // Remove border classes from other elements
+      $('.group-button:not([data-group="' + group + '"])').removeClass(" !border-solid border-2 border-brand-tertiary");
 
-        <div class="bg-brand-primary">
-          <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-            <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-              <h1 class="max-w-lg mb-6 font-sans text-5xl font-bold leading-none tracking-tight text-gray-900 sm:text-7xl md:mx-auto">
-                  Resources
-              </h1>
-              <p class="text-base text-gray-700 md:text-lg">
-                Attention-deficit/hyperactivity disorder (ADHD) is a neurodevelopmental disorder affecting 11 percent of school-age children. Symptoms continue into adulthood in more than three-quarters of cases. 
-                ADHD is characterized by developmentally inappropriate levels of inattention, impulsivity and hyperactivity.
-              </p>
-            </div>
-          </div>
-        </div>
+      if (group === 'All') {
+        $('.resource-item').show();
+      } else {
+        $('.resource-item').hide();
+        $('.resource-item[data-group="' + group + '"]').show();
+      }
+    });
+  });
+</script>
+<div class="mb-16">
 
-        <div class="relative px-4 sm:px-0">
-          <div class="absolute inset-0 bg-brand-primary h-1/2"></div>
-          <div class="relative grid mx-auto overflow-hidden bg-white divide-y rounded shadow sm:divide-y-0 sm:divide-x sm:max-w-screen-sm sm:grid-cols-4 lg:max-w-screen-md">
-            <button data-group="All" class="group-button inline-block p-8 text-center">
-                <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-full bg-indigo-50">
-                  <svg class="w-10 h-10 text-deep-purple-accent-400" stroke="currentColor" viewBox="0 0 52 52">
-                    <polygon stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" points="29 13 14 29 25 29 23 39 38 23 27 23"></polygon>
-                  </svg>
-                </div>
-                <p class="font-bold tracking-wide text-gray-800">All</p>
-              </button>
-            {% for group in groups %}
-            <button data-group="{{ group }}" class="group-button inline-block p-8 text-center">
-              <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-full bg-indigo-50">
-                <svg class="w-10 h-10 text-deep-purple-accent-400" stroke="currentColor" viewBox="0 0 52 52">
-                  <polygon stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" points="29 13 14 29 25 29 23 39 38 23 27 23"></polygon>
-                </svg>
-              </div>
-              <p class="font-bold tracking-wide text-gray-800">{{ group | capitalize }}</p>
-            </button>
-            {% endfor %}
-
-          </div>
-        </div>
+  <div class="bg-brand-primary">
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+        <h1
+          class="max-w-lg mb-6 font-sans text-5xl font-bold leading-none tracking-tight text-gray-900 sm:text-7xl md:mx-auto">
+          Resources
+        </h1>
+        <p class="text-base text-gray-700 md:text-lg">
+          Attention-deficit/hyperactivity disorder (ADHD) is a neurodevelopmental disorder affecting 11 percent of
+          school-age children. Symptoms continue into adulthood in more than three-quarters of cases.
+          ADHD is characterized by developmentally inappropriate levels of inattention, impulsivity and hyperactivity.
+        </p>
       </div>
+    </div>
+  </div>
 
-      <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-        <div class="flex flex-col mb-6 lg:justify-between lg:flex-row md:mb-8">
-          <h2 class="max-w-lg mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none md:mb-6 group">
-            <span class="inline-block mb-1 sm:mb-4">
-              The quick, brown fox<br class="hidden md:block" />
-              jumps over a lazy dog
-            </span>
-            <div class="h-1 ml-auto duration-300 origin-left transform bg-deep-purple-accent-400 scale-x-30 group-hover:scale-x-100"></div>
-          </h2>
-          <p class="text-gray-700 lg:text-sm lg:max-w-md">
-            “If you have a challenge, or someone in your family does, don’t get discouraged. There’s always a way to reach your dreams—it just might not be the path everyone else takes.”
-          </p>
+  <div class="relative px-4 sm:px-0">
+    <div class="absolute inset-0 bg-brand-primary h-1/2"></div>
+    <div
+      class="relative grid mx-auto overflow-hidden bg-white divide-y rounded shadow sm:divide-y-0 sm:divide-x sm:max-w-screen-sm sm:grid-cols-4 lg:max-w-screen-md">
+      <button data-group="All" class="group-button inline-block p-8 text-center">
+        <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-full bg-brand-primary">
+          <svg class="w-10 h-10 text-brand-tertiary" stroke="currentColor" viewBox="0 0 52 52">
+            <polygon stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"
+              points="29 13 14 29 25 29 23 39 38 23 27 23"></polygon>
+          </svg>
         </div>
-        <div class="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
-            {% for post in posts %}
-            <a class="resource-item" data-group="{{ post.meta.get('group', 'Uncategorized') }}" href="{{ url_for('resource', path=post.path.replace('resources/', '')) }}" aria-label="View Item">
-                <div class="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
-                <img class="object-cover w-full h-56 md:h-64 xl:h-80" src=
-                "
+        <p class="font-bold tracking-wide text-gray-800">All</p>
+      </button>
+      {% for group in groups %}
+      <button data-group="{{ group }}" class="group-button inline-block p-8 text-center">
+        <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-full bg-brand-primary">
+          <svg class="w-10 h-10 text-brand-tertiary" stroke="currentColor" viewBox="0 0 52 52">
+            <polygon stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"
+              points="29 13 14 29 25 29 23 39 38 23 27 23"></polygon>
+          </svg>
+        </div>
+        <p class="font-bold tracking-wide text-gray-800">{{ group | capitalize }}</p>
+      </button>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+<div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+  <div class="flex flex-col mb-6 lg:justify-between lg:flex-row md:mb-8">
+    <h2
+      class="max-w-lg mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none md:mb-6 group">
+      <span class="inline-block mb-1 sm:mb-4">
+        Here are some<br class="hidden md:block" />
+        resources
+      </span>
+      <div
+        class="h-1 ml-auto duration-300 origin-left transform bg-brand-secondary scale-x-30 group-hover:scale-x-100">
+      </div>
+    </h2>
+    <p class="text-gray-700 lg:text-sm lg:max-w-md">
+      “If you have a challenge, or someone in your family does, don’t get discouraged. There’s always a way to reach
+      your dreams—it just might not be the path everyone else takes.”
+    </p>
+  </div>
+  <div class="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
+    {% for post in posts %}
+    <a class="resource-item" data-group="{{ post.meta.get('group', 'Uncategorized') }}"
+      href="{{ url_for('resource', path=post.path.replace('resources/', '')) }}" aria-label="View Item">
+      <div
+        class="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+        <img class="object-cover w-full h-56 md:h-64 xl:h-80" src="
                   {% if post.meta.imageURL %}
                   {{ post.meta.imageURL }}
                   {% else %}
                   https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260
                   {% endif %}
                 " alt="" />
-                <div class="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
-                    <p class="text-sm font-medium tracking-wide text-white">
-                        {{ post.meta.title }}
-                    </p>
-                    <p class="text-xs font-thin tracking-wide text-white">{{ post.meta.date }}</p>
-                </div>
-                </div>
-            </a>
-            {% endfor %}
+        <div class="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
+          <p class="text-sm font-medium tracking-wide text-white">
+            {{ post.meta.title }}
+          </p>
+          <p class="text-xs font-thin tracking-wide text-white">{{ post.meta.date }}</p>
         </div>
       </div>
-      
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
 </body>
 {% endblock %}

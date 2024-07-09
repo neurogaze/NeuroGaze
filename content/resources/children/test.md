@@ -1,14 +1,46 @@
 ---
-title: child
-date: YYYY-MM-DD
+title: Parenting a Child with ADHD
+date: 2024-07-08
 group: children
-imageURL: /static/images/resources/children/image.png
+imageURL: https://t4.ftcdn.net/jpg/04/75/27/27/360_F_475272711_fJwh2BO9nebxnBcyGauTOSY8onBpvVJQ.jpg
 ---
-Example Text.
+While ADHD is believed to be hereditary, effectively managing your child’s symptoms can affect both the severity of the disorder and development of more serious problems over time. Early intervention holds the key to positive outcomes for your child. The earlier you address your child’s problems, the more likely you will be able to prevent school and social failure and associated problems such as underachievement and poor self-esteem that may lead to delinquency or drug and alcohol abuse. Although life with your child may at times seem challenging, as a parent you can help create home and school environments that improve your child’s chances for success.
 
-You can have:
+Here are some ways to get started.
 
-* Lists
-* More Lists
+-   **Don’t waste your limited emotional energy on self-blame.** ADHD is a disorder in certain areas of the brain and is inherited in the majority of cases. It is _not_ caused by poor parenting or a chaotic home environment, although the home environment can make the symptoms of ADHD better or worse.
+-   **Learn all you can about ADHD.** While a great deal of information on the diagnosis and treatment of ADHD is available, not all of it is accurate or based on scientific evidence. It is up to you to be a good consumer and learn to distinguish the accurate information from the inaccurate. How can you sort out what will be useful and what will not? In general, it is good to be wary about ads claiming to cure ADHD. Currently, there is no cure for ADHD, but you can take positive steps to decrease its impact. In addition, pay attention to the source of the information. If you’re using the Internet, stick with reputable websites such as government (for example CDC), nonprofit (such as CHADD) or university resources (those that end in .edu).
 
-> And block quotes
+-   **Make sure your child has a comprehensive assessment.** To complete the diagnostic process, make sure your child has a comprehensive assessment that includes medical, educational and psychological evaluations (involving input from your child’s teacher) and that other disorders that either mimic or commonly occur with ADHD have been considered and ruled out.
+
+**How to help your child succeed at school**
+
+-   **Become an effective case manager.** Keep a record of all information about your child. This includes copies of all report cards, teacher notes, disciplinary reports, evaluations and documents from any meetings concerning your child. You might also include information about ADHD, a record of your child’s prior treatments and placements and contact information for the professionals who have worked with your child.
+-   **Form a team that understands ADHD and be the team captain.** Meetings at your child’s school should be attended by the principal’s designee as well as a special educator and a classroom teacher that knows your child. You, however, have the right to request input at these meetings from others that understand ADHD or your child’s special needs. These include your child’s physician, the school psychologist, and the nurse or guidance counselor from your child’s school. If you have consulted other professionals, such as a psychiatrist, psychologist, educational advocate or behavior management specialist, the useful information they have provided should also be made available at these meetings. A thorough understanding of your child’s strengths and weaknesses and how ADHD affects him or her will help you and members of the team go on to develop an appropriate and effective program that takes into account his or her ADHD.
+-   **Learn all you can about ADHD and your child’s educational rights.** The more knowledge you have about your child’s rights under the two education laws, the Individuals with Disabilities Education Act (IDEA) and Section 504 of the Rehabilitation Act, the better to maximize his or her success. Each state has a parent technical assistance center that can help you learn more about your child’s rights (visit [http://www.parentcenterhub.org/ptacs/](http://www.parentcenterhub.org/ptacs/) to find the center in your state).
+-   **Become your child’s best advocate.** You need to represent and protect your child’s best interest in school situations, both academic and behavioral. Become an active part of the team that determines what services and placements your child receives in an Individualized Education Plan (IEP) or Section 504 plan. See [Education for Individuals with ADHD](https://chadd.org/Understanding-ADHD/For-Parents-Caregivers/Education.aspx) for more information.
+-   **Communicate regularly.** Adopt a collaborative attitude when working with your child’s team—after all, everyone has the same goal, to see your child succeed! Let your child’s teachers know if there are some major changes going on in your family since your child’s behavior can be affected. Invite the teachers to contact you with any issues or concerns before they become a problem. Having open lines of communication between you and the school will help your child.
+
+**How to make life at home easier**
+
+-   **Join a support group.** Parents will find additional information, as well as support, by attending local CHADD meetings where available. You can find the nearest chapter to your home using the [chapter locator](https://chadd.org/Support/Directory.aspx?state=111111111).
+-   **Seek professional help.** Ask for help from mental health professionals, particularly if you are feeling depressed, frustrated or exhausted. Helping yourself feel less stressed will benefit your child as well.
+-   **Work together.** It is important that all of the adults that care for your child (parents, grandparents, relatives and babysitters) agree on how to handle your child’s problem behaviors. Working with a professional, if needed, can help you better understand how to work together to support your child.
+-   **Learn the tools of successful behavior management.** Behavioral techniques have been widely established as a key component of treatment for children with ADHD. Parent training will teach you strategies to change behaviors and improve your relationship with your child. CHADD offers the [Parent to Parent Program](https://chadd.thinkific.com/courses/p2pm1), which provides basic education on many facets of ADHD. You can also identify parent training programs in your community through your local parent information and resource center ([www.parentcenterhub.org/ptacs/](http://www.parentcenterhub.org/ptacs/)).
+-   **Find out if you have ADHD.** Since ADHD is often inherited, many parents of children with ADHD discover that they have ADHD when their child is diagnosed. Parents with ADHD may need the same types of evaluation and treatment that they seek for their children in order to function at their best. ADHD in the parent may make the home more chaotic and affect a parent’s ability to be proactive rather than reactive.
+
+**Parent training will help you learn to:**
+
+-   **Provide clear, consistent expectations, directions and limits.** Children with ADHD need to know exactly what others expect from them. They do not perform well in ambiguous situations that don’t specify exactly what is expected and that require them to “read between the lines.” Working with a professional can help narrow the focus to a few specific behaviors, help you set limits and consistently follow through with consequences.
+-   **Set up an effective discipline system.** Parents should learn proactive—not reactive—discipline methods that teach and reward appropriate behavior and respond to misbehavior with alternatives such as time outs or loss of privileges. Communicate with the other people who care for your child and work to be as consistent with behavioral techniques across settings and caregivers as possible.
+-   **Help your child learn from his or her mistakes.** At times, negative consequences will arise naturally out of a child’s behavior. However, children with ADHD have difficulty making the connection between their behaviors and these consequences. Parents can help their child with ADHD make these connections and learn from his/her mistakes.
+
+**How to boost your child’s confidence**
+
+-   **Set aside a daily _special time_ for you and your child.** Constant negative feedback can erode a child’s self-esteem. A special time, whether it’s an outing, playing games or just time spent with your child in positive interaction, can help fortify your child against assaults to self-worth.
+-   **Notice your child’s successes, no matter how small**. Make an effort to notice when your child is paying attention well or doing what s/he is supposed to be doing. Tell your child exactly what she/he did well. This can improve your child’s self-esteem and teach him/her to notice gradual improvements, rather than being too hard on him/herself.
+-   **Tell your child that you love and support him/her unconditionally.** There will be days when you may not believe this yourself. Those will be the days when it is even more important that you acknowledge the difficulties your child constantly faces and express your love. Let your child know that you will get through both the smooth and rough times together.
+-   **Assist your child with social skills.** Children with ADHD may be rejected by peers because of hyperactive, impulsive or aggressive behaviors. Parent training can help you learn how to assist your child in making friends and learning to work cooperatively with others.
+-   **Identify your child's strengths.** Many children with ADHD have strengths in certain areas such as art, athletics, computers or mechanical ability. Build upon these strengths, so that your child will have a sense of pride and accomplishment. Make sure that your child has the opportunity to be successful while pursuing these activities and that his strengths are not undermined by untreated ADHD. Also, avoid, as much as possible, targeting these activities as contingencies for good behavior or withholding them, as a form of punishment, when your child misbehaves.
+
+-   This article is originally written at: [Source](https://chadd.org/for-parents/overview/)

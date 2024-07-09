@@ -3,7 +3,7 @@ title: "Digital Intervention Software: “Brain Training” for ADHD"
 date: 2024-06-24
 group: adults
 caption: "Solid research evidence supports two types of treatment for ADHD."
-imageURL: "https://thenutritionjunky.com/wp-content/uploads/2023/02/How-nutrition-and-diet-impact-ADHD-1024x1024.jpg"
+imageURL: "https://upload.wikimedia.org/wikipedia/commons/3/33/Brainfood_Pyramid.png"
 ---
 
 Solid research evidence supports two types of treatment for ADHD: [medication and behavioral treatments](https://chadd.org/for-parents/treatment-overview/) (such as behavior management strategies and parent training in behavior management). Even though these treatments help most children with ADHD, they are not perfect. Many practitioners, parents, and patients themselves look for complementary approaches to include with their ADHD treatment plan.
@@ -69,3 +69,4 @@ Before choosing or adding an ADHD computer game, talk to your child’s doctor.
 -   Kollins, Scott H. et al. (2020). [A novel digital intervention for actively reducing severity of paediatric ADHD (STARS-ADHD): a randomised controlled trial.](https://doi.org/10.1016/S2589-7500(20)30017-0) _Lancet_, v2, n4, e168-e178.
 -   Oldrati, Viola et al. (2020). [Effectiveness of Computerized Cognitive Training Programs (CCTP) with Game-Like Features in Children with or without Neuropsychological Disorders: A Meta-Analytic Investigation.](https://link.springer.com/article/10.1007/s11065-020-09429-5) _Neuropsychology Review_, v30, p126–141.
 -   Hollis, Chris et al. (2017). [Annual Research Review: Digital health interventions for children and young people with mental health problems—a systematic and meta-review.](https://acamh.onlinelibrary.wiley.com/doi/10.1111/jcpp.12663) _Journal of Child Psychology and Psychiatry_, v58 n4, p.474-503.
+-   This article is originally written at: [source](https://chadd.org/about-adhd/digital-intervention-software-brain-training-for-adhd/)
