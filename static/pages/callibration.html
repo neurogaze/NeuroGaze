@@ -1,103 +1,207 @@
 <!DOCTYPE html>
-<!--
-This is an example HTML that shows how WebGazer can be used on a website.
-This file provides the additional features:
-  * An integrated, intuitive and sleek action bar with an informative "help" module accessible at all times
-  * Structured 9-point calibration system
-  * Accuracy measure of predictions based on calibration process
-  * Video feedback regarding face positioning
-  * Improved eye predictions visible to the user
-Instructions on use can be found in the README repository.
--->
 <html>
-
-    <head>
-        <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-        <TITLE>WebGazer Demo</TITLE>
-        <link rel="stylesheet" href="static/css/index.css" />
-        <link href="/static/css/output.css" rel="stylesheet" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <script src="/static/js/webgazer/webgazer.js"></script>
-    </head>
-<body>
-    <canvas id="plotting_canvas" width="500" height="500" style="cursor:crosshair;"></canvas>
+  <head>
+    <link rel="stylesheet" href="static/css/index.css" />
+    <link href="/static/css/output.css" rel="stylesheet" />
+    <script src="https://unpkg.com/jspsych@7.3.4"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.2.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-webgazer-init-camera@1.0.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-webgazer-calibrate@1.0.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-webgazer-validate@1.0.3"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jspsych/jspsych@jspsych@7.0.0/examples/js/webgazer/webgazer.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="/static/js/webgazer/main.js"></script>
-    <script src="/static/js/webgazer/calibration.js"></script>
-    <script src="/static/js/webgazer/precision_calculation.js"></script>
-    <script src="/static/js/webgazer/precision_store_points.js"></script>
+    <script src="https://unpkg.com/@jspsych/extension-webgazer@1.0.3"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css"
+    />
+    <style>
+      .jspsych-btn {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  {% block body %}
+  <body></body>
 
-    {% block body %}
-    <nav id="webgazerNavbar" class="navbar navbar-expand-lg navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <!-- The hamburger menu button -->
-          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myNavbar">
-            <span class="navbar-toggler-icon">Menu</span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav">
-            <!-- Accuracy -->
-            <li id="Accuracy"><a>Not yet Calibrated</a></li>
-            <li><a onclick="Restart()" href="#">Recalibrate</a></li>
-            <li><a onclick="webgazer.applyKalmanFilter(!webgazer.params.applyKalmanFilter)" href="#">Toggle Kalman Filter</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a class="helpBtn" onclick="helpModalShow()" href="#"><span class="glyphicon glyphicon-cog"></span> Help</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- Calibration points -->
-    <div class="calibrationDiv">
-        <input type="button" class="Calibration" id="Pt1"></input>
-        <input type="button" class="Calibration" id="Pt2"></input>
-        <input type="button" class="Calibration" id="Pt3"></input>
-        <input type="button" class="Calibration" id="Pt4"></input>
-        <input type="button" class="Calibration" id="Pt5"></input>
-        <input type="button" class="Calibration" id="Pt6"></input>
-        <input type="button" class="Calibration" id="Pt7"></input>
-        <input type="button" class="Calibration" id="Pt8"></input>
-        <input type="button" class="Calibration" id="Pt9"></input>
-    </div>
-    
-    <!-- Modal -->
-    <div id="helpModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-    
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-body">
+  <script>
+    var jsPsych = initJsPsych({
+      extensions: [{ type: jsPsychExtensionWebgazer }],
+    });
 
-            <p> Press each calibration button 5 times until it turns yellow, whilst looking at the button.</p>
-            <p> Stare at the yellow middle dot for 5 seconds for accuracy calculation.</p>
-            <p> Always follow the mouse with your eyes.</p>
+    var preload = {
+      type: jsPsychPreload,
+    };
 
-          </div>
+    var camera_instructions = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <p>In order to participate you must allow the experiment to use your camera.</p>
+        <p>You will be prompted to do this on the next screen.</p>
+        <p>If you do not wish to allow use of your camera, you cannot participate in this experiment.<p>
+        <p>It may take up to 30 seconds for the camera to initialize after you give permission.</p>
+      `,
+      choices: ["Got it"],
+    };
 
-          <div class="modal-footer">
-            <button id="closeBtn" type="button" class="btn btn-default" data-bs-dismiss="modal">Close & load saved model </button>
-            <button type="button" id='start_calibration' class="btn btn-primary" data-bs-dismiss="modal" onclick="Restart()">Calibrate</button>
-          </div>
-        </div>
-    
-      </div>
-    </div>
-    
-    <!-- Latest compiled JavaScript -->
-    <script src="/static/js/webgazer/resize_canvas.js"></script>
-    <script
-    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"
-  ></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-    crossorigin="anonymous"
-  ></script>
+    var init_camera = {
+      type: jsPsychWebgazerInitCamera,
+    };
+
+    var calibration_instructions = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <p>Now you'll calibrate the eye tracking, so that the software can use the image of your eyes to predict where you are looking.</p>
+        <p>You'll see a series of dots appear on the screen. Look at each dot and click on it.</p>
+      `,
+      choices: ["Got it"],
+    };
+
+    var calibration = {
+      type: jsPsychWebgazerCalibrate,
+      calibration_points: [
+        [25, 25],
+        [75, 25],
+        [50, 50],
+        [25, 75],
+        [75, 75],
+      ],
+      repetitions_per_point: 2,
+      randomize_calibration_order: true,
+    };
+
+    var validation_instructions = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <p>Now we'll measure the accuracy of the calibration.</p>
+        <p>Look at each dot as it appears on the screen.</p>
+        <p style="font-weight: bold;">You do not need to click on the dots this time.</p>
+      `,
+      choices: ["Got it"],
+      post_trial_gap: 1000,
+    };
+
+    var validation = {
+      type: jsPsychWebgazerValidate,
+      validation_points: [
+        [25, 25],
+        [75, 25],
+        [50, 50],
+        [25, 75],
+        [75, 75],
+      ],
+      roi_radius: 200,
+      time_to_saccade: 1000,
+      validation_duration: 2000,
+      data: {
+        task: "validate",
+      },
+    };
+
+    var recalibrate_instructions = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <p>The accuracy of the calibration is a little lower than we'd like.</p>
+        <p>Let's try calibrating one more time.</p>
+        <p>On the next screen, look at the dots and click on them.<p>
+      `,
+      choices: ["OK"],
+    };
+
+    var recalibrate = {
+      timeline: [
+        recalibrate_instructions,
+        calibration,
+        validation_instructions,
+        validation,
+      ],
+      conditional_function: function () {
+        var validation_data = jsPsych.data
+          .get()
+          .filter({ task: "validate" })
+          .values()[0];
+        return validation_data.percent_in_roi.some(function (x) {
+          var minimum_percent_acceptable = 75;
+          return x < minimum_percent_acceptable;
+        });
+      },
+      data: {
+        phase: "recalibration",
+      },
+    };
+
+    var calibration_done = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <p>Great, we're done with calibration!</p>
+      `,
+      choices: ["OK"],
+      on_finish: function () {
+        swal({
+          title: "Press confirm to continue on to the test.",
+          allowOutsideClick: false,
+          buttons: {
+            cancel: "Recalibrate",
+            confirm: true,
+          },
+        }).then((isConfirm) => {
+          if (isConfirm) {
+            window.location.href = "/visual-attention"; // go to the test page
+            //clear the calibration & hide the last middle button
+            ClearCanvas();
+          }
+        });
+      },
+    };
+
+    // var begin = {
+    //   type: jsPsychHtmlKeyboardResponse,
+    //   stimulus: `<p>The next screen will show an image to demonstrate adding the webgazer extension to a trial.</p>
+    //     <p>Just look at the image while eye tracking data is collected. The trial will end automatically.</p>
+    //     <p>Press any key to start.</p>
+    //   `
+    // }
+
+    // var trial = {
+    //   type: jsPsychImageKeyboardResponse,
+    //   stimulus: 'img/blue.png',
+    //   choices: "NO_KEYS",
+    //   trial_duration: 2000,
+    //   extensions: [
+    //     {
+    //       type: jsPsychExtensionWebgazer,
+    //       params: {targets: ['#jspsych-image-keyboard-response-stimulus']}
+    //     }
+    //   ]
+    // }
+
+    // var show_data = {
+    //   type: jsPsychHtmlKeyboardResponse,
+    //   stimulus: function() {
+    //     var trial_data = jsPsych.data.getLastTrialData().values();
+    //     var trial_json = JSON.stringify(trial_data, null, 2);
+    //     return `<p style="margin-bottom:0px;"><strong>Trial data:</strong></p>
+    //       <pre style="margin-top:0px;text-align:left;">${trial_json}</pre>`;
+    //   },
+    //   choices: "NO_KEYS"
+    // };
+
+    if (window.location.pathname == "/callibration") {
+      jsPsych.run([
+        preload,
+        camera_instructions,
+        init_camera,
+        calibration_instructions,
+        calibration,
+        validation_instructions,
+        validation,
+        recalibrate,
+        calibration_done,
+      ]);
+    }
+  </script>
   {% endblock %}
-
-</body>    
 </html>

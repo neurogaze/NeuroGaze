@@ -145,3 +145,32 @@ document.addEventListener("keypress", function (event) {
 });
 
 showInitialInstructions();
+
+var trial = {
+  type: jsPsychImageKeyboardResponse,
+  choices: "NO_KEYS",
+  trial_duration: TEST_DURATION * 1000,
+  extensions: [
+    {
+      type: jsPsychExtensionWebgazer,
+      params: {targets: ['#currentImg']}
+    }
+  ]
+}
+
+var show_data = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: function() {
+    var trial_data = jsPsych.data.getLastTrialData().values();
+    var trial_json = JSON.stringify(trial_data, null, 2);
+    return `<p style="margin-bottom:0px;"><strong>Trial data:</strong></p>
+      <pre style="margin-top:0px;text-align:left;">${trial_json}</pre>`;
+  },
+  choices: "NO_KEYS"
+};
+
+
+jsPsych.run([
+  trial,
+  show_data
+]);
