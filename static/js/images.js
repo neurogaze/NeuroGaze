@@ -74,11 +74,11 @@ function initJsPsychTimeline() {
 
   jsPsych.run([
     // camera_instructions,
-    init_camera,
-    calibration_instructions,
-    calibration,
-    validation_instructions,
-    validation,
+    // init_camera,
+    // calibration_instructions,
+    // calibration,
+    // validation_instructions,
+    // validation,
     // recalibrate,
     // calibration_done,
     trialInstructions,

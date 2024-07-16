@@ -4,6 +4,7 @@ date: 2024-7-1
 group: adults
 caption: "Having a healthy, balanced diet is important to having a happy and healthy life."
 imageURL: "https://thenutritionjunky.com/wp-content/uploads/2023/02/How-nutrition-and-diet-impact-ADHD-1024x1024.jpg"
+audioURL: "/static/assets/audio/audio.mp3"
 ---
 
 ## Nutrition and ADHD

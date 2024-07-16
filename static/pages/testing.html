@@ -1,5 +1,5 @@
-{% extends 'index.html' %} {% block body %}
-
+{% extends 'index.html' %} 
+{% block body %}
 <div
   class="relative px-4 mx-auto lg:pb-32 md:px-8 xl:px-20 sm:max-w-xl md:max-w-full"
 >
@@ -8,18 +8,18 @@
       <div class="max-w-xl mb-6">
         <div>
           <p
-            class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400"
+            class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-brand-tertiary uppercase rounded-full bg-brand-primary"
           >
-            Brand new
+            What to expect
           </p>
         </div>
         <h2
           class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none"
         >
-          The quick, brown fox<br class="hidden md:block" />
-          jumps over
-          <span class="inline-block text-deep-purple-accent-400"
-            >a lazy dog</span
+          ADHD Pre-Diagnosis <br class="hidden md:block" />
+
+          <span class="inline-block text-brand-secondary"
+            >Testing</span
           >
         </h2>
         <p class="text-base text-gray-700 md:text-lg">
@@ -31,27 +31,65 @@
       <div class="flex items-center">
         <a
           href="/callibration"
-          class="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+          class="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-brand-secondary hover:bg-brand-tertiary focus:shadow-outline focus:outline-none"
         >
           Get started
         </a>
         <a
           href="/"
           aria-label=""
-          class="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800"
+          class="inline-flex items-center font-semibold transition-colors duration-200 text-brand-secondary hover:text-brand-tertiary"
           >Learn more</a
         >
       </div>
     </div>
   </div>
   <div
-    class="flex justify-center h-full overflow-hidden lg:w-2/3 xl:w-1/2 lg:absolute lg:justify-start lg:bottom-0 lg:right-0 lg:items-end"
+    class="flex justify-center h-full lg:w-2/3 xl:w-1/2 lg:absolute lg:justify-start lg:bottom-0 lg:right-0 lg:items-end shadow-lg rounded"
   >
-    <img
+  <div class="carousel w-full rounded">
+    <div id="slide1" class="carousel-item relative w-full">
+      <img
+        src="/static/images/carousel img 3.png"
+        class="w-full" />
+      <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+        <a href="#slide4" class="btn btn-circle">❮</a>
+        <a href="#slide2" class="btn btn-circle">❯</a>
+      </div>
+    </div>
+    <div id="slide2" class="carousel-item relative w-full">
+      <img
+        src="/static/images/carousel img 4.png"
+        class="w-full" />
+      <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+        <a href="#slide1" class="btn btn-circle">❮</a>
+        <a href="#slide3" class="btn btn-circle">❯</a>
+      </div>
+    </div>
+    <div id="slide3" class="carousel-item relative w-full">
+      <img
+        src="/static/images/img 2.png"
+        class="w-full" />
+      <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+        <a href="#slide2" class="btn btn-circle">❮</a>
+        <a href="#slide4" class="btn btn-circle">❯</a>
+      </div>
+    </div>
+    <div id="slide4" class="carousel-item relative w-full">
+      <img
+        src="/static/images/carousel img 1.png"
+        class="w-full" />
+      <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+        <a href="#slide3" class="btn btn-circle">❮</a>
+        <a href="#slide1" class="btn btn-circle">❯</a>
+      </div>
+    </div>
+  </div>
+    <!-- <img
       src="https://kitwind.io/assets/kometa/full-browser.png"
       class="object-cover object-top w-full h-64 max-w-xl -mb-16 rounded shadow-2xl lg:ml-64 xl:ml-8 lg:-mb-24 xl:-mb-28 lg:h-auto lg:max-w-screen-md"
       alt=""
-    />
+    /> -->
   </div>
 </div>
 <!-- Second Part of the Testing Page a Spacer-->
@@ -65,10 +103,10 @@
       class="inline-block mb-5 rounded-full sm:mx-auto"
     >
       <div
-        class="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50"
+        class="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-brand-primary"
       >
         <svg
-          class="w-12 h-12 text-deep-purple-accent-400"
+          class="w-12 h-12 text-brand-tertiary"
           stroke="currentColor"
           viewBox="0 0 52 52"
         >
@@ -83,7 +121,7 @@
       </div>
     </a>
     <h2
-      class="mb-4 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none"
+      class="mb-4 font-sans text-3xl font-bold tracking-tight text-brand-secondary sm:text-4xl sm:leading-none"
     >
       Chase ball of string eat
     </h2>
@@ -107,10 +145,7 @@
           The quick, brown fox<br class="hidden md:block" />
           jumps over
           <span class="relative px-1">
-            <div
-              class="absolute inset-x-0 bottom-0 h-3 transform -skew-x-12 bg-teal-accent-400"
-            ></div>
-            <span class="relative inline-block text-deep-purple-accent-400"
+            <span class="relative inline-block text-brand-secondary"
               >a lazy dog</span
             >
           </span>
@@ -127,7 +162,7 @@
           <li class="flex">
             <span class="mr-1">
               <svg
-                class="w-5 h-5 mt-px text-deep-purple-accent-400"
+                class="w-5 h-5 mt-px text-brand-secondary"
                 stroke="currentColor"
                 viewBox="0 0 52 52"
               >
@@ -145,7 +180,7 @@
           <li class="flex">
             <span class="mr-1">
               <svg
-                class="w-5 h-5 mt-px text-deep-purple-accent-400"
+                class="w-5 h-5 mt-px text-brand-secondary"
                 stroke="currentColor"
                 viewBox="0 0 52 52"
               >
@@ -163,7 +198,7 @@
           <li class="flex">
             <span class="mr-1">
               <svg
-                class="w-5 h-5 mt-px text-deep-purple-accent-400"
+                class="w-5 h-5 mt-px text-brand-secondary"
                 stroke="currentColor"
                 viewBox="0 0 52 52"
               >
@@ -183,7 +218,7 @@
           <li class="flex">
             <span class="mr-1">
               <svg
-                class="w-5 h-5 mt-px text-deep-purple-accent-400"
+                class="w-5 h-5 mt-px text-brand-secondary"
                 stroke="currentColor"
                 viewBox="0 0 52 52"
               >
@@ -201,7 +236,7 @@
           <li class="flex">
             <span class="mr-1">
               <svg
-                class="w-5 h-5 mt-px text-deep-purple-accent-400"
+                class="w-5 h-5 mt-px text-brand-secondary"
                 stroke="currentColor"
                 viewBox="0 0 52 52"
               >
@@ -219,7 +254,7 @@
           <li class="flex">
             <span class="mr-1">
               <svg
-                class="w-5 h-5 mt-px text-deep-purple-accent-400"
+                class="w-5 h-5 mt-px text-brand-secondary"
                 stroke="currentColor"
                 viewBox="0 0 52 52"
               >
@@ -247,4 +282,6 @@
   </div>
 </div>
 
+<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
 {% endblock %}

@@ -23,6 +23,7 @@
                         </defs>
                         <rect fill="url(#5dc90b42-5ed4-45a6-8e63-2d78ca9d3d95)" width="52" height="24"></rect>
                     </svg>
+
                     {{ page.meta.title }}
                 </span>
             </h2>
@@ -31,22 +32,41 @@
             </p>
         </div>
         <div class="mb-4 transition-shadow duration-300 hover:shadow-xl lg:mb-6">
-            <img class="object-cover w-full h-56 rounded shadow-lg sm:h-64 md:h-80 lg:h-96"
-                src=
-                "
+            <img class="object-cover w-full h-56 rounded shadow-lg sm:h-64 md:h-80 lg:h-96" src="
                   {% if page.meta.imageURL %}
                   {{ page.meta.imageURL }}
                   {% else %}
                   https://images.pexels.com/photos/3727459/pexels-photo-3727459.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260
                   {% endif %}
-                "
-                alt="" />
+                " alt="" />
         </div>
+
         <p class="max-w-xl mb-4 text-base text-gray-700 sm:mx-auto">
             {{ page.meta.caption }}
         </p>
     </div>
 </div>
+
+{% if page.meta.audioURL %}
+<section class="mb-10">
+    <div>
+        <div class="flex h-[120px] items-center gap-5 rounded-lg bg-brand-secondary">
+            <button class="flex size-[60px] items-center justify-center rounded-full bg-brand-primary" onclick="this.firstChild.play()">
+                <audio src="{{page.meta.audioURL}}"></audio> 
+                <img alt="Play" loading="lazy" width="13" height="14" decoding="async" data-nimg="1" class=""
+                    style="color: transparent;"
+                    srcset="https://website.cdn.speechify.com/mini-play.svg 1x, https://website.cdn.speechify.com/mini-play.svg 2x"
+                    src="https://website.cdn.speechify.com/mini-play.svg">
+                </button>
+            <div class="grow text-base font-medium text-white">Listen to this article!</div><img
+                alt="Speechify" loading="lazy" width="34" height="19" decoding="async" data-nimg="1" class=""
+                style="color: transparent;"
+                srcset="https://website.cdn.speechify.com/mini-logo.svg 1x, https://website.cdn.speechify.com/mini-logo.svg 2x"
+                src="https://website.cdn.speechify.com/mini-logo.svg">
+        </div>
+    </div>
+</section>
+{% endif %}
 
 <div class="flex flex-row justify-center align-items-center mb-12">
     <article class="mx-auto px-4 md:px-0 prose lg:prose-xl">
