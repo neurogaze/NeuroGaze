@@ -37,9 +37,9 @@ def testing():
 def aboutus():
     return render_template("about-us.html")
 
-@app.route("/callibration", methods=['GET'])
+@app.route("/confirmation", methods=['GET'])
 def callibration():
-    return render_template("callibration.html")
+    return render_template("confirmation.html")
 
 @app.route("/visual-attention", methods=['GET'])
 def images():

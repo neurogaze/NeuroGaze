@@ -1,5 +1,231 @@
-[
-  {
+{
+  "child" : [
+    {
+      "text": "Does not pay attention to details or makes careless mistakes with, for example, homework"
+    },
+    {
+      "text": "Has difficulty keeping attention to what needs to be done"
+    },
+    {
+      "text": "Does not seem to listen when spoken to directly"
+    },
+    {
+      "text": "Does not follow through when given directions and fails to finish activities (not due to refusal or failure to understand)"
+    },
+    {
+      "text": "Has difficulty organizing tasks and activities"
+    },
+    {
+      "text": "Avoids, dislikes, or does not want to start tasks that require ongoing mental effort"
+    },
+    {
+      "text": "Loses things necessary for tasks or activities (toys, assignments, pencils, or books)"
+    },
+    {
+      "text": "Is easily distracted by noises or other stimuli"
+    },
+    {
+      "text": "Is forgetful in daily activities"
+    },
+    {
+      "text": "Fidgets with hands or feet or squirms in seat"
+    },
+    {
+      "text": "Leaves seat when remaining seated is expected"
+    },
+    {
+      "text": "Runs about or climbs too much when remaining seated is expected"
+    },
+    {
+      "text": "Has difficulty playing or beginning quiet play activities"
+    },
+    {
+      "text": "Is 'on the go' or often acts as if 'driven by a motor'"
+    },
+    {
+      "text": "Talks too much"
+    },
+    {
+      "text": "Blurts out answers before questions have been completed"
+    },
+    {
+      "text": "Has difficulty waiting his or her turn"
+    },
+    {
+      "text": "Interrupts or intrudes in on others’ conversations and/or activities"
+    },
+    {
+      "text": "Argues with adults"
+    },
+    {
+      "text": "Loses temper"
+    },
+    {
+      "text": "Actively defies or refuses to go along with adults’ requests or rules"
+    },
+    {
+      "text": "Deliberately annoys people"
+    },
+    {
+      "text": "Blames others for his or her mistakes or misbehaviors"
+    },
+    {
+      "text": "Is touchy or easily annoyed by others"
+    },
+    {
+      "text": "Is angry or resentful"
+    },
+    {
+      "text": "Is spiteful and wants to get even"
+    },
+    {
+      "text": "Bullies, threatens, or intimidates others"
+    },
+    {
+      "text": "Starts physical fights"
+    },
+    {
+      "text": "Lies to get out of trouble or to avoid obligations (ie,‘cons’ others)"
+    },
+    {
+      "text": "Is truant from school (skips school) without permission"
+    },
+    {
+      "text": "Is physically cruel to people"
+    },
+    {
+      "text": "Has stolen things that have value"
+    },
+    {
+      "text": "Deliberately destroys others’ property"
+    },
+    {
+      "text": "Has used a weapon that can cause serious harm (bat, knife, brick, gun)"
+    },
+    {
+      "text": "Is physically cruel to animals"
+    },
+    {
+      "text": "Has deliberately set fires to cause damage"
+    },
+    {
+      "text": "Has broken into someone else’s home, business, or car"
+    },
+    {
+      "text": "Has stayed out at night without permission"
+    },
+    {
+      "text": "Has run away from home overnight"
+    },
+    {
+      "text": "Has forced someone into sexual activity"
+    },
+    {
+      "text": "Is fearful, anxious, or worried"
+    },
+    {
+      "text": "Is afraid to try new things for fear of making mistakes"
+    },
+    {
+      "text": "Feels worthless or inferior"
+    },
+    {
+      "text": "Blames self for problems, feels guilty"
+    },
+    {
+      "text": "Feels lonely, unwanted, or unloved; complains that ‘no one loves him or her’"
+    },
+    {
+      "text": "Is sad, unhappy, or depressed"
+    },
+    {
+      "text": "Is self-conscious or easily embarrassed"
+    },
+    {
+      "text": "Overall school performance"
+    },
+    {
+      "text": "Reading"
+    },
+    {
+      "text": "Writing"
+    },
+    {
+      "text": "Mathematics"
+    },
+    {
+      "text": "Relationship with parents"
+    },
+    {
+      "text": "Relationship with siblings"
+    },
+    {
+      "text": "Relationship with peers"
+    },
+    {
+      "text": "Participation in organized activities (eg, teams)"
+    }
+  ],
+
+  "teen" : [
+    {
+      "text": "Gives close attention to detail and avoids careless mistakes"
+    },
+    {
+      "text": "Sustains attention on tasks or play activities"
+    },
+    {
+      "text": "Listens when spoken to directly"
+    },
+    {
+      "text": "Follows through on instructions and finishes school work and chores"
+    },
+    {
+      "text": "Organizes tasks and activities"
+    },
+    {
+      "text": "Engages in tasks that require sustained mental effort"
+    },
+    {
+      "text": "Keeps track of things necessary for activities (doesn’t lose them)"
+    },
+    {
+      "text": "Ignores extraneous stimuli"
+    },
+    {
+      "text": "Remembers daily activities"
+    },
+    {
+      "text": "Sits still (controls movement of hands or feet or controls squirming)"
+    },
+    {
+      "text": "Stays seated (when required by class rules or social conventions)"
+    },
+    {
+      "text": "Modulates motor activity (inhibits inappropriate running or climbing)"
+    },
+    {
+      "text": "Plays quietly (keeps noise level reasonable)"
+    },
+    {
+      "text": "Settles down and rests (controls constant activity)"
+    },
+    {
+      "text": "Modulates verbal activity (controls excessive talking)"
+    },
+    {
+      "text": "Reflects on questions (controls blurting out answers)"
+    },
+    {
+      "text": "Awaits turn (stands in line and takes turns)"
+    },
+    {
+      "text": "Enters into conversation and games without interrupting or intruding"
+    }
+  ],
+
+  "adult" : [
+    {
     "text": "How often do you have trouble wrapping up the final details of a project, once the challenging parts have been done?",
     "severity_value": 3
   },
@@ -67,5 +293,6 @@
   {
     "text": "How often do you interrupt others when they are busy?",
     "severity_value": 3
-  }
-]
+  }]
+
+}

@@ -57,9 +57,9 @@ function showInitialInstructions() {
  */
 function selectDifficulty() {
   const difficultyOptions = [
-    { text: "Easy (For Children)", value: "child" },
-    { text: "Medium (For Teens)", value: "teen" },
-    { text: "Hard (For Adults)", value: "adult" },
+    { text: "(For Children 6-11)", value: "child" },
+    { text: "(For Teens 12-17)", value: "teen" },
+    { text: "(For Adults 18+)", value: "adult" },
   ];
 
   const select = document.createElement("select");

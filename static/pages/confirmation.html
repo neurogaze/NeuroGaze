@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="static/css/index.css" />
+    <link href="/static/css/output.css" rel="stylesheet" />
+    <script src="https://unpkg.com/jspsych@7.3.4"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.2.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-call-function@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-webgazer-init-camera@1.0.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-webgazer-calibrate@1.0.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-webgazer-validate@1.0.3"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jspsych/jspsych@jspsych@7.0.0/examples/js/webgazer/webgazer.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/@jspsych/extension-webgazer@1.0.3"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css"
+    />
+    <style>
+      .jspsych-btn {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  {% block body %}
+  <body></body>
+  {% endblock %}
+
+  <script>
+    function startTest() {
+      console.log(window.location.pathname);
+      if (window.location.pathname !== "/confirmation") {
+        return;
+      }
+
+      swal({
+        title:
+          "This test only works on Google Chrome. Press OK to continue on to the test. Please cancel if the browser is not Chrome.",
+        allowOutsideClick: false,
+        buttons: {
+          cancel: "Cancel",
+          confirm: true,
+        },
+      }).then((isConfirm) => {
+        if (isConfirm) {
+          window.location.href = "/visual-attention"; // go to the test page
+        } else {
+          window.location.href = "/testing"; // go to the test page
+        }
+      });
+    }
+
+    startTest();
+  </script>
+</html>

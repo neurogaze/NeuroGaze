@@ -1,16 +1,12 @@
-{% extends 'callibration.html' %} 
-{% block body %}
+{% extends 'confirmation.html' %} {% block body %}
 
 <div class="flex items-center justify-center h-screen bg-white">
-  <div
-    id="passageCont"
-    class="font-bold flex items-center justify-center"
-  >
+  <div id="passageCont" class="font-bold flex items-center justify-center">
     <span id="passage"></span>
   </div>
 </div>
 
-<img id="popUp" src="" alt="popup" class="hidden absolute"/>
+<img id="popUp" src="" alt="popup" class="hidden absolute" />
 
 <script src="/static/js/passage.js"></script>
 {% endblock %}
