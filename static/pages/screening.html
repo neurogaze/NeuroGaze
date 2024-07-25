@@ -10,12 +10,10 @@
         ADHD Self-Report Screening Checklist
       </h1>
 
-      <div id="childQuestions"  style="display: none;">
+      <div id="childQuestions" style="display: none">
         {% for question in questions.child %}
-        <div class="mb-10" id="question{{loop.index}}">
-          {{loop.index}}. {{ question.text }}
-          {% if loop.index < 48 %}
-
+        <div class="mb-10" id="questionCQ{{loop.index}}">
+          {{loop.index}}. {{ question.text }} {% if loop.index < 48 %}
           <ul
             class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           >
@@ -24,14 +22,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}b"
+                  id="questionCQ-{{loop.index}}b"
                   type="radio"
-                  value="2"
-                  name="list-radio{{loop.index}}"
+                  value="0"
+                  name="list-radioCQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}b"
+                  for="questionCQ-{{loop.index}}b"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Never</label
                 >
@@ -42,14 +40,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}c"
+                  id="questionCQ-{{loop.index}}c"
                   type="radio"
-                  value="3"
-                  name="list-radio{{loop.index}}"
+                  value="1"
+                  name="list-radioCQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}c"
+                  for="questionCQ-{{loop.index}}c"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Occasionally</label
                 >
@@ -60,14 +58,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}d"
+                  id="questionCQ-{{loop.index}}d"
                   type="radio"
-                  value="4"
-                  name="list-radio{{loop.index}}"
+                  value="2"
+                  name="list-radioCQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}d"
+                  for="questionCQ-{{loop.index}}d"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Often</label
                 >
@@ -76,14 +74,14 @@
             <li class="w-full dark:border-gray-600">
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}e"
+                  id="questionCQ-{{loop.index}}e"
                   type="radio"
-                  value="5"
-                  name="list-radio{{loop.index}}"
+                  value="3"
+                  name="list-radioCQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}e"
+                  for="questionCQ-{{loop.index}}e"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Very Often</label
                 >
@@ -101,14 +99,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}a"
+                  id="questionCQ-{{loop.index}}a"
                   type="radio"
                   value="1"
-                  name="list-radio{{loop.index}}"
+                  name="list-radioCQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}a"
+                  for="questionCQ-{{loop.index}}a"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Excellent
                 </label>
@@ -119,14 +117,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}b"
+                  id="questionCQ-{{loop.index}}b"
                   type="radio"
                   value="2"
-                  name="list-radio{{loop.index}}"
+                  name="list-radioCQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}b"
+                  for="questionCQ-{{loop.index}}b"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Above Average</label
                 >
@@ -137,14 +135,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}c"
+                  id="questionCQ-{{loop.index}}c"
                   type="radio"
                   value="3"
-                  name="list-radio{{loop.index}}"
+                  name="list-radioCQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}c"
+                  for="questionCQ-{{loop.index}}c"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Average</label
                 >
@@ -155,14 +153,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}d"
+                  id="questionCQ-{{loop.index}}d"
                   type="radio"
                   value="4"
-                  name="list-radio{{loop.index}}"
+                  name="list-radioCQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}d"
+                  for="questionCQ-{{loop.index}}d"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Somewhat of a Problem</label
                 >
@@ -171,14 +169,14 @@
             <li class="w-full dark:border-gray-600">
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}e"
+                  id="questionCQ-{{loop.index}}e"
                   type="radio"
                   value="5"
-                  name="list-radio{{loop.index}}"
+                  name="list-radioCQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}e"
+                  for="questionCQ-{{loop.index}}e"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Problematic</label
                 >
@@ -186,14 +184,13 @@
             </li>
           </ul>
           {% endif %}
-
         </div>
         {% endfor %}
       </div>
 
-      <div id="teenQuestions"  style="display: none;">
+      <div id="teenQuestions" style="display: none">
         {% for question in questions.teen %}
-        <div class="mb-10" id="question{{loop.index}}">
+        <div class="mb-10" id="questionTQ{{loop.index}}">
           {{loop.index}}. {{ question.text }}
           <ul
             class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -203,14 +200,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}b"
+                  id="questionTQ-{{loop.index}}b"
                   type="radio"
-                  value="2"
-                  name="list-radio{{loop.index}}"
+                  value="1"
+                  name="list-radioTQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}b"
+                  for="questionTQ-{{loop.index}}b"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Not at all</label
                 >
@@ -221,14 +218,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}c"
+                  id="questionTQ-{{loop.index}}c"
                   type="radio"
-                  value="3"
-                  name="list-radio{{loop.index}}"
+                  value="2"
+                  name="list-radioTQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}c"
+                  for="questionTQ-{{loop.index}}c"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Just a little</label
                 >
@@ -239,14 +236,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}d"
+                  id="questionTQ-{{loop.index}}d"
                   type="radio"
-                  value="4"
-                  name="list-radio{{loop.index}}"
+                  value="3"
+                  name="list-radioTQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}d"
+                  for="questionTQ-{{loop.index}}d"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Quite a bit</label
                 >
@@ -255,14 +252,14 @@
             <li class="w-full dark:border-gray-600">
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}e"
+                  id="questionTQ-{{loop.index}}e"
                   type="radio"
-                  value="5"
-                  name="list-radio{{loop.index}}"
+                  value="4"
+                  name="list-radioTQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}e"
+                  for="questionTQ-{{loop.index}}e"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Very Much</label
                 >
@@ -273,9 +270,9 @@
         {% endfor %}
       </div>
 
-      <div id="adultQuestions"  style="display: none;">
+      <div id="adultQuestions" style="display: none">
         {% for question in questions.adult %}
-        <div class="mb-10" id="question{{loop.index}}">
+        <div class="mb-10" id="questionAQ{{loop.index}}">
           {{loop.index}}. {{ question.text }}
           <ul
             class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -285,14 +282,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}a"
+                  id="questionAQ-{{loop.index}}a"
                   type="radio"
                   value="1"
-                  name="list-radio{{loop.index}}"
+                  name="list-radioAQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}a"
+                  for="questionAQ-{{loop.index}}a"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Never
                 </label>
@@ -303,14 +300,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}b"
+                  id="questionAQ-{{loop.index}}b"
                   type="radio"
                   value="2"
-                  name="list-radio{{loop.index}}"
+                  name="list-radioAQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}b"
+                  for="questionAQ-{{loop.index}}b"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Rarely</label
                 >
@@ -321,14 +318,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}c"
+                  id="questionAQ-{{loop.index}}c"
                   type="radio"
                   value="3"
-                  name="list-radio{{loop.index}}"
+                  name="list-radioAQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}c"
+                  for="questionAQ-{{loop.index}}c"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Sometimes</label
                 >
@@ -339,14 +336,14 @@
             >
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}d"
+                  id="questionAQ-{{loop.index}}d"
                   type="radio"
                   value="4"
-                  name="list-radio{{loop.index}}"
+                  name="list-radioAQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}d"
+                  for="questionAQ-{{loop.index}}d"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Often</label
                 >
@@ -355,14 +352,14 @@
             <li class="w-full dark:border-gray-600">
               <div class="flex items-center ps-3">
                 <input
-                  id="question-{{loop.index}}e"
+                  id="questionAQ-{{loop.index}}e"
                   type="radio"
                   value="5"
-                  name="list-radio{{loop.index}}"
+                  name="list-radioAQ{{loop.index}}"
                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
                 <label
-                  for="question-{{loop.index}}e"
+                  for="questionAQ-{{loop.index}}e"
                   class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >Very Often</label
                 >
@@ -372,7 +369,6 @@
         </div>
         {% endfor %}
       </div>
-      
 
       <div class="flex justify-center">
         <button

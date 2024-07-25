@@ -12,7 +12,7 @@ import {
 // constant for API Key
 const API_KEY = "wxFE-eV4eaT1N27OsKq5N8Kt9riF36G9Dy_KSPZenqQ";
 // value for test time duration in seconds
-const TEST_DURATION = 5;
+const TEST_DURATION = 30;
 const DELAY_INTERVAL = [1000, 2000, 4000];
 
 let images = []; // images array
@@ -20,6 +20,9 @@ let randImgIndex; // randomly selected image index
 let currImgIndex = 0; // current image index
 let corPressedKeys = 0; // correct pressed keys
 let incPressedKeys = 0; // incorrect pressed keys
+let omissionErrorFlag = true; // omission error flag
+let omissionErrors = 0; // omission errors
+let comissionErrors = 0; // comission errors
 let testingPhase = false; // boolean test initiated
 let reactionTimes = []; // reactionTimes array
 let startTime; // exact time and date when correct image appears
@@ -60,7 +63,7 @@ function initJsPsychTimeline() {
       let eyeTrackingData = jsPsych.data.getLastTrialData().values();
       let trial_json = JSON.stringify(eyeTrackingData, null, 2);
       console.log("Eye Tracking Data:", trial_json);
-      localStorage.setItem("eyeTrackingData", JSON.stringify(trial_json));
+      localStorage.setItem("eyeTrackingDataVA", JSON.stringify(trial_json));
       endTest();
     },
     trial_duration: TEST_DURATION * 1000,
@@ -73,14 +76,14 @@ function initJsPsychTimeline() {
   };
 
   jsPsych.run([
-    camera_instructions,
-    init_camera,
-    calibration_instructions,
-    calibration,
-    validation_instructions,
-    validation,
-    recalibrate,
-    calibration_done,
+    // camera_instructions,
+    // init_camera,
+    // calibration_instructions,
+    // calibration,
+    // validation_instructions,
+    // validation,
+    // recalibrate,
+    // calibration_done,
     trialInstructions,
     trial,
   ]);
@@ -164,13 +167,26 @@ async function startingTestInstructions(done) {
  */
 function showRandomImage() {
   if (!testingPhase) return;
+  omissionErrorFlag = true;
   startTime = Date.now();
   let currentImage = document.getElementById("currentImg");
   currImgIndex = Math.floor(Math.random() * images.length); // random current index
   currentImage.src = images[currImgIndex]; // set currentImage.src to random current index inside images array
 
   let delay = DELAY_INTERVAL[Math.floor(Math.random() * 3)];
+
+  setTimeout(checkOmissionError, 250 + delay);
   setTimeout(showRandomImage, 250 + delay);
+}
+
+/**
+ * Check Omission Error Flag
+ */
+function checkOmissionError() {
+  if (omissionErrorFlag && currImgIndex == randImgIndex) {
+    omissionErrors++;
+    incPressedKeys++;
+  }
 }
 
 /**
@@ -180,7 +196,7 @@ function endTest() {
   testingPhase = false;
   avgReactionTime = calculateAvgReactionTime();
   let testScore = calculateTestScore();
-  console.log("Test ended:", avgReactionTime, testScore);
+  console.log("Test ended:", avgReactionTime, testScore, omissionErrors, comissionErrors);
   localStorage.setItem(
     "attention-reactionTimes",
     JSON.stringify(reactionTimes)
@@ -228,10 +244,12 @@ document.addEventListener("keypress", function (event) {
       let reactionTime = endTime - startTime;
       reactionTimes.push(reactionTime);
       corPressedKeys++;
+      omissionErrorFlag = false;
       console.log("correct press");
     } else {
       console.log("incorrect press");
       incPressedKeys++;
+      comissionErrors++;
     }
   }
 });
