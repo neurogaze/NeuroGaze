@@ -57,5 +57,9 @@ def passage():
 def screening():
     return render_template("screening.html", questions=questions)
 
+@app.route("/results", methods=['GET'])
+def results():
+    return render_template("results.html")
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=3000,debug=True)

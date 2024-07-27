@@ -1,8 +1,103 @@
-const API_KEY = "wxFE-eV4eaT1N27OsKq5N8Kt9riF36G9Dy_KSPZenqQ";
-const TEST_DURATION = 60; // value for test time duration in seconds
-const DELAY_INTERVAL = [1000, 2000, 4000];
+import {
+  jsPsych,
+  camera_instructions,
+  init_camera,
+  calibration_instructions,
+  calibration,
+  validation_instructions,
+  validation,
+  recalibrate,
+} from "./calibration.js";
 
+const API_KEY = "wxFE-eV4eaT1N27OsKq5N8Kt9riF36G9Dy_KSPZenqQ";
+const TEST_DURATION = 30; // value for test time duration in seconds
+const DELAY_INTERVAL = [1000, 2000, 4000];
+let HTML; // Store the page's HTML content
 let passages;
+let selectedDifficulty;
+
+// Initialize jsPsych
+function initJsPsychTimeline() {
+  let calibration_done = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `
+    <p>Great, we're done with calibration!</p>
+  `,
+    choices: ["OK"],
+    on_finish: function () {},
+  };
+
+  let trialInstructions = {
+    type: jsPsychCallFunction,
+    async: true,
+    func: function (done) {
+      showInitialInstructions(done);
+    },
+  };
+
+  let trial = {
+    type: jsPsychHtmlKeyboardResponse,
+    choices: "NO_KEYS",
+    stimulus: HTML,
+    on_load: function () {
+      console.log(HTML);
+      console.log("Trial started");
+      testingPhase = true;
+      startingTest(selectedDifficulty);
+    },
+    on_finish: function () {
+      console.log("Finished");
+      let eyeTrackingData = jsPsych.data.getLastTrialData().values();
+      let trial_json = JSON.stringify(eyeTrackingData, null, 2);
+      console.log("Eye Tracking Data:", trial_json);
+      localStorage.setItem(
+        "interference-eyeTracking",
+        JSON.stringify(trial_json)
+      );
+      endTest();
+    },
+    trial_duration: TEST_DURATION * 1000,
+    extensions: [
+      {
+        type: jsPsychExtensionWebgazer,
+        params: { targets: ["#passage"] },
+      },
+    ],
+  };
+
+  jsPsych.run([
+    // camera_instructions,
+    // init_camera,
+    // calibration_instructions,
+    // calibration,
+    // validation_instructions,
+    // validation,
+    // recalibrate,
+    // calibration_done,
+    trialInstructions,
+    trial,
+  ]);
+}
+
+/**
+ * Show the instruction at the start up screen.
+ */
+function showCalibrationInstructions() {
+  HTML = document.getElementById("passageCont").outerHTML;
+  console.log(HTML);
+
+  swal({
+    title: "Pre-Test Calibration",
+    text: "You will calibrate the eye tracker before the test starts.",
+    icon: "info",
+    button: "Begin",
+    closeOnClickOutside: false,
+  }).then((isConfirm) => {
+    if (isConfirm) {
+      initJsPsychTimeline();
+    }
+  });
+}
 
 document.addEventListener("DOMContentLoaded", async function () {
   try {
@@ -37,7 +132,7 @@ async function fetchImageURLs() {
 /**
  * Show the instruction at the start up screen.
  */
-function showInitialInstructions() {
+function showInitialInstructions(done) {
   swal({
     title: "Interference Test",
     text: "In this test, you will be shown a passage of text. You will be asked to read the passage carefully.\
@@ -47,7 +142,7 @@ function showInitialInstructions() {
     closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {
-      selectDifficulty();
+      selectDifficulty(done);
     }
   });
 }
@@ -55,7 +150,7 @@ function showInitialInstructions() {
 /**
  * Choose the difficulty for the test.
  */
-function selectDifficulty() {
+function selectDifficulty(done) {
   const difficultyOptions = [
     { text: "(For Children 6-11)", value: "child" },
     { text: "(For Teens 12-17)", value: "teen" },
@@ -71,7 +166,7 @@ function selectDifficulty() {
     select.appendChild(optionElement);
   });
 
-  let selectedDifficulty = difficultyOptions[0].value; // Default to first option
+  selectedDifficulty = difficultyOptions[0].value; // Default to first option
 
   select.onchange = function (e) {
     selectedDifficulty = e.target.value;
@@ -89,8 +184,7 @@ function selectDifficulty() {
     closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {
-      testingPhase = true;
-      startingTest(selectedDifficulty);
+      done();
     }
   });
 }
@@ -119,6 +213,7 @@ async function startingTest(selectedDifficulty) {
  * Start pop=up distraction loop
  */
 function startPopupLoop() {
+  if (!testingPhase) return;
   let delay = DELAY_INTERVAL[Math.floor(Math.random() * 3)];
 
   distractionInterval = setInterval(() => {
@@ -170,9 +265,6 @@ function generateRandomPosition() {
  */
 function endTest() {
   testingPhase = false;
-  // localStorage.setItem("inhibition-reactionTimes", JSON.stringify(reactionTimes));
-  // localStorage.setItem("inhibition-avgReactionTime", avgReactionTime);
-  // localStorage.setItem("inhibition-testScore", testScore);
 
   swal({
     title: "Testing Completed",
@@ -185,4 +277,4 @@ function endTest() {
   });
 }
 
-showInitialInstructions();
+showCalibrationInstructions();

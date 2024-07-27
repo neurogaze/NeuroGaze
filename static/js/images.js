@@ -63,7 +63,7 @@ function initJsPsychTimeline() {
       let eyeTrackingData = jsPsych.data.getLastTrialData().values();
       let trial_json = JSON.stringify(eyeTrackingData, null, 2);
       console.log("Eye Tracking Data:", trial_json);
-      localStorage.setItem("eyeTrackingDataVA", JSON.stringify(trial_json));
+      localStorage.setItem("attention-eyeTracking", JSON.stringify(trial_json));
       endTest();
     },
     trial_duration: TEST_DURATION * 1000,
@@ -196,13 +196,22 @@ function endTest() {
   testingPhase = false;
   avgReactionTime = calculateAvgReactionTime();
   let testScore = calculateTestScore();
-  console.log("Test ended:", avgReactionTime, testScore, omissionErrors, comissionErrors);
+  console.log(
+    "Test ended:",
+    avgReactionTime,
+    testScore,
+    omissionErrors,
+    comissionErrors
+  );
   localStorage.setItem(
     "attention-reactionTimes",
     JSON.stringify(reactionTimes)
   );
+  localStorage.setItem("attention-reactionTimes", reactionTimes);
   localStorage.setItem("attention-avgReactionTime", avgReactionTime);
   localStorage.setItem("attention-testScore", testScore);
+  localStorage.setItem("attention-omissionErrors", omissionErrors);
+  localStorage.setItem("attention-comissionErrors", comissionErrors);
 
   swal({
     title: "Test Completed",
@@ -211,7 +220,7 @@ function endTest() {
     closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {
-      window.location.href = "interference";
+      window.location.href = "continuous-inhibition";
     }
   });
 }

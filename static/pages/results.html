@@ -1,0 +1,49 @@
+{% extends 'index.html' %} {% block body %}
+
+<h1>Results</h1>
+<p>Here are the results of the testing:</p>
+
+<h2>Visual Attention</h2>
+
+<div id="content"></div>
+
+<h2>Inhibition</h2>
+
+<h2>Interference</h2>
+
+<script>
+  const attentionRT = localStorage.getItem("attention-reactionTimes");
+  const attentionAvgRT = localStorage.getItem("attention-avgReactionTime");
+  const attentionTestScore = localStorage.getItem("attention-testScore");
+  const attentionOmission = localStorage.getItem("attention-omissionErrors");
+  const attentionCommission = localStorage.getItem("attention-comissionErrors");
+  const attentionGazeData = localStorage.getItem("attention-eyeTracking");
+
+  const inhibitionRT = localStorage.getItem("inhibition-reactionTimes");
+  const inhibitionAvgRT = localStorage.getItem("inhibition-avgReactionTime");
+  const inhibitionTestScore = localStorage.getItem("inhibition-testScore");
+  const inhibitionOmission = localStorage.getItem("inhibition-omissionErrors");
+  const inhibitionCommission = localStorage.getItem(
+    "inhibition-comissionErrors"
+  );
+  const inhibitionGazeData = localStorage.getItem("inhibition-eyeTracking");
+
+  const interferenceGazeData = localStorage.getItem("interference-eyeTracking");
+
+  console.log(attentionRT);
+  console.log(attentionAvgRT);
+  console.log(attentionTestScore);
+  console.log(attentionOmission);
+  console.log(attentionCommission);
+  console.log(attentionGazeData);
+
+  console.log(inhibitionRT);
+  console.log(inhibitionAvgRT);
+  console.log(inhibitionTestScore);
+  console.log(inhibitionOmission);
+  console.log(inhibitionCommission);
+  console.log(inhibitionGazeData);
+
+  console.log(interferenceGazeData);
+</script>
+{% endblock %}

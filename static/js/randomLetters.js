@@ -61,7 +61,10 @@ function initJsPsychTimeline() {
       let eyeTrackingData = jsPsych.data.getLastTrialData().values();
       let trial_json = JSON.stringify(eyeTrackingData, null, 2);
       console.log("Eye Tracking Data:", trial_json);
-      localStorage.setItem("eyeTrackingDataCI", JSON.stringify(trial_json));
+      localStorage.setItem(
+        "inhibition-eyeTracking",
+        JSON.stringify(trial_json)
+      );
       endTest();
     },
     trial_duration: TEST_DURATION * 1000,
@@ -74,14 +77,14 @@ function initJsPsychTimeline() {
   };
 
   jsPsych.run([
-    camera_instructions,
-    init_camera,
-    calibration_instructions,
-    calibration,
-    validation_instructions,
-    validation,
-    recalibrate,
-    calibration_done,
+    // camera_instructions,
+    // init_camera,
+    // calibration_instructions,
+    // calibration,
+    // validation_instructions,
+    // validation,
+    // recalibrate,
+    // calibration_done,
     trialInstructions,
     trial,
   ]);
@@ -170,8 +173,11 @@ function endTest() {
     "inhibition-reactionTimes",
     JSON.stringify(reactionTimes)
   );
+  localStorage.setItem("inhibition-reactionTimes", reactionTimes);
   localStorage.setItem("inhibition-avgReactionTime", avgReactionTime);
   localStorage.setItem("inhibition-testScore", testScore);
+  localStorage.setItem("inhibition-omissionErrors", omissionErrors);
+  localStorage.setItem("inhibition-comissionErrors", comissionErrors);
 
   swal({
     title: "Test Completed",
@@ -180,7 +186,7 @@ function endTest() {
     closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {
-      window.location.href = "continuous-inhibition";
+      window.location.href = "interference";
     }
   });
 }

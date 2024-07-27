@@ -135,7 +135,7 @@ async function onTestStart(selectedDifficulty) {
       oppositionalDefiantDisorder: false,
       conductDisorder: false,
       anxietyDeppression: false,
-    }
+    };
 
     for (let i = 0; i < 9; i++) {
       let question = document.getElementById("questionCQ" + (i + 1));
@@ -201,10 +201,13 @@ async function onTestStart(selectedDifficulty) {
       results.predominantlyHyperactiveImpulsive = true;
     }
 
-    if (results.predominantlyInattentive === true  && results.predominantlyHyperactiveImpulsive === true) {
+    if (
+      results.predominantlyInattentive === true &&
+      results.predominantlyHyperactiveImpulsive === true
+    ) {
       results.combinedInattentionHyperactivity = true;
     }
-    
+
     if (totalCChecked >= 4 && performanceChecked > 0) {
       results.oppositionalDefiantDisorder = true;
     }
@@ -213,7 +216,7 @@ async function onTestStart(selectedDifficulty) {
       results.conductDisorder = true;
     }
 
-    if (totalEChecked >=3 && performanceChecked > 0) {
+    if (totalEChecked >= 3 && performanceChecked > 0) {
       results.anxietyDeppression = true;
     }
 
@@ -221,14 +224,15 @@ async function onTestStart(selectedDifficulty) {
     // patient has symptoms highly consistent with ADHD in adults and further investigation is
     // warranted.
     console.log("Test Results: ", results);
+    localStorage.setItem("screening-child", results);
   }
 
   function gradeTeenTest(questions) {
     let results = {
       inattentive: false,
       hyperactiveImpulsive: false,
-      combined: false
-    }
+      combined: false,
+    };
 
     let totalAChecked = 0;
     let totalBChecked = 0;
@@ -261,18 +265,19 @@ async function onTestStart(selectedDifficulty) {
       results.hyperactiveImpulsive = true;
     }
 
-    if ((totalAChecked >= 6) && (totalBChecked >= 6)) {
+    if (totalAChecked >= 6 && totalBChecked >= 6) {
       results.combined = true;
     }
 
     console.log("Test Results: ", results);
+    localStorage.setItem("screening-teen", results);
   }
 
   function gradeAdultTest(questions) {
     let results = {
-      testA: false, 
-      testB: false
-    }
+      testA: false,
+      testB: false,
+    };
     let totalChecked = 0;
     let totalBChecked = 0;
 
@@ -310,6 +315,7 @@ async function onTestStart(selectedDifficulty) {
     // patient has symptoms highly consistent with ADHD in adults and further investigation is
     // warranted.
     console.log("Test Results: ", results);
+    localStorage.setItem("screening-adult", results);
   }
 
   submitButton.addEventListener("click", function () {
@@ -333,7 +339,7 @@ async function onTestStart(selectedDifficulty) {
       button: "Generate Report",
     }).then((isConfirm) => {
       if (isConfirm) {
-        window.location.href = "screening";
+        window.location.href = "results";
       }
     });
   });
