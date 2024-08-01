@@ -66,14 +66,14 @@ function initJsPsychTimeline() {
   };
 
   jsPsych.run([
-    // camera_instructions,
-    // init_camera,
-    // calibration_instructions,
-    // calibration,
-    // validation_instructions,
-    // validation,
-    // recalibrate,
-    // calibration_done,
+    camera_instructions,
+    init_camera,
+    calibration_instructions,
+    calibration,
+    validation_instructions,
+    validation,
+    recalibrate,
+    calibration_done,
     trialInstructions,
     trial,
   ]);
@@ -136,7 +136,7 @@ function showInitialInstructions(done) {
   swal({
     title: "Interference Test",
     text: "In this test, you will be shown a passage of text. You will be asked to read the passage carefully.\
-     You will also be shown some distractions during the test. You will have to ignore the distractions and focus on the passage.",
+     You will also be shown some distractions during the test. You will have to ignore the distractions and focus on the passage. Keep re-reading the passage until the test stops.",
     icon: "info",
     button: "Start Test",
     closeOnClickOutside: false,

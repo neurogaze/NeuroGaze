@@ -1,49 +1,75 @@
-{% extends 'index.html' %} {% block body %}
+{% extends 'index.html' %}
+{% block head %}
+<!-- Print-specific stylesheet -->
+<style>
+  @media print {
+    body { font-size: 12pt; }
+    .container { width: 100%; padding: 0; }
+    canvas { max-width: 100% !important; height: auto !important; }
+    @page { margin: 2cm; }
+}
 
-<h1>Results</h1>
-<p>Here are the results of the testing:</p>
+</style>
+{% endblock %}
 
-<h2>Visual Attention</h2>
+{% block body %}
+<div class="container mx-auto p-8 bg-white">
+    <header class="mb-8 text-center">
+        <h1 class="text-3xl font-bold mb-2">NeuroGaze Pre-Diagnosis Assessment Report</h1>
+        <p class="text-gray-600">Generated on <span id="reportDate"></span></p>
+    </header>
 
-<div id="content"></div>
+    <!-- <section id="summary" class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Executive Summary</h2>
+        <div id="summaryContent" class="grid grid-cols-3 gap-4"></div>
+    </section> -->
 
-<h2>Inhibition</h2>
+    <section id="visualAttention" class="mb-12">
+        <h2 class="text-2xl font-semibold mb-4">Visual Attention</h2>
+        <div class="grid grid-cols-2 gap-8">
+            <div>
+                <h3 class="text-xl mb-2">Performance Metrics</h3>
+                <table id="attentionMetrics" class="w-full"></table>
+            </div>
+            <div>
+                <h3 class="text-xl mb-2">Gaze Results</h3>
+                <canvas id="attentionEyeTrack"></canvas>
+            </div>
+        </div>
+    </section>
 
-<h2>Interference</h2>
+    <section id="visualAttention" class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">Continuous Inhibition</h2>
+      <div class="grid grid-cols-2 gap-8">
+          <div>
+              <h3 class="text-xl mb-2">Performance Metrics</h3>
+              <table id="inhibitionMetrics" class="w-full"></table>
+          </div>
+          <div>
+              <h3 class="text-xl mb-2">Gaze Results</h3>
+              <canvas id="inhibitionEyeTrack"></canvas>
+          </div>
+      </div>
+  </section>
 
-<script>
-  const attentionRT = localStorage.getItem("attention-reactionTimes");
-  const attentionAvgRT = localStorage.getItem("attention-avgReactionTime");
-  const attentionTestScore = localStorage.getItem("attention-testScore");
-  const attentionOmission = localStorage.getItem("attention-omissionErrors");
-  const attentionCommission = localStorage.getItem("attention-comissionErrors");
-  const attentionGazeData = localStorage.getItem("attention-eyeTracking");
+  <section id="visualAttention" class="mb-12">
+    <h2 class="text-2xl font-semibold mb-4">Interference</h2>
+    <div class="grid grid-cols-2 gap-8">
+        <div>
+            <h3 class="text-xl mb-2">Gaze Results</h3>
+            <canvas id="interferenceEyeTrack"></canvas>
+        </div>
+    </div>
+</section>
 
-  const inhibitionRT = localStorage.getItem("inhibition-reactionTimes");
-  const inhibitionAvgRT = localStorage.getItem("inhibition-avgReactionTime");
-  const inhibitionTestScore = localStorage.getItem("inhibition-testScore");
-  const inhibitionOmission = localStorage.getItem("inhibition-omissionErrors");
-  const inhibitionCommission = localStorage.getItem(
-    "inhibition-comissionErrors"
-  );
-  const inhibitionGazeData = localStorage.getItem("inhibition-eyeTracking");
 
-  const interferenceGazeData = localStorage.getItem("interference-eyeTracking");
+<section id="recommendations" class="mt-12 border-t pt-8">
+    <h2 class="text-2xl font-semibold mb-4">Screening Results</h2>
+    <div id="recommendationContent"></div>
+</section>
 
-  console.log(attentionRT);
-  console.log(attentionAvgRT);
-  console.log(attentionTestScore);
-  console.log(attentionOmission);
-  console.log(attentionCommission);
-  console.log(attentionGazeData);
-
-  console.log(inhibitionRT);
-  console.log(inhibitionAvgRT);
-  console.log(inhibitionTestScore);
-  console.log(inhibitionOmission);
-  console.log(inhibitionCommission);
-  console.log(inhibitionGazeData);
-
-  console.log(interferenceGazeData);
-</script>
+</div>
+<!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/js/report.js"></script>
 {% endblock %}

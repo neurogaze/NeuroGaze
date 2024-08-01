@@ -224,7 +224,7 @@ async function onTestStart(selectedDifficulty) {
     // patient has symptoms highly consistent with ADHD in adults and further investigation is
     // warranted.
     console.log("Test Results: ", results);
-    localStorage.setItem("screening-child", results);
+    localStorage.setItem("screening-child", JSON.stringify(results));
   }
 
   function gradeTeenTest(questions) {
@@ -270,7 +270,7 @@ async function onTestStart(selectedDifficulty) {
     }
 
     console.log("Test Results: ", results);
-    localStorage.setItem("screening-teen", results);
+    localStorage.setItem("screening-teen", JSON.stringify(results));
   }
 
   function gradeAdultTest(questions) {
@@ -315,12 +315,13 @@ async function onTestStart(selectedDifficulty) {
     // patient has symptoms highly consistent with ADHD in adults and further investigation is
     // warranted.
     console.log("Test Results: ", results);
-    localStorage.setItem("screening-adult", results);
+    localStorage.setItem("screening-adult", JSON.stringify(results));
   }
 
   submitButton.addEventListener("click", function () {
     console.log(selectedDifficulty); // child, teen, adult =>
     console.log(questions);
+    localStorage.setItem("selectedDifficulty", selectedDifficulty);
 
     switch (selectedDifficulty) {
       case "child":

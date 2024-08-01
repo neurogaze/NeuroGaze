@@ -1,11 +1,14 @@
 [
-    { "text": "The quick brown fox jumps over the lazy dog.", "difficulty": "child" },
-    {
-      "text": "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
+  {
+      "text": "Once upon a time, in a peaceful village nestled between lush green hills and a sparkling river, there lived a curious little boy named Tim. Every day, Tim would venture out into the fields, chasing butterflies and picking wildflowers. One sunny afternoon, Tim discovered a hidden path that led to a magical forest filled with talking animals and enchanted trees. He spent hours listening to their stories and learning about the wonders of the forest. As the sun began to set, Tim promised his new friends that he would return the next day, excited to uncover more of the forest's secrets.",
+      "difficulty": "child"
+  },
+  {
+      "text": "High school was always bustling with activity, and for Sarah, it was a mix of excitement and challenges. She excelled in her favorite subjects, like literature and history, but found math and science to be more difficult. One day, her teacher assigned a project that required a lot of research and teamwork. Sarah teamed up with her best friends, and they spent countless hours in the library, gathering information and putting together their presentation. Along the way, they faced several obstacles, but their determination and teamwork helped them overcome every hurdle. When they finally presented their project, they received praise for their hard work and creativity, and Sarah realized that even the toughest challenges could be conquered with the right attitude.",
       "difficulty": "teen"
-    },
-    {
-      "text": "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.",
+  },
+  {
+      "text": "In the bustling city of New York, John navigated the hectic world of finance, working as an analyst for a major investment firm. His days were filled with numbers, charts, and endless meetings. John thrived on the fast-paced environment, finding satisfaction in solving complex problems and making strategic decisions. However, the demands of his job often left him feeling overwhelmed and stressed. To cope, John took up running in Central Park, finding solace in the rhythm of his feet hitting the pavement and the fresh air filling his lungs. It was during these runs that he found clarity and a renewed sense of purpose. Over time, John learned to balance his demanding career with his need for personal well-being, proving to himself that success was not just about professional achievements, but also about maintaining a healthy mind and body.",
       "difficulty": "adult"
-    }
+  }
 ]

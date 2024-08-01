@@ -52,7 +52,7 @@
       "text": "Has difficulty waiting his or her turn"
     },
     {
-      "text": "Interrupts or intrudes in on others’ conversations and/or activities"
+      "text": "Interrupts or intrudes in on others' conversations and/or activities"
     },
     {
       "text": "Argues with adults"
@@ -61,7 +61,7 @@
       "text": "Loses temper"
     },
     {
-      "text": "Actively defies or refuses to go along with adults’ requests or rules"
+      "text": "Actively defies or refuses to go along with adults' requests or rules"
     },
     {
       "text": "Deliberately annoys people"
@@ -85,7 +85,7 @@
       "text": "Starts physical fights"
     },
     {
-      "text": "Lies to get out of trouble or to avoid obligations (ie,‘cons’ others)"
+      "text": "Lies to get out of trouble or to avoid obligations (ie,‘cons' others)"
     },
     {
       "text": "Is truant from school (skips school) without permission"
@@ -97,7 +97,7 @@
       "text": "Has stolen things that have value"
     },
     {
-      "text": "Deliberately destroys others’ property"
+      "text": "Deliberately destroys others' property"
     },
     {
       "text": "Has used a weapon that can cause serious harm (bat, knife, brick, gun)"
@@ -109,7 +109,7 @@
       "text": "Has deliberately set fires to cause damage"
     },
     {
-      "text": "Has broken into someone else’s home, business, or car"
+      "text": "Has broken into someone else's home, business, or car"
     },
     {
       "text": "Has stayed out at night without permission"
@@ -133,7 +133,7 @@
       "text": "Blames self for problems, feels guilty"
     },
     {
-      "text": "Feels lonely, unwanted, or unloved; complains that ‘no one loves him or her’"
+      "text": "Feels lonely, unwanted, or unloved; complains that ‘no one loves him or her'"
     },
     {
       "text": "Is sad, unhappy, or depressed"
@@ -187,7 +187,7 @@
       "text": "Engages in tasks that require sustained mental effort"
     },
     {
-      "text": "Keeps track of things necessary for activities (doesn’t lose them)"
+      "text": "Keeps track of things necessary for activities (doesn't lose them)"
     },
     {
       "text": "Ignores extraneous stimuli"
@@ -283,7 +283,7 @@
     "severity_value": 2
   },
   {
-    "text": "When you’re in a conversation, how often do you find yourself finishing the sentences of the people you are talking to, before they can finish them themselves?",
+    "text": "When you're in a conversation, how often do you find yourself finishing the sentences of the people you are talking to, before they can finish them themselves?",
     "severity_value": 3
   },
   {
