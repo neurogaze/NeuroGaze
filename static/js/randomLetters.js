@@ -102,6 +102,7 @@ function showCalibrationInstructions() {
     text: "You will calibrate the eye tracker before the test starts.",
     icon: "info",
     button: "Begin",
+    
     closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {

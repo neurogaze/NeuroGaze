@@ -8,7 +8,7 @@ npx tailwindcss -i ./css/index.css -o ./css/output.css --watch
 <!-- running server: -->
 python3 -m venv .venv                                                  
 source .venv/bin/activate
-python3 main.py
+python3 app.py
 
 <!-- turning off virtual environment: -->
 source deactivate

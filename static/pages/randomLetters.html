@@ -1,17 +1,36 @@
-{% extends 'confirmation.html' %} {% block body %}
+{% extends 'confirmation.html' %} 
+{% block body %}
+
 <style>
+  /* Initial white background */
   .jspsych-content-wrapper {
+    background-color: white;
+    transition: background-color 0.5s ease; /* Smooth transition effect */
+  }
+
+  /* Black background after confirmation ends */
+  .black-background {
     background-color: black;
   }
 </style>
-<div class="flex items-center justify-center h-screen bg-black">
+
+<div class="flex items-center justify-center h-screen jspsych-content-wrapper">
   <div
     id="letterCont"
-    class="text-white text-9xl font-bold flex items-center justify-center"
+    class="text-black text-9xl font-bold flex items-center justify-center"
   >
     <span id="currentLetter"></span>
   </div>
 </div>
 
 <script type="module" src="/static/js/randomLetters.js"></script>
+
+<script>
+  // Listen for the custom event 'confirmationEnded'
+  document.addEventListener('confirmationEnded', () => {
+    // Turn the background black after confirmation ends
+    document.querySelector('.jspsych-content-wrapper').classList.add('black-background');
+  });
+</script>
+
 {% endblock %}
