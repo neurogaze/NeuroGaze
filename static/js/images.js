@@ -12,7 +12,7 @@ import {
 // constant for API Key
 const API_KEY = "wxFE-eV4eaT1N27OsKq5N8Kt9riF36G9Dy_KSPZenqQ";
 // value for test time duration in seconds
-const TEST_DURATION = 30;
+const TEST_DURATION = 30; // change later
 const DELAY_INTERVAL = [1000, 2000, 4000];
 
 let images = []; // images array
@@ -37,7 +37,14 @@ function initJsPsychTimeline() {
     <p>Great, we're done with calibration!</p>
   `,
     choices: ["OK"],
-    on_finish: function () {},
+    on_finish: function () {
+      // add calibration done to local storage
+      localStorage.setItem("calibration_done", true);
+      console.log(
+        "Calibration status saved:",
+        localStorage.getItem("calibration_done")
+      );
+    },
   };
 
   let trialInstructions = {

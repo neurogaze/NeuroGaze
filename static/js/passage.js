@@ -68,12 +68,12 @@ function initJsPsychTimeline() {
   jsPsych.run([
     camera_instructions,
     init_camera,
-    calibration_instructions,
-    calibration,
-    validation_instructions,
-    validation,
-    recalibrate,
-    calibration_done,
+    // calibration_instructions,
+    // calibration,
+    // validation_instructions,
+    // validation,
+    // recalibrate,
+    // calibration_done,
     trialInstructions,
     trial,
   ]);
@@ -85,6 +85,13 @@ function initJsPsychTimeline() {
 function showCalibrationInstructions() {
   HTML = document.getElementById("passageCont").outerHTML;
   console.log(HTML);
+
+  const calibrationDone = localStorage.getItem("calibration_done");
+
+  if (!calibrationDone) {
+    initJsPsychTimeline();
+    return;
+  }
 
   swal({
     title: "Pre-Test Calibration",
@@ -269,10 +276,10 @@ function endTest() {
   swal({
     title: "Testing Completed",
     icon: "success",
-    button: "Start Screening Test",
+    button: "Go to your results",
   }).then((isConfirm) => {
     if (isConfirm) {
-      window.location.href = "screening";
+      window.location.href = "results"; // modify to jump straight to results.
     }
   });
 }
