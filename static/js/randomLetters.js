@@ -79,12 +79,12 @@ function initJsPsychTimeline() {
   jsPsych.run([
     camera_instructions,
     init_camera,
-    calibration_instructions,
-    calibration,
-    validation_instructions,
-    validation,
-    recalibrate,
-    calibration_done,
+    // calibration_instructions,
+    // calibration,
+    // validation_instructions,
+    // validation,
+    // recalibrate,
+    // calibration_done,
     trialInstructions,
     trial,
   ]);
@@ -97,12 +97,19 @@ function showCalibrationInstructions() {
   HTML = document.getElementById("letterCont").outerHTML;
   console.log(HTML);
 
+  const calibrationDone = localStorage.getItem("calibration_done");
+
+  if (!calibrationDone) {
+    initJsPsychTimeline();
+    return;
+  }
+
   swal({
     title: "Pre-Test Calibration",
     text: "You will calibrate the eye tracker before the test starts.",
     icon: "info",
     button: "Begin",
-    
+
     closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {
