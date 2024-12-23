@@ -8,6 +8,7 @@ import {
   validation,
   recalibrate,
 } from "./calibration.js";
+import { configureTimeline } from "./randomLetters.js";
 
 const API_KEY = "wxFE-eV4eaT1N27OsKq5N8Kt9riF36G9Dy_KSPZenqQ";
 const TEST_DURATION = 30; // value for test time duration in seconds
@@ -15,6 +16,9 @@ const DELAY_INTERVAL = [1000, 2000, 4000];
 let HTML; // Store the page's HTML content
 let passages;
 let selectedDifficulty;
+let testSource = localStorage.getItem("testSource");
+let timeline;
+
 
 // Initialize jsPsych
 function initJsPsychTimeline() {
@@ -65,18 +69,25 @@ function initJsPsychTimeline() {
     ],
   };
 
-  jsPsych.run([
-    camera_instructions,
-    init_camera,
-    calibration_instructions,
-    calibration,
-    validation_instructions,
-    validation,
-    recalibrate,
-    calibration_done,
-    trialInstructions,
-    trial,
-  ]);
+  timeline = testSource === '/testing' ?
+      [ camera_instructions,
+        init_camera,
+        calibration_instructions,
+        calibration,
+        validation_instructions,
+        validation,
+        recalibrate,
+        calibration_done,
+        trialInstructions,
+        trial
+      ] : [
+        init_camera,
+        trialInstructions,
+        trial
+      ];
+  
+
+  jsPsych.run(timeline);
 }
 
 /**
@@ -86,17 +97,21 @@ function showCalibrationInstructions() {
   HTML = document.getElementById("passageCont").outerHTML;
   console.log(HTML);
 
-  swal({
-    title: "Pre-Test Calibration",
-    text: "You will calibrate the eye tracker before the test starts.",
-    icon: "info",
-    button: "Begin",
-    closeOnClickOutside: false,
-  }).then((isConfirm) => {
-    if (isConfirm) {
-      initJsPsychTimeline();
-    }
-  });
+  if (testSource === "/testing") {
+    swal({
+      title: "Pre-Test Calibration",
+      text: "You will calibrate the eye tracker before the test starts.",
+      icon: "info",
+      button: "Begin",
+      closeOnClickOutside: false,
+    }).then((isConfirm) => {
+      if (isConfirm) {
+        initJsPsychTimeline();
+      }
+    });
+  } else {
+    initJsPsychTimeline();
+  }
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -266,13 +281,23 @@ function generateRandomPosition() {
 function endTest() {
   testingPhase = false;
 
+  let dest, btnText;
+
+  if (testSource === '/testing') {
+    dest = "screening";
+    btnText = "Start Screening Test";
+  } else {
+    dest = "results";
+    btnText = "Generate Report";
+  }
+
   swal({
     title: "Testing Completed",
     icon: "success",
-    button: "Start Screening Test",
+    button: btnText,
   }).then((isConfirm) => {
     if (isConfirm) {
-      window.location.href = "screening";
+      window.location.href = dest;
     }
   });
 }

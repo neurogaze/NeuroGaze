@@ -43,6 +43,8 @@ let reactionTimes = []; // reactionTimes array
 let startTime; // exact time and date when correct image appears
 let avgReactionTime; // average reaction time
 let HTML; // Store the page's HTML content
+let timeline; // Stores the timeline for the trial
+let testSource = localStorage.getItem("testSource"); // Retrieving testSource from local storage
 
 // Initialize jsPsych
 function initJsPsychTimeline() {
@@ -52,7 +54,7 @@ function initJsPsychTimeline() {
     <p>Great, we're done with calibration!</p>
   `,
     choices: ["OK"],
-    on_finish: function () {},
+    on_finish: function () { },
   };
 
   let trialInstructions = {
@@ -93,19 +95,26 @@ function initJsPsychTimeline() {
     ],
   };
 
-  jsPsych.run([
-    camera_instructions,
-    init_camera,
-    calibration_instructions,
-    calibration,
-    validation_instructions,
-    validation,
-    recalibrate,
-    calibration_done,
-    trialInstructions,
-    trial,
-  ]);
+  timeline = testSource === '/testing' ?
+    [ camera_instructions,
+      init_camera,
+      calibration_instructions,
+      calibration,
+      validation_instructions,
+      validation,
+      recalibrate,
+      calibration_done,
+      trialInstructions,
+      trial
+    ] : [
+      init_camera,
+      trialInstructions,
+      trial
+    ];
+
+  jsPsych.run(timeline);
 }
+
 
 /**
  * Show the instruction at the start up screen.
@@ -114,18 +123,24 @@ function showCalibrationInstructions() {
   HTML = document.getElementById("letterCont").outerHTML;
   console.log(HTML);
 
-  swal({
-    title: "Pre-Test Calibration",
-    text: "You will calibrate the eye tracker before the test starts.",
-    icon: "info",
-    button: "Begin",
-    
-    closeOnClickOutside: false,
-  }).then((isConfirm) => {
-    if (isConfirm) {
-      initJsPsychTimeline();
-    }
-  });
+  if (testSource === "/testing") {
+    // Starting alert for calibration
+    swal({
+      title: "Pre-Test Calibration",
+      text: "You will calibrate the eye tracker before the test starts.",
+      icon: "info",
+      button: "Begin",
+
+      closeOnClickOutside: false,
+    }).then((isConfirm) => {
+      if (isConfirm) {
+        initJsPsychTimeline();
+      }
+    });
+  } else {
+    // Immediately initialize trial timeline
+    initJsPsychTimeline();
+  }
 }
 
 /**
