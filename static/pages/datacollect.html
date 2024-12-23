@@ -1,0 +1,198 @@
+{% extends 'index.html' %}
+{% block body %}
+<body class="bg-white">
+<div
+  class="relative px-4 mx-auto lg:pb-32 md:px-8 xl:px-20 sm:max-w-xl md:max-w-full bg-white"
+>
+  <div class="max-w-xl mx-auto lg:max-w-screen-xl">
+    <div class="mb-16 lg:max-w-lg lg:mb-0">
+      <div class="max-w-xl mb-6">
+        <div>
+          <p
+            class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-brand-tertiary uppercase rounded-full bg-brand-primary"
+          >
+            What to expect
+          </p>
+        </div>
+        <h2
+          class="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none"
+        >
+          ADHD Pre-Diagnosis <br class="hidden md:block" />
+
+          <span class="inline-block text-brand-secondary"
+            >Testing</span
+          >
+        </h2>
+        <p class="text-base text-gray-700 md:text-lg">
+          Experience simplified ADHD pre-diagnosis with quick results and comprehensive resources. 
+        </p>
+      </div>
+      <div class="flex items-center">
+        
+        <a
+          href="/confirmation"
+          id="start-test"
+          class="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-brand-secondary hover:bg-brand-tertiary focus:shadow-outline focus:outline-none"
+        >
+          Get started
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const startTestButton = document.getElementById("start-test");
+        startTestButton.addEventListener("click", (event) => {
+        // Prevent default navigation for demonstration purposes
+        event.preventDefault();
+
+        // Store the href value in localStorage
+        const hrefValue = startTestButton.getAttribute("href");
+        localStorage.setItem("testSource", hrefValue);
+
+        // Redirect to the confirmation page
+        window.location.href = '/confirmation';
+
+        });
+    });
+  </script>
+  <div
+    class="flex justify-center h-full lg:w-2/3 xl:w-1/2 lg:absolute lg:justify-start lg:bottom-0 lg:right-0 lg:items-end shadow-lg rounded"
+  >
+  <div class="carousel w-full rounded">
+    <div id="slide1" class="carousel-item relative w-full">
+      <img
+        src="/static/images/carousel img 3.png"
+        class="w-full" />
+      <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+        <a href="#slide4" class="btn btn-circle">❮</a>
+        <a href="#slide2" class="btn btn-circle">❯</a>
+      </div>
+    </div>
+    <div id="slide2" class="carousel-item relative w-full">
+      <img
+        src="/static/images/carousel img 4.png"
+        class="w-full" />
+      <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+        <a href="#slide1" class="btn btn-circle">❮</a>
+        <a href="#slide3" class="btn btn-circle">❯</a>
+      </div>
+    </div>
+    <div id="slide3" class="carousel-item relative w-full">
+      <img
+        src="/static/images/img 2.png"
+        class="w-full" />
+      <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+        <a href="#slide2" class="btn btn-circle">❮</a>
+        <a href="#slide4" class="btn btn-circle">❯</a>
+      </div>
+    </div>
+    <div id="slide4" class="carousel-item relative w-full">
+      <img
+        src="/static/images/carousel img 1.png"
+        class="w-full" />
+      <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+        <a href="#slide3" class="btn btn-circle">❮</a>
+        <a href="#slide1" class="btn btn-circle">❯</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Second Part of the Testing Page a Spacer-->
+<div
+  class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-28 bg-white"
+>
+  <div class="max-w-screen-sm sm:text-center sm:mx-auto">
+      <div
+        class="inline-block mb-5 rounded-full sm:mx-auto flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-brand-primary"
+      >
+        <svg
+          class="w-12 h-12 text-brand-tertiary"
+          stroke="currentColor"
+          viewBox="0 0 52 52"
+        >
+          <polygon
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="none"
+            points="29 13 14 29 25 29 23 39 38 23 27 23"
+          ></polygon>
+        </svg>
+      </div>
+    <h2
+      class="mb-4 font-sans text-3xl font-bold tracking-tight text-brand-secondary sm:text-4xl sm:leading-none"
+    >
+      Visual Attention
+    </h2>
+    <p class="text-base text-gray-700 md:text-lg sm:px-4">
+      This test measures the ability to sustain visual attention / attentiveness.
+    </p>
+    <hr class="w-full my-8 border-gray-300" />
+  </div>
+
+  <div class="max-w-screen-sm sm:text-center sm:mx-auto">
+    <div
+      class="inline-block mb-5 rounded-full sm:mx-auto flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-brand-primary"
+    >
+      <svg
+        class="w-12 h-12 text-brand-tertiary"
+        stroke="currentColor"
+        viewBox="0 0 52 52"
+      >
+        <polygon
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"
+          points="29 13 14 29 25 29 23 39 38 23 27 23"
+        ></polygon>
+      </svg>
+    </div>
+  <h2
+    class="mb-4 font-sans text-3xl font-bold tracking-tight text-brand-secondary sm:text-4xl sm:leading-none"
+  >
+    Continuous Inhibition
+  </h2>
+  <p class="text-base text-gray-700 md:text-lg sm:px-4">
+    This test measures for behavioral impulsivity.
+  </p>
+  <hr class="w-full my-8 border-gray-300" />
+</div>
+
+<div class="max-w-screen-sm sm:text-center sm:mx-auto">
+  <div
+    class="inline-block mb-5 rounded-full sm:mx-auto flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-brand-primary"
+  >
+    <svg
+      class="w-12 h-12 text-brand-tertiary"
+      stroke="currentColor"
+      viewBox="0 0 52 52"
+    >
+      <polygon
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"
+        points="29 13 14 29 25 29 23 39 38 23 27 23"
+      ></polygon>
+    </svg>
+  </div>
+<h2
+  class="mb-4 font-sans text-3xl font-bold tracking-tight text-brand-secondary sm:text-4xl sm:leading-none"
+>
+  Interference Section
+</h2>
+<p class="text-base text-gray-700 md:text-lg sm:px-4">
+  This test measures the eyes for interference inhibition and hyperactivity based on sudden eye movements.
+</p>
+<hr class="w-full my-8 border-gray-300" />
+</div>
+
+</div>
+
+<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
+{% endblock %}

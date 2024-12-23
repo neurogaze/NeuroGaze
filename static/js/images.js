@@ -12,7 +12,20 @@ import {
 // constant for API Key
 const API_KEY = "wxFE-eV4eaT1N27OsKq5N8Kt9riF36G9Dy_KSPZenqQ";
 // value for test time duration in seconds
-const TEST_DURATION = 30;
+function updateTestDuration() {
+  const testSource = localStorage.getItem("testSource");
+
+  if (testSource === "/datacollect") {
+    // If the test came from the confirmation page, update duration to 90 seconds
+    console.log("Test source is confirmation. Setting duration to 90 seconds.");
+    return 90;
+  } else {
+    console.log("Test source is not confirmation. Setting duration to 30 seconds.");
+    return 30;
+  }
+}
+
+const TEST_DURATION = updateTestDuration();
 const DELAY_INTERVAL = [1000, 2000, 4000];
 
 let images = []; // images array

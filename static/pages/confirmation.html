@@ -46,10 +46,15 @@
           confirm: true,
         },
       }).then((isConfirm) => {
+        let testSource = localStorage.getItem("testSource");
+        console.log("In confirmation page: ", testSource);
         if (isConfirm) {
           window.location.href = "/visual-attention"; // go to the test page
-        } else {
-          window.location.href = "/testing"; // go to the test page
+        } else if (testSource === "/testing") {
+          window.location.href = testSource; // go back to the test page
+        } else if (testSource === "/datacollect") {
+          window.location.href = testSource; // go back to the data collection page 
+                                             // if that's where we came from
         }
       });
     }
