@@ -9,8 +9,25 @@ import {
   recalibrate,
 } from "./calibration.js";
 
-// value for test time duration in seconds
-const TEST_DURATION = 30;
+// Function to determine test duration
+function updateTestDuration() {
+  // Retrieve the stored test source from localStorage
+  const testSource = localStorage.getItem("testSource");
+
+  // Log the retrieved value for debugging
+  console.log("Retrieved testSource: ", testSource);
+
+  // Determine test duration based on the stored value
+  if (testSource === "/datacollect") {
+    console.log("Test source is datacollect. Setting duration to 90 seconds.");
+    return 90; // Set duration to 90 seconds for datacollect
+  } else {
+    console.log("Test source is not recognized. Setting duration to 30 seconds.");
+    return 30; // Default duration for other sources
+  }
+}
+
+const TEST_DURATION = updateTestDuration();
 // values of the alphabet
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const DELAY_INTERVAL = [1000, 2000, 4000];

@@ -42,19 +42,30 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const startTestButton = document.getElementById("start-test");
-        startTestButton.addEventListener("click", (event) => {
+      // Store the current page's path (e.g., "/datacollect") in localStorage
+      const currentPagePath = window.location.pathname;
+      localStorage.setItem("testSource", currentPagePath);
+  
+      // Log the stored value for debugging
+      console.log("TestSource Set as Current Page Path: ", currentPagePath);
+  
+      const startTestButton = document.getElementById("start-test");
+  
+      // Debugging log to confirm button exists
+      if (!startTestButton) {
+        console.error("Button with ID 'start-test' not found.");
+        return;
+      }
+      console.log("Start Test Button Found: ", startTestButton);
+  
+      startTestButton.addEventListener("click", (event) => {
         // Prevent default navigation for demonstration purposes
         event.preventDefault();
-
-        // Store the href value in localStorage
-        const hrefValue = startTestButton.getAttribute("href");
-        localStorage.setItem("testSource", hrefValue);
-
+  
         // Redirect to the confirmation page
+        console.log("Redirecting to confirmation page...");
         window.location.href = '/confirmation';
-
-        });
+      });
     });
   </script>
   <div

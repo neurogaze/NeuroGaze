@@ -28,14 +28,45 @@
         </p>
       </div>
       <div class="flex items-center">
+        
         <a
           href="/confirmation"
+          id="start-test"
           class="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-brand-secondary hover:bg-brand-tertiary focus:shadow-outline focus:outline-none"
         >
           Get started
         </a>
       </div>
     </div>
+  </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Store the current page's path (e.g., "/datacollect") in localStorage
+        const currentPagePath = window.location.pathname;
+        localStorage.setItem("testSource", currentPagePath);
+    
+        // Log the stored value for debugging
+        console.log("TestSource Set as Current Page Path: ", currentPagePath);
+    
+        const startTestButton = document.getElementById("start-test");
+    
+        // Debugging log to confirm button exists
+        if (!startTestButton) {
+          console.error("Button with ID 'start-test' not found.");
+          return;
+        }
+        console.log("Start Test Button Found: ", startTestButton);
+    
+        startTestButton.addEventListener("click", (event) => {
+          // Prevent default navigation for demonstration purposes
+          event.preventDefault();
+    
+          // Redirect to the confirmation page
+          console.log("Redirecting to confirmation page...");
+          window.location.href = '/confirmation';
+        });
+      });
+    </script> 
   </div>
   <div
     class="flex justify-center h-full lg:w-2/3 xl:w-1/2 lg:absolute lg:justify-start lg:bottom-0 lg:right-0 lg:items-end shadow-lg rounded"
