@@ -62,7 +62,7 @@ def screening():
     return render_template("screening.html", questions=questions)
 
 @app.route("/passagetest", methods=['GET'])
-def results():
+def passagetest():
     return render_template("passagetest.html")
 
 @app.route("/results", methods=['GET'])

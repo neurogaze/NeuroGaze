@@ -276,8 +276,8 @@ function showPopup() {
   setTimeout(() => {
     popUp.classList.add("hidden");
 
-    let currentGazeData = jsPsych.data.getLastTrialData().values();
-    console.log(currentGazeData.webgazer_data);
+    let allTrials = jsPsych.data;
+    console.log(allTrials);
 
     let lastIndex = currentGazeData.length - 1;
     let lastEntry = currentGazeData[lastIndex];
