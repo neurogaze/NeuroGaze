@@ -1,0 +1,85 @@
+{% extends 'confirmation.html' %}
+{% block body %}
+<div class="flex items-center justify-center bg-white">
+  <div
+    id="book-test-cont"
+    class="font-bold flex items-center justify-center mt-10"
+  >
+    <div class="flex flex-col w-3/4">
+      <h1 class="text-2xl font-bold text-center mb-6">
+        Book Test: Shadow Swimmers
+      </h1>
+
+      <!-- Questions Section -->
+      <form id="bookTestForm">
+        {% for question in questions %}
+        <div class="mb-8" id="question{{loop.index}}">
+          <p class="mb-4 font-medium">
+            {{loop.index}}. {{ question.text }}
+          </p>
+          <ul
+            class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          >
+            {% for option in question.options %}
+            <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+              <div class="flex items-center ps-3">
+                <input
+                  id="question{{loop.parentloop.index}}-{{loop.index}}"
+                  type="radio"
+                  value="{{ option.correct }}"
+                  name="question{{loop.parentloop.index}}"
+                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                />
+                <label
+                  for="question{{loop.parentloop.index}}-{{loop.index}}"
+                  class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  >{{ option.text }}</label
+                >
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+
+        <!-- Submit Button -->
+        <div class="flex justify-center">
+          <button
+            id="submit"
+            type="button"
+            class="px-4 py-2 mb-10 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+
+      <!-- Score Display -->
+      <div id="scoreCont" class="hidden text-center">
+        <h2 class="text-xl font-bold">Your Score</h2>
+        <p id="score" class="text-lg mt-2"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("submit").addEventListener("click", function () {
+      const form = document.getElementById("bookTestForm");
+      const inputs = form.querySelectorAll("input[type='radio']:checked");
+      let score = 0;
+
+      inputs.forEach((input) => {
+        score += parseInt(input.value);
+      });
+
+      const scoreCont = document.getElementById("scoreCont");
+      const scoreText = document.getElementById("score");
+
+      scoreText.textContent = `You scored ${score} out of ${
+        inputs.length * 1
+      }!`;
+      scoreCont.classList.remove("hidden");
+    });
+  </script>
+</div>
+{% endblock %}

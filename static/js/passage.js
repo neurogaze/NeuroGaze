@@ -10,14 +10,33 @@ import {
 } from "./calibration.js";
 
 const API_KEY = "wxFE-eV4eaT1N27OsKq5N8Kt9riF36G9Dy_KSPZenqQ";
-const TEST_DURATION = 30; // value for test time duration in seconds
+// Function to determine test duration
+function updateTestDuration() {
+  // Retrieve the stored test source from localStorage
+  const testSource = localStorage.getItem("testSource");
+
+  // Log the retrieved value for debugging
+  console.log("Retrieved testSource: ", testSource);
+
+  // Determine test duration based on the stored value
+  if (testSource === "/datacollect") {
+    console.log("Test source is datacollect. Setting duration to 90 seconds.");
+    return 90; // Set duration to 90 seconds for datacollect
+  } else {
+    console.log("Test source is not recognized. Setting duration to 30 seconds.");
+    return 30; // Default duration for other sources
+  }
+}
+
+const TEST_DURATION = updateTestDuration();
 const DELAY_INTERVAL = [1000, 2000, 4000];
+const MARGIN_ERROR = 20;
 let HTML; // Store the page's HTML content
 let passages;
 let selectedDifficulty;
 let testSource = localStorage.getItem("testSource");
 let timeline;
-
+let comissionError = 0;
 
 // Initialize jsPsych
 function initJsPsychTimeline() {
@@ -256,6 +275,24 @@ function showPopup() {
 
   setTimeout(() => {
     popUp.classList.add("hidden");
+
+    let currentGazeData = jsPsych.data.getLastTrialData().values();
+    console.log(currentGazeData.webgazer_data);
+
+    let lastIndex = currentGazeData.length - 1;
+    let lastEntry = currentGazeData[lastIndex];
+    console.log(lastEntry);
+
+    let leftBorder = randomPosition.x - MARGIN_ERROR;
+    let rightBorder = randomPosition.x + MARGIN_ERROR;
+    let topBorder = randomPosition.y + MARGIN_ERROR;
+    let bottomBorder = randomPosition.y - MARGIN_ERROR;
+
+    if (lastEntry.x >= leftBorder && lastEntry.x <= rightBorder && lastEntry.y >= bottomBorder && lastEntry.y <= topBorder) {
+      console.log("You looked at the distraction pictures!");
+      ++comissionError;
+    }
+
   }, 1000);
 }
 
@@ -281,6 +318,8 @@ function endTest() {
   testingPhase = false;
 
   let dest, btnText;
+
+  console.log(jsPsych.data.getLastTrialData().values());
 
   if (testSource === '/testing') {
     dest = "screening";

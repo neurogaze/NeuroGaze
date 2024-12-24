@@ -30,7 +30,7 @@ function updateTestDuration() {
 const TEST_DURATION = updateTestDuration();
 // values of the alphabet
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const DELAY_INTERVAL = [1000, 2000, 4000];
+const DELAY_INTERVAL = [1000, 2000, 2500];
 
 let currLetterIndex = 0; // current letter index
 let corPressedKeys = 0; // correct pressed keys
@@ -186,7 +186,7 @@ function showRandomLetter() {
  */
 function checkOmissionError() {
   if (omissionErrorFlag && ALPHABET[currLetterIndex] !== "X") {
-    console.log("omission error");
+    console.log("omission error: spacebar not pressed for non-X letter");
     omissionErrors++;
     incPressedKeys++;
   }
