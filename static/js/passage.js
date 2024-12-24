@@ -8,7 +8,6 @@ import {
   validation,
   recalibrate,
 } from "./calibration.js";
-import { configureTimeline } from "./randomLetters.js";
 
 const API_KEY = "wxFE-eV4eaT1N27OsKq5N8Kt9riF36G9Dy_KSPZenqQ";
 const TEST_DURATION = 30; // value for test time duration in seconds

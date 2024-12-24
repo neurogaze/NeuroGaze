@@ -214,7 +214,15 @@ function generateReport() {
     if (inhibition.eyeTracking) renderEyeTrackingChart('inhibitionEyeTrack', inhibition.eyeTracking);
     if (interference.eyeTracking) renderEyeTrackingChart('interferenceEyeTrack', interference.eyeTracking);
 
-    loadScreeningResults();
+    // Only display screening results if test source is '/testing'
+    let testSourcre = localStorage.getItem("testSource");
+    if (testSourcre === '/testing') {
+        loadScreeningResults();
+    } else {
+        // Removing last section 'Screening Results' if in '/datacollect'
+        let screeningSection = document.getElementById('recommendations');
+        screeningSection.style.display = 'none';
+    }
 }
 
 document.addEventListener('DOMContentLoaded', generateReport);

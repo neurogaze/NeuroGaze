@@ -155,6 +155,10 @@ function showInitialInstructions(done) {
     closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {
+      // Changing background color to black after test starts
+      let wrapper = document.getElementsByClassName('jspsych-content-wrapper')[0];
+      console.log(wrapper);
+      wrapper.style.backgroundColor = 'black';
       done();
     }
   });
