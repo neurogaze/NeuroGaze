@@ -10,7 +10,25 @@ import {
 } from "./calibration.js";
 
 const API_KEY = "wxFE-eV4eaT1N27OsKq5N8Kt9riF36G9Dy_KSPZenqQ";
-const TEST_DURATION = 30; // value for test time duration in seconds
+// Function to determine test duration
+function updateTestDuration() {
+  // Retrieve the stored test source from localStorage
+  const testSource = localStorage.getItem("testSource");
+
+  // Log the retrieved value for debugging
+  console.log("Retrieved testSource: ", testSource);
+
+  // Determine test duration based on the stored value
+  if (testSource === "/datacollect") {
+    console.log("Test source is datacollect. Setting passage test duration to 90 seconds.");
+    return 90; // Set duration to 90 seconds for datacollect
+  } else {
+    console.log("Test source is not recognized. Setting passage test duration to 30 seconds.");
+    return 30; // Default duration for other sources
+  }
+}
+
+const TEST_DURATION = updateTestDuration(); // value for test time duration in seconds
 const DELAY_INTERVAL = [1000, 2000, 4000];
 let HTML; // Store the page's HTML content
 let passages;
