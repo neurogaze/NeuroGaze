@@ -20,10 +20,10 @@ function updateTestDuration() {
 
   // Determine test duration based on the stored value
   if (testSource === "/datacollect") {
-    console.log("Test source is datacollect. Setting duration to 90 seconds.");
+    console.log("Test source is datacollect. Setting passage test duration to 90 seconds.");
     return 90; // Set duration to 90 seconds for datacollect
   } else {
-    console.log("Test source is not recognized. Setting duration to 30 seconds.");
+    console.log("Test source is not recognized. Setting passage test duration to 30 seconds.");
     return 30; // Default duration for other sources
   }
 }
@@ -31,6 +31,7 @@ function updateTestDuration() {
 const TEST_DURATION = updateTestDuration();
 const DELAY_INTERVAL = [2000, 3000, 4000];
 const MARGIN_ERROR = 20;
+
 let HTML; // Store the page's HTML content
 let passages;
 let selectedDifficulty;
