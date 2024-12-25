@@ -150,31 +150,34 @@
 
 <script>
   document.getElementById("submit").addEventListener("click", function () {
-    const form = document.getElementById("bookTestForm");
-    const inputs = form.querySelectorAll("input[type='radio']:checked");
-    let score = 0;
-    const totalQuestions = 5; // Set the total number of questions explicitly
+  const form = document.getElementById("bookTestForm");
+  const inputs = form.querySelectorAll("input[type='radio']:checked");
+  let score = 0;
+  const totalQuestions = 5; // Explicitly set total questions
 
-    // Calculate the score
-    inputs.forEach((input) => {
-      score += parseInt(input.value);
-    });
-
-    // Display the score temporarily
-    const scoreCont = document.getElementById("scoreCont");
-    const scoreText = document.getElementById("score");
-
-    scoreText.textContent = `You scored ${score} out of ${totalQuestions}!`;
-    scoreCont.classList.remove("hidden");
-
-    // Store the score in localStorage
-    localStorage.setItem("testScore", score);
-    localStorage.setItem("totalQuestions", totalQuestions); // Explicitly store the total number of questions
-
-    // Redirect to the Generate Report page
-    setTimeout(() => {
-      window.location.href = "results"; // Replace with your actual results page URL
-    }, 2000); // Delay to show the score before redirecting
+  // Calculate the score
+  inputs.forEach((input) => {
+    score += parseInt(input.value);
   });
+
+  // Store the score in localStorage
+  localStorage.setItem("testScore", score);
+  localStorage.setItem("totalQuestions", totalQuestions);
+
+  // Show SweetAlert popup
+  swal({
+    title: "Testing Completed",
+    text: `You scored ${score} out of ${totalQuestions}!`,
+    icon: "success",
+    button: "Generate Report",
+  }).then((isConfirm) => {
+    if (isConfirm) {
+      // Redirect to the results page
+      window.location.href = "results";
+    }
+  });
+});
 </script>
+
+
 {% endblock %}
