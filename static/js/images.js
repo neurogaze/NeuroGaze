@@ -32,6 +32,8 @@ function updateTestDuration() {
 
 const TEST_DURATION = updateTestDuration();
 const DELAY_INTERVAL = [1000, 2000, 4000];
+const MIN_ROUNDS = TEST_DURATION * 1000 / DELAY_INTERVAL[2]; // Calculating the minimum number of rounds possible
+const randRoundToInsert = Math.floor(Math.random() * MIN_ROUNDS); // Generating random round number to insert selected image
 
 let images = []; // images array
 let randImgIndex; // randomly selected image index
@@ -46,6 +48,7 @@ let reactionTimes = []; // reactionTimes array
 let startTime; // exact time and date when correct image appears
 let avgReactionTime; // average reaction time
 let HTML; // Store the page's HTML content
+let currentRound = 0;
 
 // Initialize jsPsych
 function initJsPsychTimeline() {
@@ -74,6 +77,7 @@ function initJsPsychTimeline() {
       console.log(HTML);
       console.log("Trial started");
       testingPhase = true; // set testingPhase to true
+      console.log("Round to insert selected image: ", randRoundToInsert);
       showRandomImage(); // call random image function
     },
     on_finish: function () {
@@ -190,11 +194,22 @@ async function startingTestInstructions(done) {
  */
 function showRandomImage() {
   if (!testingPhase) return;
+
+  ++currentRound;
+  console.log("Current round: ", currentRound);
   omissionErrorFlag = true;
   startTime = Date.now();
   let currentImage = document.getElementById("currentImg");
-  currImgIndex = Math.floor(Math.random() * images.length); // random current index
-  currentImage.src = images[currImgIndex]; // set currentImage.src to random current index inside images array
+
+  // Manually insert selected image instead if 
+  // current round matches randomly selected round
+  if (currentRound === randRoundToInsert) {
+    currImgIndex = randImgIndex;
+  } else {
+    currImgIndex = Math.floor(Math.random() * images.length); // random current index
+  }
+  currentImage.src = images[currImgIndex]; // set currentImage.src to random current index inside images array  
+
 
   let delay = DELAY_INTERVAL[Math.floor(Math.random() * 3)];
 

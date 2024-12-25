@@ -31,6 +31,8 @@ const TEST_DURATION = updateTestDuration();
 // values of the alphabet
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const DELAY_INTERVAL = [1000, 2000, 2500];
+const MIN_ROUNDS = TEST_DURATION * 1000 / DELAY_INTERVAL[2]; // Calculating the minimum number of rounds possible
+const randRoundToInsert = Math.floor(Math.random() * MIN_ROUNDS); // Generating random round number to insert letter X
 
 let currLetterIndex = 0; // current letter index
 let corPressedKeys = 0; // correct pressed keys
@@ -44,6 +46,7 @@ let startTime; // exact time and date when correct image appears
 let avgReactionTime; // average reaction time
 let HTML; // Store the page's HTML content
 let timeline; // Stores the timeline for the trial
+let currountRound = 0;
 let testSource = localStorage.getItem("testSource"); // Retrieving testSource from local storage
 
 // Initialize jsPsych
@@ -73,6 +76,7 @@ function initJsPsychTimeline() {
       console.log(HTML);
       console.log("Trial started");
       testingPhase = true; // set testingPhase to true
+      console.log("Round to insert letter X: ", randRoundToInsert);
       showRandomLetter(); // call random image function
     },
     on_finish: function () {
@@ -169,7 +173,15 @@ function showInitialInstructions(done) {
  */
 function showRandomLetter() {
   if (!testingPhase) return;
-  currLetterIndex = Math.floor(Math.random() * 26); // random current index
+
+  ++currountRound;
+  console.log("Current round: ", currountRound);
+  
+  if (currountRound === randRoundToInsert) {
+    currLetterIndex = 23; // manually setting the current index to be the index of letter X
+  } else {
+    currLetterIndex = Math.floor(Math.random() * 26); // random current index
+  }
 
   startTime = Date.now();
   let currentLetter = document.getElementById("currentLetter");

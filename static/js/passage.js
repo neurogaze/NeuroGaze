@@ -77,7 +77,7 @@ function initJsPsychTimeline() {
         "interference-eyeTracking",
         JSON.stringify(trial_json)
       );
-      comissionErrorCheck();
+      checkCommissionError();
       endTest();
     },
     trial_duration: TEST_DURATION * 1000,
@@ -306,8 +306,20 @@ function generateRandomPosition() {
   const maxY = windowHeight - 200;
   const maxX = windowWidth - 200;
 
+  
+  // Ensuring that pop up image doesn't appear directly behind the passage
+  let center = windowWidth / 2;
+  let passageLeft = center - (center / 2) - 100;
+  let passageRight = center + (center / 2);
+
+  let x;
+
+  do {
+    x = Math.floor(Math.random() * maxX);
+  } while (x >= passageLeft && x <= passageRight);
+
   const randomY = Math.floor(Math.random() * maxY);
-  const randomX = Math.floor(Math.random() * maxX);
+  const randomX = x;
 
   return { x: randomX, y: randomY };
 }
@@ -315,14 +327,17 @@ function generateRandomPosition() {
 /*
  * Checks for comission error by comparing gaze data to the images' bounding box
  */
-function comissionErrorCheck() {
+function checkCommissionError() {
   let gazeData = jsPsych.data.getLastTrialData().values()[0].webgazer_data;
 
 
   // Going through each pop up image to complete comparison
   for (let popUpImage of images) {
     let gazeMatches = gazeData.filter((data) => {
-      return data.x >= popUpImage.left && data.x <= popUpImage.right && data.y >= popUpImage.top && data.y <= popUpImage.bottom;
+      return data.x >= popUpImage.left 
+          && data.x <= popUpImage.right 
+          && data.y >= popUpImage.top 
+          && data.y <= popUpImage.bottom;
     })
 
     console.log("Printing gaze matches: ", gazeMatches);
