@@ -236,11 +236,7 @@ async function startingTest(selectedDifficulty) {
 
   console.log(selectedDifficulty);
 
-  let box = document.getElementById('passageCont').getBoundingClientRect(); 
 
-  console.log(box);
-  console.log(box.width);
-  console.log(box.height);
 
   popUps = await fetchImageURLs(); // Set the images to the popUps array
   const filteredpassages = passages.filter(
@@ -283,13 +279,16 @@ function startPopupLoop() {
 }
 
 // WebGazer Listener to update gaze data
-if (window.webgazer) {
-  webgazer.setGazeListener((data, elapsedTime) => {
-    if (data) {
-      currentGazeData.push({ x: data.x, y: data.y }); // Add gaze coordinates
-    }
-  }).begin();
-}
+// if (window.webgazer) {
+//   webgazer.setGazeListener((data, elapsedTime) => {
+//     if (data) {
+//       currentGazeData.push({ x: data.x, y: data.y }); // Add gaze coordinates
+//     }
+//   }).begin();
+
+// }
+
+
 /**
  * Show the pop-up distractions
  */
