@@ -30,15 +30,13 @@ function updateTestDuration() {
 
 const TEST_DURATION = updateTestDuration();
 const DELAY_INTERVAL = [2000, 3000, 4000];
-const MARGIN_ERROR = 20;
 
 let HTML; // Store the page's HTML content
 let passages;
 let selectedDifficulty;
 let testSource = localStorage.getItem("testSource");
 let timeline;
-let comissionError = 0;
-let images = [];
+let comissionErrors = 0;
 let currentGazeData = []; // Initialize gaze data
 
 
@@ -103,7 +101,6 @@ function initJsPsychTimeline() {
         trialInstructions,
         trial
       ] : [
-        init_camera,
         trialInstructions,
         trial
       ];
@@ -170,6 +167,13 @@ async function fetchImageURLs() {
  * Show the instruction at the start up screen.
  */
 function showInitialInstructions(done) {
+
+  // Adding WebGazer listener to update gaze data
+  // Also initializes camera
+  webgazer.setGazeListener((data) => {
+    currentGazeData.push({x : data.x, y : data.y});
+  }).begin();
+
   swal({
     title: "Interference Test",
     text: "In this test, you will be shown a passage of text. You will be asked to read the passage carefully.\
@@ -236,12 +240,6 @@ async function startingTest(selectedDifficulty) {
 
   console.log(selectedDifficulty);
 
-  let box = document.getElementById('passageCont').getBoundingClientRect(); 
-
-  console.log(box);
-  console.log(box.width);
-  console.log(box.height);
-
   popUps = await fetchImageURLs(); // Set the images to the popUps array
   const filteredpassages = passages.filter(
     (passage) => passage.difficulty === selectedDifficulty
@@ -267,12 +265,6 @@ function startPopupLoop() {
     // Show the pop-up
     showPopup();
 
-    // Hide the pop-up after 250ms
-    setTimeout(() => {
-      const popUp = document.getElementById("popUp");
-      popUp.classList.add("hidden");
-    }, 1000);
-
     // Schedule the next pop-up after a random delay (1, 2, or 4 seconds)
     const delay = DELAY_INTERVAL[Math.floor(Math.random() * DELAY_INTERVAL.length)];
     setTimeout(showAndScheduleNextPopup, delay);
@@ -282,14 +274,7 @@ function startPopupLoop() {
   showAndScheduleNextPopup();
 }
 
-// WebGazer Listener to update gaze data
-if (window.webgazer) {
-  webgazer.setGazeListener((data, elapsedTime) => {
-    if (data) {
-      currentGazeData.push({ x: data.x, y: data.y }); // Add gaze coordinates
-    }
-  }).begin();
-}
+
 /**
  * Show the pop-up distractions
  */
@@ -310,12 +295,15 @@ function showPopup() {
   popUp.style.left = `${randomPosition.x}px`;
   popUp.classList.remove("hidden");
 
-  // checkCommissionError(randomPosition, randomSize);
 
+  // Hide the pop-up after 250ms
   setTimeout(() => {
     popUp.classList.add("hidden");
-    console.log("Current commission error: ", comissionError);
+    checkCommissionError(randomPosition, randomSize);
+
+    console.log("Current commission error: ", comissionErrors);
   }, 1000);
+
 }
 
 /**
@@ -333,8 +321,10 @@ function generateRandomPosition() {
   let passageLeft = center - (center / 2) - 100;
   let passageRight = center + (center / 2);
 
-  let x;
+  let x = 0; // randomly generated x position
 
+  // Continuously generating new x position 
+  // if the x position overlaps with passage area
   do {
     x = Math.floor(Math.random() * maxX);
   } while (x >= passageLeft && x <= passageRight);
@@ -359,17 +349,19 @@ function checkCommissionError(randomPosition, randomSize) {
     right: imageX + randomSize,
   };
 
-  // Retrieving last gaze data detected
-  let lastGaze = currentGazeData.pop();
-  console.log("Last recorded gaze: ", lastGaze);
-  if (lastGaze.x >= imageBoundingBox.left && 
-      lastGaze.x <= imageBoundingBox.right && 
-      lastGaze.y >= imageBoundingBox.top &&
-      lastGaze.y <= imageBoundingBox.bottom) {
-    ++comissionError;
-  }
+  // Filtering through all gaze data collected since last image
+  // and retrieving ones that are within the bounding box of current image
 
-  localStorage.setItem("interference-comissionErrors", comissionError);
+  let gazeMatches = currentGazeData.filter((gazeData) => {
+      return gazeData.x >= imageBoundingBox.left && 
+             gazeData.x <= imageBoundingBox.right && 
+             gazeData.y >= imageBoundingBox.top &&
+             gazeData.y <= imageBoundingBox.bottom
+    }
+  )
+
+  comissionErrors += gazeMatches.length;
+  currentGazeData = [];
 }
 
 
@@ -390,12 +382,12 @@ function endTest() {
     btnText = "Take Test";
   }
 
-  // Retrieve and display commission error count
-  const storedErrors = localStorage.getItem("commissionErrors") || 0;
+  // Saving calculated commission error for this task to local storage
+  localStorage.setItem("interference-comissionErrors", comissionErrors);
 
   swal({
     title: "Testing Completed",
-    text: `You had ${storedErrors} commission errors.`,
+    text: `You had ${comissionErrors} commission errors.`,
     icon: "success",
     button: btnText,
   }).then((isConfirm) => {
