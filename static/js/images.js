@@ -123,6 +123,11 @@ async function fetchImageURLs() {
  * Show the instruction at the start up screen.
  */
 function showCalibrationInstructions() {
+  const imgCont = document.getElementById("imgCont");
+  if (imgCont) {
+    imgCont.style.background = "none"; // Removes the background
+  }
+  
   HTML = document.getElementById("imgCont").outerHTML;
   console.log(HTML);
 
