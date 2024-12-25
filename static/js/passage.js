@@ -20,17 +20,18 @@ function updateTestDuration() {
 
   // Determine test duration based on the stored value
   if (testSource === "/datacollect") {
-    console.log("Test source is datacollect. Setting duration to 90 seconds.");
+    console.log("Test source is datacollect. Setting passage test duration to 90 seconds.");
     return 90; // Set duration to 90 seconds for datacollect
   } else {
-    console.log("Test source is not recognized. Setting duration to 30 seconds.");
+    console.log("Test source is not recognized. Setting passage test duration to 30 seconds.");
     return 30; // Default duration for other sources
   }
 }
 
 const TEST_DURATION = updateTestDuration();
-const DELAY_INTERVAL = [1000, 2000, 4000];
+const DELAY_INTERVAL = [2000, 3000, 4000];
 const MARGIN_ERROR = 20;
+
 let HTML; // Store the page's HTML content
 let passages;
 let selectedDifficulty;
@@ -251,34 +252,60 @@ async function startingTest(selectedDifficulty) {
 }
 
 /**
- * Start pop=up distraction loop
+ * Start pop-up distraction loop
  */
 function startPopupLoop() {
   if (!testingPhase) return;
-  let delay = DELAY_INTERVAL[Math.floor(Math.random() * 3)];
 
-  distractionInterval = setInterval(() => {
+  // Show a pop-up for 250ms, then schedule the next pop-up
+  const showAndScheduleNextPopup = () => {
+    if (!testingPhase) return;
+
+    // Show the pop-up
     showPopup();
-  }, 250 + delay);
-}
 
+    // Hide the pop-up after 250ms
+    setTimeout(() => {
+      const popUp = document.getElementById("popUp");
+      popUp.classList.add("hidden");
+    }, 1000);
+
+    // Schedule the next pop-up after a random delay (1, 2, or 4 seconds)
+    const delay = DELAY_INTERVAL[Math.floor(Math.random() * DELAY_INTERVAL.length)];
+    setTimeout(showAndScheduleNextPopup, delay);
+  };
+
+  // Start the first pop-up
+  showAndScheduleNextPopup();
+}
+let currentGazeData = []; // Initialize gaze data
+
+// WebGazer Listener to update gaze data
+if (window.webgazer) {
+  webgazer.setGazeListener((data, elapsedTime) => {
+    if (data) {
+      currentGazeData.push({ x: data.x, y: data.y }); // Add gaze coordinates
+    }
+  }).begin();
+}
 /**
  * Show the pop-up distractions
  */
 function showPopup() {
   const popUp = document.getElementById("popUp");
-  const randomSize = Math.floor(Math.random() * 100 + 200); // Generate size anywhere from 200px - 300px;
+  const randomSize = Math.floor(Math.random() * 100 + 200); // Generate size from 200px - 300px
   const randomPosition = generateRandomPosition();
-  console.log(randomPosition);
+  console.log("Pop-up position: ", randomPosition);
 
   // Randomly select an image from the popUps array
-  let randomImgIndex = Math.floor(Math.random() * popUps.length);
+  const randomImgIndex = Math.floor(Math.random() * popUps.length);
 
+  // Update pop-up properties
   popUp.src = popUps[randomImgIndex];
-  popUp.style.width = randomSize.toString() + "px";
-  popUp.style.height = randomSize.toString() + "px";
-  popUp.style.top = randomPosition.y.toString() + "px";
-  popUp.style.left = randomPosition.x.toString() + "px";
+  popUp.style.width = `${randomSize}px`;
+  popUp.style.height = `${randomSize}px`;
+  popUp.style.top = `${randomPosition.y}px`;
+  popUp.style.left = `${randomPosition.x}px`;
   popUp.classList.remove("hidden");
 
   // Storing the bounding box for the pop up images
@@ -365,8 +392,12 @@ function endTest() {
     btnText = "Generate Report";
   }
 
+  // Retrieve and display commission error count
+  const storedErrors = localStorage.getItem("commissionErrors") || 0;
+
   swal({
     title: "Testing Completed",
+    text: `You had ${storedErrors} commission errors.`,
     icon: "success",
     button: btnText,
   }).then((isConfirm) => {
