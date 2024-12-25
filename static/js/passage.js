@@ -37,6 +37,7 @@ let selectedDifficulty;
 let testSource = localStorage.getItem("testSource");
 let timeline;
 let comissionError = 0;
+let images = [];
 
 // Initialize jsPsych
 function initJsPsychTimeline() {
@@ -76,6 +77,7 @@ function initJsPsychTimeline() {
         "interference-eyeTracking",
         JSON.stringify(trial_json)
       );
+      comissionErrorCheck();
       endTest();
     },
     trial_duration: TEST_DURATION * 1000,
@@ -230,6 +232,12 @@ async function startingTest(selectedDifficulty) {
 
   console.log(selectedDifficulty);
 
+  let box = document.getElementById('passageCont').getBoundingClientRect(); 
+
+  console.log(box);
+  console.log(box.width);
+  console.log(box.height);
+
   popUps = await fetchImageURLs(); // Set the images to the popUps array
   const filteredpassages = passages.filter(
     (passage) => passage.difficulty === selectedDifficulty
@@ -273,26 +281,19 @@ function showPopup() {
   popUp.style.left = randomPosition.x.toString() + "px";
   popUp.classList.remove("hidden");
 
+  // Storing the bounding box for the pop up images
+  let imageX = randomPosition.x;
+  let imageY = randomPosition.y;
+
+  images.push({
+    top: imageY,
+    bottom: imageY + randomSize,
+    left: imageX,
+    right: imageX + randomSize,
+  })
+
   setTimeout(() => {
     popUp.classList.add("hidden");
-
-    let allTrials = jsPsych.data;
-    console.log(allTrials);
-
-    let lastIndex = currentGazeData.length - 1;
-    let lastEntry = currentGazeData[lastIndex];
-    console.log(lastEntry);
-
-    let leftBorder = randomPosition.x - MARGIN_ERROR;
-    let rightBorder = randomPosition.x + MARGIN_ERROR;
-    let topBorder = randomPosition.y + MARGIN_ERROR;
-    let bottomBorder = randomPosition.y - MARGIN_ERROR;
-
-    if (lastEntry.x >= leftBorder && lastEntry.x <= rightBorder && lastEntry.y >= bottomBorder && lastEntry.y <= topBorder) {
-      console.log("You looked at the distraction pictures!");
-      ++comissionError;
-    }
-
   }, 1000);
 }
 
@@ -311,15 +312,35 @@ function generateRandomPosition() {
   return { x: randomX, y: randomY };
 }
 
+/*
+ * Checks for comission error by comparing gaze data to the images' bounding box
+ */
+function comissionErrorCheck() {
+  let gazeData = jsPsych.data.getLastTrialData().values()[0].webgazer_data;
+
+
+  // Going through each pop up image to complete comparison
+  for (let popUpImage of images) {
+    let gazeMatches = gazeData.filter((data) => {
+      return data.x >= popUpImage.left && data.x <= popUpImage.right && data.y >= popUpImage.top && data.y <= popUpImage.bottom;
+    })
+
+    console.log("Printing gaze matches: ", gazeMatches);
+
+    comissionError += gazeMatches.length;
+  }
+  
+  console.log(comissionError);
+  localStorage.setItem("interference-comissionErrors", comissionError);
+}
+
+
 /**
  * Ends the test
  */
 function endTest() {
-  testingPhase = false;
-
   let dest, btnText;
-
-  console.log(jsPsych.data.getLastTrialData().values());
+  testingPhase = false;
 
   if (testSource === '/testing') {
     dest = "screening";

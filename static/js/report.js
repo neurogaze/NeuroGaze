@@ -128,6 +128,14 @@ function renderMetricsTable(tableId, data) {
     `;
 }
 
+// Render metrics table for Interference Test
+function renderInterferenceTable(tableId, data) {
+    const table = document.getElementById(tableId);
+    table.innerHTML = `
+        ${createTableRow("Commission Errors", data.commissions, "", data.commissions > 5 ? "High" : "Low")}
+    `;
+}
+
 // Process screening data
 function loadScreeningResults() {
     const recommendationContent = document.getElementById("recommendationContent");
@@ -200,6 +208,7 @@ function generateReport() {
     };
 
     const interference = {
+        commissions: Number(localStorage.getItem('interference-comissionErrors') || 0),
         eyeTracking: processEyeTrackingData(localStorage.getItem('interference-eyeTracking'))
     };
 
@@ -208,6 +217,8 @@ function generateReport() {
     // Render tables
     renderMetricsTable('attentionMetrics', attention);
     renderMetricsTable('inhibitionMetrics', inhibition);
+    renderInterferenceTable('interferenceMetrics', interference);
+
 
     // Render eye tracking charts (assuming you've implemented renderEyeTrackingChart)
     if (attention.eyeTracking) renderEyeTrackingChart('attentionEyeTrack', attention.eyeTracking);
