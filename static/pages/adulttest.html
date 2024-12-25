@@ -1,0 +1,170 @@
+{% extends 'confirmation.html' %}
+{% block body %}
+<script>
+  const selectedDifficulty = localStorage.getItem("selectedDifficulty");
+  console.log(selectedDifficulty)
+  if (selectedDifficulty !== "teen") {
+    console.log("Starting teen test.");
+    window.location.href = "/";
+  }
+</script>
+<div class="flex items-center justify-center bg-white">
+  <div
+    id="book-test-cont"
+    class="font-bold flex items-center justify-center mt-10"
+  >
+    <div class="flex flex-col w-3/4">
+      <h1 class="text-2xl font-bold text-center mb-6">
+        Book Test: Shadow Swimmers (Adult)
+      </h1>
+
+      <!-- Questions Section -->
+      <form id="bookTestForm">
+  
+<!-- Dummy Question 1 -->
+<div class="mb-8" id="question1">
+  <p class="mb-4 font-medium">
+    1. ###
+  </p>
+  <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+    <li class="w-full border-b border-gray-200 dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question1-1" type="radio" value="0" name="question1" class="w-4 h-4" />
+        <label for="question1-1" class="w-full py-3 ms-2">Decoration</label>
+      </div>
+    </li>
+    <li class="w-full border-b border-gray-200 dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question1-2" type="radio" value="1" name="question1" class="w-4 h-4" />
+        <label for="question1-2" class="w-full py-3 ms-2">Hunting and communication</label>
+      </div>
+    </li>
+    <li class="w-full dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question1-3" type="radio" value="0" name="question1" class="w-4 h-4" />
+        <label for="question1-3" class="w-full py-3 ms-2">Attracting predators</label>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Dummy Question 2 -->
+<div class="mb-8" id="question2">
+  <p class="mb-4 font-medium">
+    2. ###
+  </p>
+  <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+    <li class="w-full border-b border-gray-200 dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question2-1" type="radio" value="0" name="question2" class="w-4 h-4" />
+        <label for="question2-1" class="w-full py-3 ms-2">Decoration</label>
+      </div>
+    </li>
+    <li class="w-full border-b border-gray-200 dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question2-2" type="radio" value="1" name="question2" class="w-4 h-4" />
+        <label for="question2-2" class="w-full py-3 ms-2">Hunting and communication</label>
+      </div>
+    </li>
+    <li class="w-full dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question2-3" type="radio" value="0" name="question2" class="w-4 h-4" />
+        <label for="question2-3" class="w-full py-3 ms-2">Attracting predators</label>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Dummy Question 3 -->
+<div class="mb-8" id="question3">
+  <p class="mb-4 font-medium">
+    3. ###
+  </p>
+  <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+    <li class="w-full border-b border-gray-200 dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question3-1" type="radio" value="0" name="question3" class="w-4 h-4" />
+        <label for="question3-1" class="w-full py-3 ms-2">Decoration</label>
+      </div>
+    </li>
+    <li class="w-full border-b border-gray-200 dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question3-2" type="radio" value="1" name="question3" class="w-4 h-4" />
+        <label for="question3-2" class="w-full py-3 ms-2">Hunting and communication</label>
+      </div>
+    </li>
+    <li class="w-full dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question3-3" type="radio" value="0" name="question3" class="w-4 h-4" />
+        <label for="question3-3" class="w-full py-3 ms-2">Attracting predators</label>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Dummy Question 4 -->
+<div class="mb-8" id="question3">
+  <p class="mb-4 font-medium">
+    4. ###
+  </p>
+  <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+    <li class="w-full border-b border-gray-200 dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question4-1" type="radio" value="0" name="question4" class="w-4 h-4" />
+        <label for="question4-1" class="w-full py-3 ms-2">Decoration</label>
+      </div>
+    </li>
+    <li class="w-full border-b border-gray-200 dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question4-2" type="radio" value="1" name="question4" class="w-4 h-4" />
+        <label for="question4-2" class="w-full py-3 ms-2">Hunting and communication</label>
+      </div>
+    </li>
+    <li class="w-full dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question4-3" type="radio" value="0" name="question4" class="w-4 h-4" />
+        <label for="question4-3" class="w-full py-3 ms-2">Attracting predators</label>
+      </div>
+    </li>
+  </ul>
+</div>
+<!-- Continue similar changes for other questions -->
+
+<!-- Submit Button -->
+<div class="flex justify-center">
+  <button
+    id="submit"
+    type="button"
+    class="px-4 py-2 mb-10 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+  >
+    Submit
+  </button>
+</div>
+</form>
+
+<!-- Score Display -->
+<div id="scoreCont" class="hidden text-center">
+  <h2 class="text-xl font-bold">Your Score</h2>
+  <p id="score" class="text-lg mt-2"></p>
+</div>
+</div>
+</div>
+
+<script>
+  document.getElementById("submit").addEventListener("click", function () {
+    const form = document.getElementById("bookTestForm");
+    const inputs = form.querySelectorAll("input[type='radio']:checked");
+    let score = 0;
+
+    inputs.forEach((input) => {
+      score += parseInt(input.value);
+    });
+
+    const scoreCont = document.getElementById("scoreCont");
+    const scoreText = document.getElementById("score");
+
+    scoreText.textContent = `You scored ${score} out of ${inputs.length}!`;
+    scoreCont.classList.remove("hidden");
+  });
+</script>
+{% endblock %}

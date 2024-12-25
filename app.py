@@ -65,6 +65,18 @@ def screening():
 def passagetest():
     return render_template("passagetest.html")
 
+@app.route("/childtest", methods=['GET'])
+def childtest():
+    return render_template("childtest.html")
+
+@app.route("/teentest", methods=['GET'])
+def teentest():
+    return render_template("teentest.html")
+
+@app.route("/adulttest", methods=['GET'])
+def adulttest():
+    return render_template("adulttest.html")
+
 @app.route("/results", methods=['GET'])
 def results():
     return render_template("results.html")

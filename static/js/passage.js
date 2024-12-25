@@ -39,6 +39,8 @@ let testSource = localStorage.getItem("testSource");
 let timeline;
 let comissionError = 0;
 let images = [];
+let currentGazeData = []; // Initialize gaze data
+
 
 // Initialize jsPsych
 function initJsPsychTimeline() {
@@ -78,7 +80,6 @@ function initJsPsychTimeline() {
         "interference-eyeTracking",
         JSON.stringify(trial_json)
       );
-      checkCommissionError();
       endTest();
     },
     trial_duration: TEST_DURATION * 1000,
@@ -206,6 +207,7 @@ function selectDifficulty(done) {
 
   select.onchange = function (e) {
     selectedDifficulty = e.target.value;
+    localStorage.setItem("selectedDifficulty", selectedDifficulty); // Store selected difficulty in localStorage
   };
 
   swal({
@@ -220,6 +222,7 @@ function selectDifficulty(done) {
     closeOnClickOutside: false,
   }).then((isConfirm) => {
     if (isConfirm) {
+      localStorage.setItem("selectedDifficulty", selectedDifficulty); // Save again when user confirms
       done();
     }
   });
@@ -278,7 +281,6 @@ function startPopupLoop() {
   // Start the first pop-up
   showAndScheduleNextPopup();
 }
-let currentGazeData = []; // Initialize gaze data
 
 // WebGazer Listener to update gaze data
 if (window.webgazer) {
@@ -308,19 +310,11 @@ function showPopup() {
   popUp.style.left = `${randomPosition.x}px`;
   popUp.classList.remove("hidden");
 
-  // Storing the bounding box for the pop up images
-  let imageX = randomPosition.x;
-  let imageY = randomPosition.y;
-
-  images.push({
-    top: imageY,
-    bottom: imageY + randomSize,
-    left: imageX,
-    right: imageX + randomSize,
-  })
+  // checkCommissionError(randomPosition, randomSize);
 
   setTimeout(() => {
     popUp.classList.add("hidden");
+    console.log("Current commission error: ", comissionError);
   }, 1000);
 }
 
@@ -354,25 +348,27 @@ function generateRandomPosition() {
 /*
  * Checks for comission error by comparing gaze data to the images' bounding box
  */
-function checkCommissionError() {
-  let gazeData = jsPsych.data.getLastTrialData().values()[0].webgazer_data;
+function checkCommissionError(randomPosition, randomSize) {
+  // Storing the bounding box for the pop up images
+  let imageX = randomPosition.x;
+  let imageY = randomPosition.y;
+  const imageBoundingBox = {
+    top: imageY,
+    bottom: imageY + randomSize,
+    left: imageX,
+    right: imageX + randomSize,
+  };
 
-
-  // Going through each pop up image to complete comparison
-  for (let popUpImage of images) {
-    let gazeMatches = gazeData.filter((data) => {
-      return data.x >= popUpImage.left 
-          && data.x <= popUpImage.right 
-          && data.y >= popUpImage.top 
-          && data.y <= popUpImage.bottom;
-    })
-
-    console.log("Printing gaze matches: ", gazeMatches);
-
-    comissionError += gazeMatches.length;
+  // Retrieving last gaze data detected
+  let lastGaze = currentGazeData.pop();
+  console.log("Last recorded gaze: ", lastGaze);
+  if (lastGaze.x >= imageBoundingBox.left && 
+      lastGaze.x <= imageBoundingBox.right && 
+      lastGaze.y >= imageBoundingBox.top &&
+      lastGaze.y <= imageBoundingBox.bottom) {
+    ++comissionError;
   }
-  
-  console.log(comissionError);
+
   localStorage.setItem("interference-comissionErrors", comissionError);
 }
 
@@ -387,9 +383,11 @@ function endTest() {
   if (testSource === '/testing') {
     dest = "screening";
     btnText = "Start Screening Test";
-  } else {
-    dest = "results";
-    btnText = "Generate Report";
+  } 
+  
+  else if (testSource === '/datacollect') {
+    dest = "passagetest";
+    btnText = "Take Test";
   }
 
   // Retrieve and display commission error count
