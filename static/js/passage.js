@@ -239,7 +239,7 @@ async function startingTest(selectedDifficulty) {
   if (!testingPhase) return;
 
   console.log(selectedDifficulty);
-
+  
   popUps = await fetchImageURLs(); // Set the images to the popUps array
   const filteredpassages = passages.filter(
     (passage) => passage.difficulty === selectedDifficulty
@@ -273,7 +273,6 @@ function startPopupLoop() {
   // Start the first pop-up
   showAndScheduleNextPopup();
 }
-
 
 /**
  * Show the pop-up distractions

@@ -125,14 +125,20 @@ function renderMetricsTable(tableId, data) {
         ${createTableRow("Test Score", data.score, "%", data.score > 75 ? "Regular Performance" : "Variable Performance")}
         ${createTableRow("Omission Errors", data.omissions, "", data.omissions > 5 ? "High" : "Low")}
         ${createTableRow("Commission Errors", data.commissions, "", data.commissions > 5 ? "High" : "Low")}
+        
     `;
 }
 
 // Render metrics table for Interference Test
 function renderInterferenceTable(tableId, data) {
     const table = document.getElementById(tableId);
+
+    // Use data.testscore to display the test score
+    const scoreFraction = `${data.testscore}/${data.totalQuestions}`; // Format the score as "3/5"
+
     table.innerHTML = `
-        ${createTableRow("Commission Errors", data.commissions, "", data.commissions > 5 ? "High" : "Low")}
+        ${createTableRow("Commission Errors", data.commissions, "")}
+        ${createTableRow("Test Score", data.testscore, `/ ${data.totalQuestions}`, "")}
     `;
 }
 
@@ -209,6 +215,8 @@ function generateReport() {
 
     const interference = {
         commissions: Number(localStorage.getItem('interference-comissionErrors') || 0),
+        testscore: Number(localStorage.getItem("testScore")),
+        totalQuestions: Number(localStorage.getItem('totalQuestions') || 5),
         eyeTracking: processEyeTrackingData(localStorage.getItem('interference-eyeTracking'))
     };
 
