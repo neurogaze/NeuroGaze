@@ -3,8 +3,8 @@
 <script>
   const selectedDifficulty = localStorage.getItem("selectedDifficulty");
   console.log(selectedDifficulty)
-  if (selectedDifficulty !== "teen") {
-    console.log("Starting teen test.");
+  if (selectedDifficulty !== "adult") {
+    console.log("Starting adult test.");
     window.location.href = "/";
   }
 </script>
@@ -15,7 +15,7 @@
   >
     <div class="flex flex-col w-3/4">
       <h1 class="text-2xl font-bold text-center mb-6">
-        Book Test: Shadow Swimmers (Adult)
+        Book Test: Finding Balance in the Fast Lane
       </h1>
 
       <!-- Questions Section -->
@@ -24,25 +24,31 @@
 <!-- Dummy Question 1 -->
 <div class="mb-8" id="question1">
   <p class="mb-4 font-medium">
-    1. ###
+    1. What job does John have?
   </p>
   <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
     <li class="w-full border-b border-gray-200 dark:border-gray-600">
       <div class="flex items-center ps-3">
         <input id="question1-1" type="radio" value="0" name="question1" class="w-4 h-4" />
-        <label for="question1-1" class="w-full py-3 ms-2">Decoration</label>
+        <label for="question1-1" class="w-full py-3 ms-2">Teacher</label>
       </div>
     </li>
     <li class="w-full border-b border-gray-200 dark:border-gray-600">
       <div class="flex items-center ps-3">
         <input id="question1-2" type="radio" value="1" name="question1" class="w-4 h-4" />
-        <label for="question1-2" class="w-full py-3 ms-2">Hunting and communication</label>
+        <label for="question1-2" class="w-full py-3 ms-2">Financial Analyst</label>
+      </div>
+    </li>
+    <li class="w-full border-b border-gray-200 dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question1-3" type="radio" value="0" name="question1" class="w-4 h-4" />
+        <label for="question1-3" class="w-full py-3 ms-2">Economist</label>
       </div>
     </li>
     <li class="w-full dark:border-gray-600">
       <div class="flex items-center ps-3">
-        <input id="question1-3" type="radio" value="0" name="question1" class="w-4 h-4" />
-        <label for="question1-3" class="w-full py-3 ms-2">Attracting predators</label>
+        <input id="question1-4" type="radio" value="0" name="question1" class="w-4 h-4" />
+        <label for="question1-4" class="w-full py-3 ms-2">Data Science Analyst</label>
       </div>
     </li>
   </ul>
@@ -51,25 +57,31 @@
 <!-- Dummy Question 2 -->
 <div class="mb-8" id="question2">
   <p class="mb-4 font-medium">
-    2. ###
+    2. What initially motivated John to start running in Central Park?
   </p>
   <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
     <li class="w-full border-b border-gray-200 dark:border-gray-600">
       <div class="flex items-center ps-3">
         <input id="question2-1" type="radio" value="0" name="question2" class="w-4 h-4" />
-        <label for="question2-1" class="w-full py-3 ms-2">Decoration</label>
+        <label for="question2-1" class="w-full py-3 ms-2">He wanted to train for a marathon.</label>
       </div>
     </li>
     <li class="w-full border-b border-gray-200 dark:border-gray-600">
       <div class="flex items-center ps-3">
-        <input id="question2-2" type="radio" value="1" name="question2" class="w-4 h-4" />
-        <label for="question2-2" class="w-full py-3 ms-2">Hunting and communication</label>
+        <input id="question2-2" type="radio" value="0" name="question2" class="w-4 h-4" />
+        <label for="question2-2" class="w-full py-3 ms-2">His doctor advised him to improve his fitness.</label>
       </div>
     </li>
     <li class="w-full dark:border-gray-600">
       <div class="flex items-center ps-3">
-        <input id="question2-3" type="radio" value="0" name="question2" class="w-4 h-4" />
-        <label for="question2-3" class="w-full py-3 ms-2">Attracting predators</label>
+        <input id="question2-3" type="radio" value="1" name="question2" class="w-4 h-4" />
+        <label for="question2-3" class="w-full py-3 ms-2">He needed a way to relax after stressful workdays.</label>
+      </div>
+    </li>
+    <li class="w-full border-b border-gray-200 dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question2-4" type="radio" value="1" name="question2" class="w-4 h-4" />
+        <label for="question2-4" class="w-full py-3 ms-2">He was inspired by a friend who also ran.</label>
       </div>
     </li>
   </ul>
@@ -78,25 +90,31 @@
 <!-- Dummy Question 3 -->
 <div class="mb-8" id="question3">
   <p class="mb-4 font-medium">
-    3. ###
+    3. How did running change John’s perspective on his life?
   </p>
   <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
     <li class="w-full border-b border-gray-200 dark:border-gray-600">
       <div class="flex items-center ps-3">
         <input id="question3-1" type="radio" value="0" name="question3" class="w-4 h-4" />
-        <label for="question3-1" class="w-full py-3 ms-2">Decoration</label>
+        <label for="question3-1" class="w-full py-3 ms-2">It made him want to leave his job entirely.</label>
       </div>
     </li>
     <li class="w-full border-b border-gray-200 dark:border-gray-600">
       <div class="flex items-center ps-3">
         <input id="question3-2" type="radio" value="1" name="question3" class="w-4 h-4" />
-        <label for="question3-2" class="w-full py-3 ms-2">Hunting and communication</label>
+        <label for="question3-2" class="w-full py-3 ms-2">It helped him realize the need to balance work and personal well-being.</label>
       </div>
     </li>
     <li class="w-full dark:border-gray-600">
       <div class="flex items-center ps-3">
         <input id="question3-3" type="radio" value="0" name="question3" class="w-4 h-4" />
-        <label for="question3-3" class="w-full py-3 ms-2">Attracting predators</label>
+        <label for="question3-3" class="w-full py-3 ms-2">It pushed him to focus more on his professional achievements.</label>
+      </div>
+    </li>
+    <li class="w-full dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question3-4" type="radio" value="0" name="question3" class="w-4 h-4" />
+        <label for="question3-4" class="w-full py-3 ms-2">It encouraged him to prioritize competition over relaxation.</label>
       </div>
     </li>
   </ul>
@@ -105,25 +123,64 @@
 <!-- Dummy Question 4 -->
 <div class="mb-8" id="question3">
   <p class="mb-4 font-medium">
-    4. ###
+    4. Why did John view running as more than just exercise?
   </p>
   <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
     <li class="w-full border-b border-gray-200 dark:border-gray-600">
       <div class="flex items-center ps-3">
         <input id="question4-1" type="radio" value="0" name="question4" class="w-4 h-4" />
-        <label for="question4-1" class="w-full py-3 ms-2">Decoration</label>
+        <label for="question4-1" class="w-full py-3 ms-2">It allowed him to test his endurance for marathons.</label>
       </div>
     </li>
     <li class="w-full border-b border-gray-200 dark:border-gray-600">
       <div class="flex items-center ps-3">
-        <input id="question4-2" type="radio" value="1" name="question4" class="w-4 h-4" />
-        <label for="question4-2" class="w-full py-3 ms-2">Hunting and communication</label>
+        <input id="question4-2" type="radio" value="0" name="question4" class="w-4 h-4" />
+        <label for="question4-2" class="w-full py-3 ms-2">It was the only activity he enjoyed outside work.</label>
       </div>
     </li>
     <li class="w-full dark:border-gray-600">
       <div class="flex items-center ps-3">
         <input id="question4-3" type="radio" value="0" name="question4" class="w-4 h-4" />
-        <label for="question4-3" class="w-full py-3 ms-2">Attracting predators</label>
+        <label for="question4-3" class="w-full py-3 ms-2">He used it to improve his physical strength exclusively.</label>
+      </div>
+    </li>
+    <li class="w-full dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question4-4" type="radio" value="1" name="question4" class="w-4 h-4" />
+        <label for="question4-4" class="w-full py-3 ms-2">He associated it with persistence and self-care.</label>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Dummy Question 5 -->
+<div class="mb-8" id="question3">
+  <p class="mb-4 font-medium">
+    5. What key lesson did John learn through his new routine?
+  </p>
+  <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+    <li class="w-full border-b border-gray-200 dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question5-1" type="radio" value="0" name="question4" class="w-4 h-4" />
+        <label for="question5-1" class="w-full py-3 ms-2">Career success is all that matters.</label>
+      </div>
+    </li>
+    <li class="w-full border-b border-gray-200 dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question5-2" type="radio" value="0" name="question4" class="w-4 h-4" />
+        <label for="question5-2" class="w-full py-3 ms-2">Stress is an unavoidable part of life.</label>
+      </div>
+    </li>
+    <li class="w-full dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question5-3" type="radio" value="1" name="question4" class="w-4 h-4" />
+        <label for="question5-3" class="w-full py-3 ms-2">Balancing ambition and self-care leads to a more fulfilling life.</label>
+      </div>
+    </li>
+    <li class="w-full dark:border-gray-600">
+      <div class="flex items-center ps-3">
+        <input id="question5-4" type="radio" value="0" name="question4" class="w-4 h-4" />
+        <label for="question5-4" class="w-full py-3 ms-2">Physical health is more important than mental health.</label>
       </div>
     </li>
   </ul>
@@ -147,24 +204,34 @@
   <h2 class="text-xl font-bold">Your Score</h2>
   <p id="score" class="text-lg mt-2"></p>
 </div>
-</div>
-</div>
 
 <script>
   document.getElementById("submit").addEventListener("click", function () {
-    const form = document.getElementById("bookTestForm");
-    const inputs = form.querySelectorAll("input[type='radio']:checked");
-    let score = 0;
+  const form = document.getElementById("bookTestForm");
+  const inputs = form.querySelectorAll("input[type='radio']:checked");
+  let score = 0;
+  const totalQuestions = 5; // Explicitly set total questions
 
-    inputs.forEach((input) => {
-      score += parseInt(input.value);
-    });
-
-    const scoreCont = document.getElementById("scoreCont");
-    const scoreText = document.getElementById("score");
-
-    scoreText.textContent = `You scored ${score} out of ${inputs.length}!`;
-    scoreCont.classList.remove("hidden");
+  // Calculate the score
+  inputs.forEach((input) => {
+    score += parseInt(input.value);
   });
+
+  // Store the score in localStorage
+  localStorage.setItem("testScore", score);
+  localStorage.setItem("totalQuestions", totalQuestions);
+
+  // Show SweetAlert popup
+  swal({
+    title: "Testing Completed",
+    icon: "success",
+    button: "Generate Report",
+  }).then((isConfirm) => {
+    if (isConfirm) {
+      // Redirect to the results page
+      window.location.href = "results";
+    }
+  });
+});
 </script>
 {% endblock %}
