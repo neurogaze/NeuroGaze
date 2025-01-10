@@ -2,14 +2,17 @@
 {% block head %}
 <!-- Print-specific stylesheet -->
 <style>
-  @media print {
-    body { font-size: 12pt; }
-    .container { width: 100%; padding: 0; }
-    canvas { max-width: 100% !important; height: auto !important; }
-    @page { margin: 2cm; }
-}
-
-</style>
+    @media print {
+      body { font-size: 12pt; }
+      .container { width: 100%; padding: 0; }
+      canvas { max-width: 100% !important; height: auto !important; }
+      @page { margin: 0cm; }
+      
+      /* Force content to stay on one page */
+      .page-break { page-break-before: always; }
+      .no-break { page-break-inside: avoid; }
+    }
+  </style>
 {% endblock %}
 
 {% block body %}
@@ -37,34 +40,38 @@
             </div>
         </div>
     </section>
+    
 
     <section id="visualAttention" class="mb-12">
-      <h2 class="text-2xl font-semibold mb-4">Continuous Inhibition Test</h2>
-      <div class="grid grid-cols-2 gap-8">
-          <div>
-              <h3 class="text-xl mb-2">Performance Metrics</h3>
-              <table id="inhibitionMetrics" class="w-full"></table>
-          </div>
-          <div>
-              <h3 class="text-xl mb-2">Gaze Results</h3>
-              <canvas id="inhibitionEyeTrack"></canvas>
-          </div>
-      </div>
-  </section>
-
-  <section id="visualAttention" class="mb-12">
-    <h2 class="text-2xl font-semibold mb-4">Interference Test</h2>
-    <div class="grid grid-cols-2 gap-8">
-        <div>
-            <h3 class="text-xl mb-2">Performance Metrics</h3>
-            <table id="interferenceMetrics" class="w-full"></table>
+        <h2 class="text-2xl font-semibold mb-4">Continuous Inhibition Test</h2>
+        <div class="flex gap-8">
+            <div style="flex: 1;">
+                <h3 class="text-xl mb-2">Performance Metrics</h3>
+                <table id="inhibitionMetrics" class="w-full"></table>
+            </div>
+            <div style="flex: 1;">
+                <h3 class="text-xl mb-2">Gaze Results</h3>
+                <canvas id="inhibitionEyeTrack" class="w-full"></canvas>
+            </div>
         </div>
-        <div>
-            <h3 class="text-xl mb-2">Gaze Results</h3>
-            <canvas id="interferenceEyeTrack"></canvas>
+    </section>
+    
+    <!-- Add this spacer -->
+    <div style="height: 200px;"></div>
+    
+    <section id="interferenceTest" class="mb-12 page-break">
+        <h2 class="text-2xl font-semibold mb-4">Interference Test</h2>
+        <div class="flex gap-8">
+            <div style="flex: 1;">
+                <h3 class="text-xl mb-2">Performance Metrics</h3>
+                <table id="interferenceMetrics" class="w-full"></table>
+            </div>
+            <div style="flex: 1;">
+                <h3 class="text-xl mb-2">Gaze Results</h3>
+                <canvas id="interferenceEyeTrack" class="w-full"></canvas>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
 <section id="recommendations" class="mt-12 border-t pt-8">
