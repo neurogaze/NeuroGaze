@@ -1173,10 +1173,6 @@ video {
   margin-bottom: 2rem;
 }
 
-.-mb-16 {
-  margin-bottom: -4rem;
-}
-
 .-ml-20 {
   margin-left: -5rem;
 }
@@ -1263,6 +1259,10 @@ video {
 
 .mt-12 {
   margin-top: 3rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
 }
 
 .mt-4 {
@@ -1374,6 +1374,10 @@ video {
   max-height: 100%;
 }
 
+.w-1\/2 {
+  width: 50%;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -1388,6 +1392,10 @@ video {
 
 .w-3 {
   width: 0.75rem;
+}
+
+.w-3\/4 {
+  width: 75%;
 }
 
 .w-32 {
@@ -1420,10 +1428,6 @@ video {
 
 .w-px {
   width: 1px;
-}
-
-.w-1\/2 {
-  width: 50%;
 }
 
 .max-w-full {
@@ -1687,11 +1691,6 @@ video {
      object-fit: cover;
 }
 
-.object-top {
-  -o-object-position: top;
-     object-position: top;
-}
-
 .p-1 {
   padding: 0.25rem;
 }
@@ -1706,11 +1705,6 @@ video {
 
 .p-8 {
   padding: 2rem;
-}
-
-.px-1 {
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
 }
 
 .px-3 {
@@ -1952,10 +1946,6 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.opacity-25 {
-  opacity: 0.25;
-}
-
 .opacity-50 {
   opacity: 0.5;
 }
@@ -1963,12 +1953,6 @@ video {
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.shadow-2xl {
-  --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-  --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -2598,6 +2582,10 @@ button {
     max-width: 36rem;
   }
 
+  .sm\:grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2769,10 +2757,6 @@ button {
     right: 0px;
   }
 
-  .lg\:-mb-24 {
-    margin-bottom: -6rem;
-  }
-
   .lg\:-ml-28 {
     margin-left: -7rem;
   }
@@ -2787,10 +2771,6 @@ button {
 
   .lg\:mb-6 {
     margin-bottom: 1.5rem;
-  }
-
-  .lg\:ml-64 {
-    margin-left: 16rem;
   }
 
   .lg\:inline-block {
@@ -2811,10 +2791,6 @@ button {
 
   .lg\:h-96 {
     height: 24rem;
-  }
-
-  .lg\:h-auto {
-    height: auto;
   }
 
   .lg\:h-full {
@@ -2931,14 +2907,6 @@ button {
 }
 
 @media (min-width: 1280px) {
-  .xl\:-mb-28 {
-    margin-bottom: -7rem;
-  }
-
-  .xl\:ml-8 {
-    margin-left: 2rem;
-  }
-
   .xl\:h-80 {
     height: 20rem;
   }
